@@ -6,15 +6,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-    
+
     @RequestMapping("/")
     public String pageAccueil() {
         return "index";
     }
 
     @RequestMapping("/classes")
-    public String ListClasses(Model model) {
+    public String listClasses(Model model) {
         return "class";
     }
-    
+
+    @RequestMapping("/courses")
+    public String listCourses(Model model) {
+        return "course";
+    }
+
 }
