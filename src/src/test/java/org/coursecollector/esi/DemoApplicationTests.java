@@ -1,4 +1,4 @@
-package org.coursecollector.esi.coursecollector;
+package org.coursecollector.esi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
