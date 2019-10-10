@@ -12,9 +12,9 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/cours")
-    public String ListeDesCours(Model model) {
-        return "cours";
+    @RequestMapping("/classes")
+    public String ListClasses(Model model) {
+        return "class";
     }
     
 }
