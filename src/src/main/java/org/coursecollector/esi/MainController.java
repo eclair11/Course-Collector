@@ -22,4 +22,9 @@ public class MainController {
         return "course";
     }
 
+    @RequestMapping("/content")
+    public String listCoursesContent(Model model) {
+        return "content";
+    }
+
 }

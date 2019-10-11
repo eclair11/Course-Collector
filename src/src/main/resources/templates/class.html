@@ -32,14 +32,7 @@
 
   <section class="w-container">
     <h1>M1 - DSC</h1>
-    <div id="1" class="card" onclick="alert('#id')">IA</div>
-    <div class="card">ALGO</div>
-    <div class="card">PROG</div>
-
-    <h1>M1 - DSC</h1>
-    <div class="card">IA</div>
-    <div class="card">ALGO</div>
-    <div class="card">PROG</div>
+    <div class="card text" onclick="redirect()">IA</div>
   </section>
 
   <footer class="footer section">
@@ -61,6 +54,11 @@
     });
   </script>
   <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
+  <script>
+    function redirect() {
+      location.href = "http://localhost:8080/courses";
+    };
+  </script>
 
 </body>
 
