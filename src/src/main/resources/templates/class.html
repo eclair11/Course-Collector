@@ -60,6 +60,21 @@
                 </div>
             </div>
         </footer>
+        
+        <!-- MODAL -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Do you really want to unsubscribe from this course ?</p>
+                <form>
+                    <input type="hidden" name="unsubscribe" value="1"/>
+                   <button type="submit" class="w-button">Oui</button>
+                   <button class="w-button">Non</button>
+                </form>
+            </div>
+
+        </div>
 
         <script src="lib/webfont.js"></script>
         <script type="text/javascript">WebFont.load({
@@ -69,6 +84,7 @@
             });
         </script>
         <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
+        <script src="js/unsubscribe-confirmation.js" type="text/javascript"></script>
 
     </body>
 
