@@ -2248,7 +2248,7 @@ input[type=text]:focus {
 }
 
 
-/** STYLE DE BOUTON SE DESINSCRIRE   **/
+/** STYLE DU BOUTON SE DESINSCRIRE   **/
 button.unsubscribe i {
     color: #f44336;
 }
@@ -2261,6 +2261,25 @@ button.unsubscribe {
 
 button.unsbubscribe:hover {
     color: #da190b;
+}
+
+/** STYLE DU BOUTON TELECHARGER **/
+button.download i {
+    
+}
+
+button.download {
+    background-color: DodgerBlue;
+    boder: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+}
+
+button.download:hover {
+    background-color: RoyalBlue;
 }
 
 /* The Modal (background) */
