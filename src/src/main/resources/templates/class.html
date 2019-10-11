@@ -14,20 +14,7 @@
 
     <body>
 
-        <header class="nav-bar">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="brand-column w-col w-col-4">
-                        <img class="logo" src="img/logo_transparent.png" alt="logo application" width="130" />
-                        <div class="company"></div>
-                    </div>
-                    <nav class="nav-column w-col w-col-8">
-                        <a class="nav-link" href="#features">Setting</a>
-                        <a class="nav-link sign-up" href="#page-nav-Customers" target="_self">Log in</a>
-                    </nav>
-                </div>
-            </div>
-        </header>
+        <div th:replace="header :: header"></div>
 
         <section class="w-container">
 
@@ -41,13 +28,28 @@
                 IA
                 <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
-            <div class="card">ALGO</div>
-            <div class="card">PROG</div>
+            <div class="card">
+                ALGO
+                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+            </div>
+            <div class="card">
+                PROG
+                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+            </div>
 
             <h1>M1 - DSC</h1>
-            <div class="card">IA</div>
-            <div class="card">ALGO</div>
-            <div class="card">PROG</div>
+            <div class="card">
+                IA
+                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+            </div>
+            <div class="card">
+                ALGO
+                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+            </div>
+            <div class="card">
+                PROG
+                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+            </div>
         </section>
 
         <footer class="footer section">
