@@ -2247,3 +2247,19 @@ input[type=text]:focus {
 .search-bar i {
   font-size: 30px !important; 
 }
+
+
+/** STYLE DE BOUTON SE DESINSCRIRE   **/
+button.unsubscribe i {
+    color: #f44336;
+}
+
+button.unsubscribe {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+button.unsbubscribe:hover {
+    color: #da190b;
+}
