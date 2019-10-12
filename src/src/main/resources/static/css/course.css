@@ -1,10 +1,6 @@
-.toptext {
-  font-size: 40px;
-}
-
 .topcard {
   background: #8b0000;
-  border-radius: 20px;
+  font-size: 40px;
 }
 
 .control {
