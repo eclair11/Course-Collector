@@ -14,19 +14,8 @@
 
     <body>
 
-        <header class="nav-bar">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="brand-column w-col w-col-4">
-                        <img class="logo" src="img/logo_transparent.png" alt="logo application" width="130"/>
-                        <div class="company"></div>
-                    </div>
-                    <nav class="nav-column w-col w-col-8">
-                        <a class="nav-link" href="#features">Setting</a>
-                        <a class="nav-link sign-up" href="#page-nav-Customers" target="_self">Log in</a></nav>
-                </div>
-            </div>
-        </header>
+        <!-- INCLUDE HEADER -->
+        <header th:replace="header :: header"></header>
 
         <div class="hero section">
             <div class="w-container">
@@ -61,17 +50,8 @@
 
 
 
-        <footer class="footer section">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="w-col w-col-12">
-                        <div><img src="img/logo_entreprise.png" alt="logo entreprise" width="120" /> </div>
-                        <div class="footer-text">Powered by ESI Digital Corp - 2019
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- INCLUDE FOOTER -->
+        <footer th:replace="footer :: footer"></footer>
 
         
         
