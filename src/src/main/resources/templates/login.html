@@ -9,6 +9,7 @@
         <link href="img/favicon.png" rel="shortcut icon" type="image/x-icon">
         <link href="img/favicon.png" rel="apple-touch-icon">
         <link href="lib/fontawesome/css/all.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/login.js" ></script>
     </head>
 
@@ -30,19 +31,26 @@
         
         <section class="content">
 
-            <div id="login">
+            <div id="container">
                 <!-- Formilaire de connexion -->
                 <form action="" onsubmit="return verifForm(this)" method="POST">
-                    <h2 class="hero-subhead"> Connexion </h2>
+                    <h2 class="aligner"> Connexion </h2>
 
                     <label><b> Student ID </b></label>
-                    <input type="number" placeholder="Enter your student id" name="studentID" onblur="verifStudentID(this)" required/>
+                    <input type="text" placeholder="Enter your student ID" name="studentID" /*onblur="verifStudentID(this)"*/ required/>
 
                     <label><b> Password </b></label>
-                    <input type="password" placeholder="Enter your password" name="password" required/>
+                    <input type="password" placeholder="Enter your password" name="password" require/>
+
 
                     <br/>
                     <input type="submit" id='submit' value='LOGIN'/>
+                    <br/>
+                    <input type="radio" name=""  value=""> Remember me
+                    
+                    <p class="forgot">
+                        <a href="" target="_blank"> Forgot your Login? </a>
+                    </p>
                 </form>
 
             </div>
