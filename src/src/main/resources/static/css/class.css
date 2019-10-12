@@ -8,8 +8,21 @@
   position: relative;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-align: center;
+  line-height: 100px;
 }
 
 .card:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.text {
+  text-shadow:
+    -1px -1px 0 #dad0d0,
+    1px -1px 0 #dad0d0,
+    -1px 1px 0 #dad0d0,
+    1px 1px 0 #dad0d0,
+    1px 1px 10px #141414;
+    color:#dad0d0;
+    font-size: 30px;
 }

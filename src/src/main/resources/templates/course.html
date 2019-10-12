@@ -3,11 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Classes</title>
+  <title>Courses</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <meta content="Webflow" name="generator" />
   <link href="css/template.css" rel="stylesheet" type="text/css" />
+  <link href="css/class.css" rel="stylesheet" type="text/css" />
+  <link href="css/course.css" rel="stylesheet" type="text/css" />
   <link href="img/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="img/favicon.png" rel="apple-touch-icon">
   <link href="lib/fontawesome/css/all.css" rel="stylesheet">
@@ -31,6 +33,26 @@
   </header>
 
   <section class="w-container">
+    <span>IA</span>
+    <button id="request-button" class="styled" type="button">Demander un cours</button>
+    <button id="share-button" class="styled" type="button">Publier un cours</button>
+    <div class="card text" onclick="redirect()">IA</div>
+
+
+<div id="request-modal" class="modal">
+<div class="modal-content">
+    <span id="request-close">&times;</span>
+    <p>DEMANDE</p>
+  </div>
+</div>
+
+<div id="share-modal" class="modal">
+    <div class="modal-content">
+        <span id="share-close">&times;</span>
+        <p>PUBLICATION</p>
+      </div>
+    </div>
+
       <div class="w-section">
           <p>Le bouton télécharger à intégrer en dessous de chaque fichier cours</p>
           <button id="myBtn" class="download" title="download this course"> <i class="fas fa-download"></i>  Download</button>
@@ -73,6 +95,44 @@
     });
   </script>
   <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
+  <script>
+      function redirect() {
+        location.href = "http://localhost:8080/content";
+      };
+
+var req = document.getElementById("request-button");
+var sha = document.getElementById("share-button");
+var reqmod = document.getElementById("request-modal");
+var shamod = document.getElementById("share-modal")
+var reqclose = document.getElementById("request-close");
+var shaclose = document.getElementById("share-close");
+
+req.onclick = function() {
+  reqmod.style.display = "block";
+}
+
+sha.onclick = function() {
+  shamod.style.display = "block";
+}
+
+reqclose.onclick = function() {
+  reqmod.style.display = "none";
+}
+
+shaclose.onclick = function() {
+  shamod.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == reqmod) {
+    reqmod.style.display = "none";
+  }
+  else if (event.target == shamod) {
+    shamod.style.display = "none";
+  }
+}
+  </script>
+
   <script src="js/download-choice.js" type="text/javascript"></script>
   
 </body>
