@@ -8,25 +8,15 @@
         <link href="css/template.css" rel="stylesheet" type="text/css" />
         <link href="img/favicon.png" rel="shortcut icon" type="image/x-icon">
         <link href="img/favicon.png" rel="apple-touch-icon">
+        <link href="lib/fontawesome/css/all.css" rel="stylesheet">
         <script type="text/javascript" src="js/login.js" ></script>
     </head>
 
 
     <body>
 
-        <header class="nav-bar">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="brand-column w-col w-col-4">
-                        <img class="logo" src="img/logo_transparent.png" alt="logo application" width="130"/>
-                        <div class="company"></div>
-                    </div>
-                    <nav class="nav-column w-col w-col-8">
-                        <a class="nav-link" href="#features">Setting</a>
-                        <a class="nav-link sign-up" href="#page-nav-Customers" target="_self">Log in</a></nav>
-                </div>
-            </div>
-        </header>
+        <!-- INCLUDE HEADER -->
+        <header th:replace="header :: header"></header>
 
         <div class="hero section">
             <div class="w-container">
@@ -46,7 +36,7 @@
                     <h2 class="hero-subhead"> Connexion </h2>
 
                     <label><b> Student ID </b></label>
-                    <input type="text" placeholder="Enter your student id" name="studentID" onblur="verifStudentID(this)" required/>
+                    <input type="number" placeholder="Enter your student id" name="studentID" onblur="verifStudentID(this)" required/>
 
                     <label><b> Password </b></label>
                     <input type="password" placeholder="Enter your password" name="password" required/>
@@ -61,17 +51,8 @@
 
 
 
-        <footer class="footer section">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="w-col w-col-12">
-                        <div><img src="img/logo_entreprise.png" alt="logo entreprise" width="120" /> </div>
-                        <div class="footer-text">Powered by ESI Digital Corp - 2019
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- INCLUDE FOOTER -->
+        <footer th:replace="footer :: footer"></footer>
 
         
         

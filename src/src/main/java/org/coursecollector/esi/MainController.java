@@ -26,5 +26,9 @@ public class MainController {
     public String listCoursesContent(Model model) {
         return "content";
     }
-
+    
+    @RequestMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
 }
