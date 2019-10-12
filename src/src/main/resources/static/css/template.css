@@ -2263,19 +2263,14 @@ button.unsbubscribe:hover {
     color: #da190b;
 }
 
-/** STYLE DU BOUTON TELECHARGER **/
-button.download i {
-    
-}
-
 button.download {
     background-color: DodgerBlue;
-    boder: none;
     color: white;
     padding: 12px 30px;
     cursor: pointer;
     font-size: 20px;
     width: 100%;
+    margin: 5px 0px 5px 0px;
 }
 
 button.download:hover {

@@ -1,8 +1,13 @@
 .formcard {
   background: #000000;
-  width: 50%;
   height: 50px;
   line-height: 50px;
+  font-size: 20px;
+}
+
+.formtext {
+  text-align: center;
+  margin: 10px 0px 10px 0px;
   font-size: 20px;
 }
 

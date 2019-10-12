@@ -6,7 +6,7 @@
   width: 100%;
   height: 100px;
   line-height: 100px;
-  margin: 5px;
+  margin: 5px 0px 5px 0px;
   text-shadow: -1px -1px 0 #dad0d0, 1px -1px 0 #dad0d0, -1px 1px 0 #dad0d0,
     1px 1px 0 #dad0d0, 1px 1px 10px #141414;
   color: #dad0d0;
