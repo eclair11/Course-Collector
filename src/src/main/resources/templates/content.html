@@ -34,15 +34,49 @@
 
   <section class="w-container">
     <span>Publié par Nom Prénom le 01/01/0001</span>
+    <button id="request-button" class="styled" type="button">Demander un cours</button>
+    <button id="share-button" class="styled" type="button">Publier un cours</button>
     <div>FORMAT IMG</div>
     <div>
-        <button></button>
         <img class="picture" src="">
     </div>
     <div>FORMAT PDF</div>
     <div>
         <img class="picture" src="">
     </div>
+    <div id="request-modal" class="modal">
+            <div class="modal-content">
+                <span id="request-close">&times;</span>
+                <p>DEMANDE</p>
+              </div>
+            </div>
+            
+            <div id="share-modal" class="modal">
+                <div class="modal-content">
+                    <span id="share-close">&times;</span>
+                    <p>PUBLICATION</p>
+                  </div>
+                </div>
+            
+                  <div class="w-section">
+                      <p>Le bouton télécharger à intégrer en dessous de chaque fichier cours</p>
+                      <button id="myBtn" class="download" title="download this course"> <i class="fas fa-download"></i>  Download</button>
+                  </div>
+
+                  <!-- MODAL -->
+        <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Choose the format of the files to download :</p>
+                    <form method="POST">
+                        <label><input type="checkbox" name="format" value="img"/> image(jpg, png, svg)</label>
+                        <label><input type="checkbox" name="format" value="text"/> texte(pdf)</label>
+                       <button type="submit" class="w-button">Confirm</button>
+                    </form>
+                </div>
+    
+            </div>
   </section>
 
   <footer class="footer section">
@@ -64,6 +98,8 @@
     });
   </script>
   <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
+
+  <script src="js/content.js" type="text/javascript"></script>
 
 </body>
 
