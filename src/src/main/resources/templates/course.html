@@ -33,9 +33,44 @@
   </header>
 
   <section class="w-container">
-    <span>IA</span>
-    
-    <div class="card text" onclick="redirect()">IA</div>
+
+    <div class="control">
+      <button id="request-button" class="styled" type="button">Demander un cours</button>
+      <button id="share-button" class="styled" type="button">Publier un cours</button>
+    </div>
+
+    <div class="card topcard text toptext">Artificial Intelligence and Advanced Algorithm</div>
+    <div class="card text" onclick="redirect()">05/10/2019 : Prop. Logic</div>
+    <div class="card text" onclick="redirect()">12/10/2019 : First Order Logic</div>
+    <div class="card text" onclick="redirect()">17/10/2019 : Prolog</div>
+    <div class="card text" onclick="redirect()">22/10/2019 : Prolog II</div>
+    <div class="card text" onclick="redirect()">30/10/2019 : Prolog III</div>
+
+    <div id="request-modal" class="modal">
+      <div class="modal-content">
+        <span id="request-close" class="close">&times;</span>
+        <form method="POST">
+          <div class="text-modal">Sélectionnez la date où le cours que vous cherchez a eu lieu</div>
+          <div class="body-modal">
+            <input type="date">
+            <br>
+            <button type="submit" class="styled">Valider la demande</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="share-modal" class="modal">
+      <div class="modal-content">
+        <span id="share-close" class="close">&times;</span>
+        <form method="POST">
+          <div class="text-modal">Sélectionnez le dossier contenant les fichiers du cours à publier</div>
+          <div class="body-modal">
+            <button type="submit" class="styled">Ajouter un dossier</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
   </section>
 
@@ -49,7 +84,6 @@
       </div>
     </div>
   </footer>
-    
 
   <script src="lib/webfont.js"></script>
   <script type="text/javascript">WebFont.load({
@@ -59,12 +93,8 @@
     });
   </script>
   <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
-  <script>
-      function redirect() {
-        location.href = "http://localhost:8080/content";
-      };
-  </script>
-  
+  <script src="js/course.js" type="text/javascript"></script>
+
 </body>
 
 </html>
