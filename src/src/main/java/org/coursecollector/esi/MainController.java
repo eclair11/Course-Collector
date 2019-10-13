@@ -31,4 +31,9 @@ public class MainController {
     public String login(Model model) {
         return "login";
     }
+
+    @RequestMapping("/sucess")
+    public String confirmation(Model model) {
+        return "request-success";
+    }
 }
