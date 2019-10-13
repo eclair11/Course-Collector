@@ -32,7 +32,7 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/sucess")
+    @RequestMapping("/request-success")
     public String confirmation(Model model) {
         return "request-success";
     }
@@ -40,5 +40,11 @@ public class MainController {
     @RequestMapping("/setting")
     public String setting(Model model) {
         return "setting";
+    }
+}
+    
+    @RequestMapping("/publish-success")
+    public String publishSuccess() {
+        return "publish-success";
     }
 }

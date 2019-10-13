@@ -74,15 +74,13 @@
   cursor: pointer;
 }
 
-.text-modal {
+.modal-body {
   text-align: center;
-  margin: 20px 0px 50px 0px;
   font-size: 20px;
 }
 
-.body-modal {
-  text-align: center;
-  margin: 50px 0px 20px 0px;
+.modal-body > * {
+  margin: 20px 0px 20px 0px;
 }
 
 /* https://codepen.io/maheshambure21/pen/VYJQYG */

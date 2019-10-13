@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,8 +9,8 @@
         <!-- INCLUDE SHARED LINKS  -->
         <link th:replace="links-header :: link"/>
         
-        <link href="css/course.css" rel="stylesheet" type="text/css" />
-        <link href="css/request-sucess.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/publish-success.css" />
+        
     </head>
 
 
@@ -28,25 +29,18 @@
             </div>
         </div>
         
-        <!-- Page qui affiche la confirmation  quand la demande est acceptée -->
-        <section class="content">
-            <div class="suc">
-
-                <p class="success"> Your request has been accepted successfully !!</p>
-
-            </div>
-            <div class="control">
-
-                <button id="request-button" class="styled" type="button" OnClick="window.location.href='http://localhost:8080/courses'"> Request another course </button>
-
-            </div>
-
-            <div class="control">
-
-                <button id="request-button" class="styled" type="button" OnClick="window.location.href='http://localhost:8080/'"> Back to Home </button>
-
-            </div>
+        <section class="section centered">
+            <i class="icons fas fa-check-circle"></i>
+            <h2>Your course have been published successfully !</h2>
+            <h3><em>Génie Logiciel - 3th September 2019</em></h3>
+            <p>Thanks for your contribution</p>
         </section>
+        
+        <nav class="section centered">
+            <a href="/content" class="w-button">Go to the published course</a>
+            <a href="/courses" class="w-button">Publish another course</a>
+            <a href="/" class="w-button">Return to homepage</a>
+        </nav>
 
 
 
