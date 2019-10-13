@@ -53,7 +53,7 @@
                 <form method="POST" action="/publish-success">
                     <div class="modal-body">
                         <span>Si vous publierez votre cours à la réponse d'une demande :</span><br>
-                        <select id="select-modal">
+                        <select id="select-date" onchange="check()">
                             <option value="0">--Choisissez la date du cours que vous publierez--</option>
                             <option value="1">19/11/2019</option>
                             <option value="2">25/11/2019</option>
@@ -63,7 +63,7 @@
                             <option value="6">12/12/2019</option>
                         </select><br>
                         <span>Si vous publierez votre cours spontanément :</span><br>
-                        <input type="date"><br>
+                        <input id="input-date" class="input-date" type="date"><br>
                         <span>Sélectionnez les fichiers du cours :</span>
                         <input type="file" name="img" multiple><br>
                         <button type="submit" class="styled">Ajouter les fichiers</button><br>
