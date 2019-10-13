@@ -36,4 +36,9 @@ public class MainController {
     public String confirmation(Model model) {
         return "request-success";
     }
+    
+    @RequestMapping("/publish-success")
+    public String publishSuccess() {
+        return "publish-success";
+    }
 }
