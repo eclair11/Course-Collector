@@ -41,7 +41,6 @@ public class MainController {
     public String setting(Model model) {
         return "setting";
     }
-}
     
     @RequestMapping("/publish-success")
     public String publishSuccess() {
