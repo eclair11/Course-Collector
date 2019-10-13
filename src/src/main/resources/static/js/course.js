@@ -29,6 +29,18 @@ window.onclick = function(event) {
   }
 };
 
+function check() {
+  var sel = document.getElementById("select-date");
+  if (sel.options[sel.selectedIndex].value > 0) {
+    document.getElementById("input-date").value = "";
+    document.getElementById("input-date").style.backgroundColor = "gray";
+    document.getElementById("input-date").disabled = true;
+  } else {
+    document.getElementById("input-date").style.backgroundColor = "";
+    document.getElementById("input-date").disabled = false;
+  }
+}
+
 function redirect() {
   location.href = "http://localhost:8080/content";
 }
