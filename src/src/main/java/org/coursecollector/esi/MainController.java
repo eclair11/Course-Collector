@@ -36,4 +36,9 @@ public class MainController {
     public String confirmation(Model model) {
         return "request-success";
     }
+
+    @RequestMapping("/setting")
+    public String setting(Model model) {
+        return "setting";
+    }
 }
