@@ -28,35 +28,35 @@
                 <br/>
                 <ul>
                     <li>
-                        <strong>LICENCE 1</strong>
+                        <div><strong>LICENCE 1</strong> <button class="editBtn" id="edit-1"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1"><i class="fas fa-trash-alt"></i>  </button></div>
                         <h3>Options</h3>
-                        <button class="w-button myBtn" id="1-1"><i class="fas fa-plus"></i>Add new option</button>
+                        <button class="w-button myBtn" id="1-1"><i class="fas fa-plus"></i> Add new option</button>
                         <ul>
                             <li>
-                                <strong>Informatique</strong>
+                                <div><strong>Informatique</strong> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1-1"><i class="fas fa-trash-alt"></i>  </button></div>
                                 <h3>Subjects</h3>
                                 <button class="w-button myBtn" id="1-1-1"><i class="fas fa-plus"></i> Add new subject</button>
                                 <ul>
-                                    <li><em>Base de donnée 1</em></li>
-                                    <li><em>Programmation impérative 1</em></li>
+                                    <li><em>Base de donnée 1</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1-1-1"><i class="fas fa-trash-alt"></i>  </button></li>
+                                    <li><em>Programmation impérative 1</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1-1-2"><i class="fas fa-trash-alt"></i>  </button></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <strong>LICENCE 2</strong>
+                        <div><strong>LICENCE 2</strong> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></div>
                         <h3>Options</h3>
-                        <button class="w-button myBtn" id="2-1"><i class="fas fa-plus"></i>Add new option</button>
+                        <button class="w-button myBtn" id="2-1"><i class="fas fa-plus"></i> Add new option</button>
                         <ul>
                             <li>
-                                <strong>Informatique</strong>
+                                <div><strong>Informatique</strong> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></div>
 
                                 <h3>Subjects</h3>
                                 <button class="w-button myBtn" id="2-1-1"><i class="fas fa-plus"></i> Add new subject</button>
                                 <ul>
-                                    <li><em>Base de donnée 2</em></li>
-                                    <li><em>Programmation impérative 2</em></li>
+                                    <li><em>Base de donnée 2</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></li>
+                                    <li><em>Programmation impérative 2</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></li>
                                 </ul>
                             </li>
                         </ul>
@@ -70,6 +70,70 @@
 
         <!-- INCLUDE FOOTER -->
         <footer th:replace="footer :: footer"></footer>
+        
+        
+        <!-- EDIT MODALS  -->
+        
+        <!-- MODAL -->
+        <div id="modal-edit-1" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-edit-1">&times;</span>
+                <p>Edit class name</p>
+                <form>
+                    <input type="text" value="LICENCE 1" class="w-input" />
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+        
+        
+        
+        <!-- DELETE MODALS -->
+        
+        <!-- MODAL -->
+        <div id="modal-del-1" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-del-1">&times;</span>
+                <p>Are you sure to delete this class ?</p>
+                <small>All options and subjects that correspond to this class will be deleted too</small>
+                <p><a href="?delete=1" class="w-button">Yes</a></p>
+            </div>
+        </div>
+        
+        <!-- MODAL -->
+        <div id="modal-del-1-1" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-del-1-1">&times;</span>
+                <p>Are you sure to delete this option ?</p>
+                <small>All subjects that correspond to this option will be deleted too</small>
+                <p><a href="?delete=1" class="w-button">Yes</a></p>
+            </div>
+        </div>
+        
+        <!-- MODAL -->
+        <div id="modal-del-1-1-1" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-del-1-1-1">&times;</span>
+                <p>Are you sure to delete this subject ?</p>
+                <small>All contents that correspond to this option will be deleted too</small>
+                <p><a href="?delete=1" class="w-button">Yes</a></p>
+            </div>
+        </div>
+        
+        <!-- MODAL -->
+        <div id="modal-del-1-1-2" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-del-1-1-2">&times;</span>
+                <p>Are you sure to delete this subject ?</p>
+                <small>All contents that correspond to this option will be deleted too</small>
+                <p><a href="?delete=1" class="w-button">Yes</a></p>
+            </div>
+        </div>
 
         <!-- MODAL -->
         <div id="modal-1" class="modal">

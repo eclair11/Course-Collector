@@ -2394,3 +2394,13 @@ span.close {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+/** STYLE FOR SPECIFIC BACKGROUND **/
+.danger-bg {
+    background-color: #f44336;
+    color: white;
+}
+
+.danger-bg:hover {
+    background-color: #da190b;
+}
