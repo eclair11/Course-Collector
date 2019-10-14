@@ -1,30 +1,43 @@
-var req = document.getElementById("email-button");
-var sha = document.getElementById("pwd-button");
-var reqmod = document.getElementById("email-modal");
-var shamod = document.getElementById("pwd-modal");
-var reqclose = document.getElementById("email-close");
-var shaclose = document.getElementById("pwd-close");
+var email = document.getElementById("email-button");
+var pwd = document.getElementById("pwd-button");
+var remove = document.getElementById("remove-button");
+var emailmod = document.getElementById("email-modal");
+var pwdmod = document.getElementById("pwd-modal");
+var removemod = document.getElementById("remove-modal");
+var emailclose = document.getElementById("email-close");
+var pwdclose = document.getElementById("pwd-close");
+var removeclose = document.getElementById("remove-close");
 
-req.onclick = function() {
-  reqmod.style.display = "block";
+email.onclick = function() {
+  emailmod.style.display = "block";
 };
 
-sha.onclick = function() {
-  shamod.style.display = "block";
+pwd.onclick = function() {
+  pwdmod.style.display = "block";
 };
 
-reqclose.onclick = function() {
-  reqmod.style.display = "none";
+remove.onclick = function() {
+  removemod.style.display = "block";
 };
 
-shaclose.onclick = function() {
-  shamod.style.display = "none";
+emailclose.onclick = function() {
+  emailmod.style.display = "none";
+};
+
+pwdclose.onclick = function() {
+  pwdmod.style.display = "none";
+};
+
+removeclose.onclick = function() {
+  removemod.style.display = "none";
 };
 
 window.onclick = function(event) {
-  if (event.target == reqmod) {
-    reqmod.style.display = "none";
-  } else if (event.target == shamod) {
-    shamod.style.display = "none";
+  if (event.target == emailmod) {
+    emailmod.style.display = "none";
+  } else if (event.target == pwdmod) {
+    pwdmod.style.display = "none";
+  } else if (event.target == removemod) {
+    removemod.style.display = "none";
   }
 };
