@@ -27,30 +27,30 @@
             <div class="card topcard">M1 - DSC</div>
             <div class="card">
                 IA
-                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+                <button id="1" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
             <div class="card">
                 ALGO
-                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+                <button id="2" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
             <div class="card">
                 PROG
-                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+                <button id="3" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
 
 
             <div class="card topcard">M1 - MLDM</div>
             <div class="card">
                 IA
-                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+                <button id="4" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
             <div class="card">
                 ALGO
-                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+                <button id="5" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
             <div class="card">
                 PROG
-                <button id="myBtn" class="unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
+                <button id="6" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i class="fas fa-bell-slash"></i></button>
             </div>
         </section>
 
@@ -58,15 +58,79 @@
         <footer th:replace="footer :: footer"></footer>
         
         <!-- MODAL -->
-        <div id="myModal" class="modal">
+        <div id="modal-1" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Do you really want to unsubscribe from this course ?</p>
+                <span class="close" id="close-1">&times;</span>
+                <p>Do you really want to unsubscribe from M1 - DSC IA ?</p>
                 <form method="POST">
                     <input type="hidden" name="unsubscribe" value="1"/>
                    <button type="submit" class="w-button">Yes</button>
-                   <button type="button" class="w-button close">No</button>
+                </form>
+            </div>
+
+        </div>
+        
+        <div id="modal-2" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-2">&times;</span>
+                <p>Do you really want to unsubscribe from M1 - DSC ALGO ?</p>
+                <form method="POST">
+                    <input type="hidden" name="unsubscribe" value="1"/>
+                   <button type="submit" class="w-button">Yes</button>
+                </form>
+            </div>
+
+        </div>
+        
+        <div id="modal-3" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-3">&times;</span>
+                <p>Do you really want to unsubscribe from M1 - DSC PROG ?</p>
+                <form method="POST">
+                    <input type="hidden" name="unsubscribe" value="1"/>
+                   <button type="submit" class="w-button">Yes</button>
+                </form>
+            </div>
+
+        </div>
+        
+        <div id="modal-4" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-4">&times;</span>
+                <p>Do you really want to unsubscribe from M1 - MLDM IA ?</p>
+                <form method="POST">
+                    <input type="hidden" name="unsubscribe" value="1"/>
+                   <button type="submit" class="w-button">Yes</button>
+                </form>
+            </div>
+
+        </div>
+        
+        <div id="modal-5" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-5">&times;</span>
+                <p>Do you really want to unsubscribe from M1 - MLDM ALGO ?</p>
+                <form method="POST">
+                    <input type="hidden" name="unsubscribe" value="1"/>
+                   <button type="submit" class="w-button">Yes</button>
+                </form>
+            </div>
+
+        </div>
+        
+        <div id="modal-6" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="close-6">&times;</span>
+                <p>Do you really want to unsubscribe from M1 - MLDM PROG ?</p>
+                <form method="POST">
+                    <input type="hidden" name="unsubscribe" value="1"/>
+                   <button type="submit" class="w-button">Yes</button>
                 </form>
             </div>
 
@@ -86,7 +150,7 @@
     };
   </script>
   <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
-  <script src="js/unsubscribe-confirmation.js" type="text/javascript"></script>
+  <script src="js/modals.js" type="text/javascript"></script>
 
     </body>
 </html>
