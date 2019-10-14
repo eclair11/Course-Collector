@@ -22,4 +22,9 @@ public class AdminController {
         return "admin";
     }
 
+    @RequestMapping("/users")
+    public String listUsers(Model model) {
+        return "user";
+    }
+
 }
