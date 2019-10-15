@@ -27,4 +27,10 @@ public class AdminController {
         return "user";
     }
 
+
+    @RequestMapping("/statut")
+    public String changeStatut() {
+        return "change-statut";
+    }
+
 }
