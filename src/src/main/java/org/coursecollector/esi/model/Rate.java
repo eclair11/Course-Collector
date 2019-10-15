@@ -24,9 +24,10 @@ public class Rate {
     @ManyToOne
     Student student;
 
-    public Rate(Boolean like, Publication publication) {
+    public Rate(Boolean like, Publication publication, Student student) {
         this.like = like;
         this.publication = publication;
+        this.student = student;
     }
 
     public Rate() {

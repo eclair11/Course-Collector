@@ -30,8 +30,9 @@ public class Publication {
     @ManyToOne
     Student student;
 
-    public Publication(Course course) {
+    public Publication(Course course, Student student) {
         this.course = course;
+        this.student = student;
         this.date = new Date();
     }
 
