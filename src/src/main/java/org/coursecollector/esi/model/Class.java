@@ -28,10 +28,16 @@ public class Class {
     long id;
     
     String name;
-    int level;
+    int level; // year of the class : ex level = 1 for LICENCE 1 
     
+    /* Correspondant list of options available for the class */
     @OneToMany
-    List <Option> options = new ArrayList<>();
+    List<Option> options = new ArrayList<>();
+    
+    /* Correspondant list of subjects mandatory for the class */
+    @OneToMany
+    List<Subject> subjects = new ArrayList<>();
+    
     
     public Class(String name, int level) {
         this.name = name;
@@ -41,6 +47,11 @@ public class Class {
     public Class(String name, int level, List<Option> options) {
         this(name, level);
         this.options = options;
+    }
+    
+    public Class(String name, int level, List<Option> options, List<Subject> subjects) {
+        this(name, level, options);
+        this.subjects = subjects;
     }
     
     public Class() {
