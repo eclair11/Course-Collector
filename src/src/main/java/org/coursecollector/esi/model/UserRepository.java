@@ -10,8 +10,8 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author Ibrahima DIALLO
+ * @author Ibrahima DIIALLO
  */
-public interface StudentRepo extends CrudRepository<Course, Long> {
+public interface UserRepository extends CrudRepository<Course, Long> {
 
 }
