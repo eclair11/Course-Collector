@@ -2,7 +2,7 @@ package org.coursecollector.esi;
 
 import javax.inject.Inject;
 
-import org.coursecollector.esi.model.CourseRepo;
+import org.coursecollector.esi.model.CourseRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @Inject
-    CourseRepo courseRepo;
+    CourseRepository courseRepository;
 
 
     @RequestMapping("/")
