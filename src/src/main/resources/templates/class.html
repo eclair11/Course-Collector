@@ -25,41 +25,17 @@
             <input type="text" name="search" placeholder="Chercher une classe, un parcours, une matière ou un cours">
         </form>
 
-        <div class="card topcard">M1 - DSC</div>
-        <div class="card">
-            <a href="/course?subjectId=17">IA</a>
-            <button id="1" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i
-                    class="fas fa-bell-slash"></i></button>
+        <div th:each="c : ${classes}">
+            <div class="card topcard">
+                [[ ${c.name} ]] [[ ${c.level} ]]
+            </div>
+            <div class="card" th:each="s : ${c.subjects}">
+                <a th:href="@{/course?subjectId=17}">[[ ${s.id} ]] [[ ${s.name} ]]</a>
+                <button id="1" class="myBtn unsubscribe" title="Unsubscribe me from this course">
+                    <i class="fas fa-bell-slash"></i>
+                </button>
+            </div>
         </div>
-        <div class="card" onclick="redirect()">
-            ALGO
-            <button id="2" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i
-                    class="fas fa-bell-slash"></i></button>
-        </div>
-        <div class="card" onclick="redirect()">
-            PROG
-            <button id="3" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i
-                    class="fas fa-bell-slash"></i></button>
-        </div>
-
-
-        <div class="card topcard">M1 - MLDM</div>
-        <div class="card" onclick="redirect()">
-            Machine Turing
-            <button id="4" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i
-                    class="fas fa-bell-slash"></i></button>
-        </div>
-        <div class="card" onclick="redirect()">
-            Deep Learning
-            <button id="5" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i
-                    class="fas fa-bell-slash"></i></button>
-        </div>
-        <div class="card" onclick="redirect()">
-            Advanced Web
-            <button id="6" class="myBtn unsubscribe" title="Unsubscribe me from this course"> <i
-                    class="fas fa-bell-slash"></i></button>
-        </div>
-
 
     </section>
 

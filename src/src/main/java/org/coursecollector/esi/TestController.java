@@ -24,8 +24,6 @@ import org.coursecollector.esi.model.SubjectRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -50,10 +48,6 @@ public class TestController {
     
     @RequestMapping("/test-data")
     public String generateTestData(Model model) {
-        Class c1 = new Class("Master", 1);
-        Class c2 = new Class("Master", 2);
-        classRepo.save(c1);
-        classRepo.save(c2);
         
         // Create Students test 
         Student[] students = {
@@ -106,6 +100,13 @@ public class TestController {
         subjectRepo.save(s4);
         subjectRepo.save(s5);
         subjectRepo.save(s6);
+
+        Class c1 = new Class("Master", 1);
+        Class c2 = new Class("Master", 2);
+        c1.setSubjects(Arrays.asList(s1, s2, s3));
+        c2.setSubjects(Arrays.asList(s4, s5, s6));
+        classRepo.save(c1);
+        classRepo.save(c2);
         
         return "redirect:/classes";
     }
