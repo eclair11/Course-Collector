@@ -27,50 +27,19 @@
             <button id="share-button" class="styled" type="button">Publier un cours</button>
         </div>
 
-        <div class="card topcard">Artificial Intelligence and Advanced Algorithm</div>
-        <div class="card" onclick="redirect()">05/10/2019 : Prop. Logic</div>
-        <div class="divemoji">
-            <button class="emoji" id="" onclick="">&#128525;</button>
-            <span>14</span>
-            <button class="emoji" style='font-size:30px;'>&#129326;</button>
-            <span>140</span>
-        </div>
-
-
-        <div class="card" onclick="redirect()">12/10/2019 : First Order Logic</div>
-        <div class="divemoji">
-            <button class="emoji" id="" onclick="">&#128525;</button>
-            <span>14</span>
-            <button class="emoji" style='font-size:30px;'>&#129326;</button>
-            <span>140</span>
-        </div>
-
-
-        <div class="card" onclick="redirect()">17/10/2019 : Prolog</div>
-        <div class="divemoji">
-            <button class="emoji" id="" onclick="">&#128525;</button>
-            <span>14</span>
-            <button class="emoji" style='font-size:30px;'>&#129326;</button>
-            <span>140</span>
-        </div>
-
-
-        <div class="card" onclick="redirect()">22/10/2019 : Prolog II</div>
-        <div class="divemoji">
-            <button class="emoji" id="" onclick="">&#128525;</button>
-            <span>14</span>
-            <button class="emoji" style='font-size:30px;'>&#129326;</button>
-            <span>140</span>
-        </div>
-
+        <div class="card topcard">[[ ${subject.name} ]]</div>
         
-        <div class="card" onclick="redirect()">30/10/2019 : Prolog III</div>
-        <div class="divemoji">
-            <button class="emoji" id="" onclick="">&#128525;</button>
-            <span>14</span>
-            <button class="emoji" style='font-size:30px;'>&#129326;</button>
-            <span>140</span>
-        </div>
+        
+        <article th:each="publication : ${subject.publications}">
+            <div class="card" onclick="redirect()">[[ ${publication.course.dateCourse} ]] : [[ ${publication.course.name} ]]</div>
+            <div class="divemoji">
+                <button class="emoji" id="" onclick="">&#128525;</button>
+                <span>14</span>
+                <button class="emoji" style='font-size:30px;'>&#129326;</button>
+                <span>140</span>
+            </div>
+        </article>
+
 
         <div id="request-modal" class="modal">
             <div class="modal-content">

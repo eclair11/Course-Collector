@@ -40,14 +40,14 @@ public class Subject {
         this.name = name;
     }
     
-    public Subject(String name, List<Request> requests) {
+    public Subject(String name, List<Publication> publications) {
         this(name);
-        this.requests = requests;
+        this.publications = publications;
     }
 
     public Subject(String name, List<Request> requests, List<Publication> publications) {
-        this(name, requests);
-        this.publications = publications;
+        this(name, publications);
+        this.requests = requests;
     }
     
     public Subject() {
