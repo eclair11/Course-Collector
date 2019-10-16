@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Solofo RABONARIJAONA
  */
-public interface SubjectRepo extends CrudRepository<Subject, Long>{
+public interface ClassRepository extends CrudRepository<Class, Long>{
 
 }
