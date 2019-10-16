@@ -16,7 +16,7 @@ public class Rate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    Boolean like;
+    Boolean dislike;
 
     @ManyToOne
     Publication publication;
@@ -24,8 +24,8 @@ public class Rate {
     @ManyToOne
     Student student;
 
-    public Rate(Boolean like, Publication publication, Student student) {
-        this.like = like;
+    public Rate(Boolean dislike, Publication publication, Student student) {
+        this.dislike = dislike;
         this.publication = publication;
         this.student = student;
     }

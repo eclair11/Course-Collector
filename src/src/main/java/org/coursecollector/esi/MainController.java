@@ -1,11 +1,18 @@
 package org.coursecollector.esi;
 
+import javax.inject.Inject;
+
+import org.coursecollector.esi.model.CourseRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
+
+    @Inject
+    CourseRepo courseRepo;
+
 
     @RequestMapping("/")
     public String pageAccueil() {
