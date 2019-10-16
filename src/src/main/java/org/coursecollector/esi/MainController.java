@@ -13,6 +13,11 @@ public class MainController {
     @Inject
     CourseRepository courseRepository;
 
+    @RequestMapping("/GenerateCourses")
+    public String GenerateCourses(Model model) {
+        return "redirect:/courses";
+    }
+
 
     @RequestMapping("/")
     public String pageAccueil() {

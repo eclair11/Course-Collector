@@ -2,6 +2,6 @@ package org.coursecollector.esi.model;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ContentRepo extends CrudRepository<Content, Long> {
+public interface RateRepository extends CrudRepository<Rate, Long> {
 
 }

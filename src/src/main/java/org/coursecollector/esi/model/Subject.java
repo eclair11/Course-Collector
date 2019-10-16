@@ -31,15 +31,23 @@ public class Subject {
     
     /* Correspondant list of courses */
     @OneToMany
-    List<Course> courses = new ArrayList<>();
+    List<Request> requests = new ArrayList<>();
+
+    @OneToMany
+    List<Publication> publications = new ArrayList<>();
     
     public Subject(String name) {
         this.name = name;
     }
     
-    public Subject(String name, List<Course> courses) {
+    public Subject(String name, List<Request> requests) {
         this(name);
-        this.courses = courses;
+        this.requests = requests;
+    }
+
+    public Subject(String name, List<Request> requests, List<Publication> publications) {
+        this(name, requests);
+        this.publications = publications;
     }
     
     public Subject() {

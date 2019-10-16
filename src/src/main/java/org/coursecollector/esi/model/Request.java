@@ -30,10 +30,18 @@ public class Request {
     @ManyToOne
     Student student;
 
+    @OneToOne
+    Publication publication;
+
     public Request(Course course, Student student) {
         this.course = course;
         this.student = student;
         this.date = new Date();
+    }
+
+    public Request(Course course, Student student, Publication publication) {
+        this(course, student);
+        this.publication = publication;
     }
 
     public Request() {
