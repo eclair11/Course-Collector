@@ -30,7 +30,7 @@
                 [[ ${c.name} ]] [[ ${c.level} ]]
             </div>
             <div class="card" th:each="s : ${c.subjects}">
-                <a th:href="@{/course?subjectId=17}">[[ ${s.id} ]] [[ ${s.name} ]]</a>
+                <a th:href="@{/course(subjectId=${s.id})}"> [[ ${s.name} ]]</a>
                 <button id="1" class="myBtn unsubscribe" title="Unsubscribe me from this course">
                     <i class="fas fa-bell-slash"></i>
                 </button>
