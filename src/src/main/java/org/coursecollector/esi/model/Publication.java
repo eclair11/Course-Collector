@@ -45,6 +45,10 @@ public class Publication {
     /* number of dislikes */
     @Transient // not saved in DB
     int numberDislike;
+    
+    public Publication(Course course) {
+        this.course = course;
+    }
 
     public Publication(Course course, Student student) {
         this.course = course;

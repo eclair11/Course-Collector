@@ -22,6 +22,8 @@ import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
+import org.coursecollector.esi.model.Rate;
+import org.coursecollector.esi.model.RateRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,9 @@ public class TestController {
 
     @Inject
     CourseRepository courseRepo;
+    
+    @Inject
+    RateRepository rateRepo;
 
     @RequestMapping("/test-data")
     public String generateTestData(Model model) {
@@ -58,18 +63,41 @@ public class TestController {
         }
 
         // Create Publication test
-        Publication[] publications = { new Publication(), new Publication(), new Publication(), new Publication(),
-                new Publication(), new Publication() };
+        Publication[] publications = { 
+            new Publication(courses[0]), 
+            new Publication(courses[1]), 
+            new Publication(courses[2]), 
+            new Publication(courses[3]),
+            new Publication(courses[4]), 
+            new Publication(courses[5]) };
 
         // Save all Publications in DB
         for (int i = 0; i < publications.length; i++) {
             publicationRepo.save(publications[i]);
         }
+        
+         // Create some Rate for the first publication
+        Rate[] rates = {
+            new Rate(true, publications[0]),
+            new Rate(false, publications[0])
+        };
+        // save all Rates in DB
+        for (int i = 0; i < rates.length; i++) {
+            rateRepo.save(rates[i]);
+        }
+
+        // add Rates for the first publication
+        publications[0].setRates(new ArrayList<Rate>(Arrays.asList(rates)));
+        // update this publication in DB
+        publicationRepo.save(publications[0]);
 
         // Create Subject Test
         // save all publications in Subject IA
         Subject[] subjects = { new Subject("IA"), new Subject("Advanced Algorithm"), new Subject("Complexity"),
                 new Subject("Turing Machine"), new Subject("Deep Learning"), new Subject("Advanced Web") };
+        
+        // add some publications in the first subject : IA
+        subjects[0].setPublications(new ArrayList<Publication>(Arrays.asList(publications)));
 
         // Save all subject in DB
         for (int i = 0; i < subjects.length; i++) {
@@ -97,8 +125,11 @@ public class TestController {
         for (int i = 0; i < students.length; i++) {
             studentRepo.save(students[i]);
         }
+        
+        // get the id of Lebron James (saved first)
+        Long lebronId = studentRepo.findAll().iterator().next().getId();
 
-        return "redirect:/login";
+        return "redirect:/class?studentId=" + lebronId;
     }
 
 }
