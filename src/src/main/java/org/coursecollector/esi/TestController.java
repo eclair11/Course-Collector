@@ -21,6 +21,8 @@ import org.coursecollector.esi.model.Publication;
 import org.coursecollector.esi.model.CourseRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
+import org.coursecollector.esi.model.Rate;
+import org.coursecollector.esi.model.RateRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,9 @@ public class TestController {
 
     @Inject
     CourseRepository courseRepo;
+    
+    @Inject
+    RateRepository rateRepo;
     
     @RequestMapping("/test-data")
     public String generateTestData(Model model) {
@@ -85,6 +90,21 @@ public class TestController {
         for (int i = 0; i < publications.length; i++) {
             publicationRepo.save(publications[i]);
         }
+        
+        // Create some Rate 
+        Rate[] rates = {
+            new Rate(true, publications[0], students[0]),
+            new Rate(false, publications[0], students[1])
+        };
+        // save all Rates in DB
+        for (int i = 0; i < rates.length; i++) {
+            rateRepo.save(rates[i]);
+        }
+        
+        // add Rates for the first publication
+        publications[0].setRates(new ArrayList<Rate>(Arrays.asList(rates)));
+        // update this publication in DB
+        publicationRepo.save(publications[0]);
         
         // Create Subject Test
         Subject s1 = new Subject("IA", new ArrayList<Publication>(Arrays.asList(publications))); // save all publications in Subject IA
