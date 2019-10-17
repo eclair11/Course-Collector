@@ -20,11 +20,11 @@
             <i class="fas fa-search"></i><br>
             <input type="text" name="search" placeholder="Cherchez un cours">
         </form>
-        <div th:each="c : ${classes}">
+        <div th:each="c : ${class}">
             <div class="card topcard">[[ ${c.name} ]] [[ ${c.level} ]]</div>
             <div class="card" th:each="s : ${c.subjects}">
                 <a th:href="@{/course(subjectId=${s.id})}">[[ ${s.name} ]]</a>
-                <button id="1" class="myBtn unsubscribe" title="Déinscription du cours">
+                <button id="1" class="myBtn unsubscribe" title="Désinscription du cours">
                     <i class="fas fa-bell-slash"></i>
                 </button>
             </div>

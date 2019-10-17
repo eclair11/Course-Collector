@@ -1,17 +1,5 @@
-.formcard {
-  background: #000000;
-  height: 50px;
-  line-height: 50px;
-  font-size: 20px;
-}
-
-.formtext {
-  text-align: center;
-  margin: 10px 0px 10px 0px;
-  font-size: 20px;
-}
-
 /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow */
+
 .mySlides {
   display: none;
 }

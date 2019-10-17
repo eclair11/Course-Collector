@@ -1,12 +1,15 @@
 package org.coursecollector.esi;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
-import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Class;
 import org.coursecollector.esi.model.ClassRepository;
-import org.coursecollector.esi.model.PublicationRepository;
 import org.coursecollector.esi.model.CourseRepository;
+import org.coursecollector.esi.model.PublicationRepository;
+import org.coursecollector.esi.model.Student;
+import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
 import org.springframework.stereotype.Controller;
@@ -37,10 +40,11 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/classes")
-    public String listClasses(Model model) {
-        Iterable<Class> classes = classRepo.findAll();
-        model.addAttribute("classes", classes);
+    @RequestMapping("/class")
+    public String listClasses(Model model, @RequestParam Long studentId) {
+        Student student = studentRepo.findById(studentId).get();
+        List<Class> listClass = student.getClasses();
+        model.addAttribute("class", listClass);
         return "class";
     }
 

@@ -2404,3 +2404,35 @@ span.close {
 .danger-bg:hover {
     background-color: #da190b;
 }
+
+.card {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  margin: 5px 0px 5px 0px;
+  background: #333333;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.topcard {
+  background: #3898ec;
+  color: #000000;
+  font-size: 40px;
+}
+
+.topcard:hover {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0), 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
