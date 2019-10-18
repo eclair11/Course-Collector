@@ -1,7 +1,7 @@
 package org.coursecollector.esi.model;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,8 +24,9 @@ public class Student  extends User{
     String lastName;
     String option;
     int level;
+    
     /* List of class where the student is subscribed */
-    @OneToMany
+    @ManyToMany
     List<Class> classes = new ArrayList<>();
 
     public Student(String role, String password, String firstName, String lastName, String option, int level) {

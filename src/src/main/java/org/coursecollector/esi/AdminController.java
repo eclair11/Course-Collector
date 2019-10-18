@@ -6,9 +6,13 @@
 
 package org.coursecollector.esi;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.coursecollector.esi.model.Student;
+import org.coursecollector.esi.model.StudentRepository;
 
 /**
  *
@@ -16,20 +20,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class AdminController {
+    
+    @Inject 
+    StudentRepository studentRepo;
 
     @RequestMapping("/admin")
     public String page(Model model) {
+        // get notifications that concern the student
+        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "admin";
     }
 
     @RequestMapping("/users")
     public String listUsers(Model model) {
+        // get notifications that concern the student
+        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "user";
     }
 
 
     @RequestMapping("/statut")
-    public String changeStatut() {
+    public String changeStatut(Model model) {
+        // get notifications that concern the student
+        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "change-statut";
     }
 

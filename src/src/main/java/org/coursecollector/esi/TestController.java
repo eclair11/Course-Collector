@@ -9,6 +9,7 @@ package org.coursecollector.esi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.text.SimpleDateFormat;  
 
 import javax.inject.Inject;
 
@@ -24,12 +25,17 @@ import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
 import org.coursecollector.esi.model.Rate;
 import org.coursecollector.esi.model.RateRepository;
+import org.coursecollector.esi.model.Request;
+import org.coursecollector.esi.model.RequestRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
+    
+    // static attributes
+    public static Long defaultStudentId; 
 
     @Inject
     StudentRepository studentRepo;
@@ -48,6 +54,16 @@ public class TestController {
     
     @Inject
     RateRepository rateRepo;
+    
+    @Inject
+    RequestRepository requestRepo;
+    
+    /**
+     * method that set value of defaultStudentId
+     */
+    public static void setDefaultStudentId(Long id) {
+        defaultStudentId = id;
+    }
 
     @RequestMapping("/test-data")
     public String generateTestData(Model model) {
@@ -118,16 +134,40 @@ public class TestController {
         Student[] students = { new Student("USER", "1234", "Lebron", "James", "Informatique", 4),
                 new Student("USER", "1234", "Kobe", "Bryant", "Informatique", 4) };
 
-        students[0].setClasses(Arrays.asList(classes[0]));
-        students[1].setClasses(Arrays.asList(classes[1]));
+        students[0].setClasses(Arrays.asList(classes));
+        students[1].setClasses(Arrays.asList(classes));
 
         // Save all Students in DB
         for (int i = 0; i < students.length; i++) {
             studentRepo.save(students[i]);
         }
         
+        // Create some Request
+        Request[] requests = {
+            new Request(new Date(), students[0]),
+            new Request(new Date(), students[0]),
+            new Request(new Date(), students[0]),
+            new Request(new Date(), students[0])
+        };
+        // save all request
+        for (int i = 0; i < requests.length; i++) {
+            requestRepo.save(requests[i]);
+        }
+        
+        // add requests to the first subject in DB
+        Subject firstSubjInDb = subjectRepo.findAll().iterator().next();
+        for (int i = 0; i < requests.length; i++) {
+            firstSubjInDb.getRequests().add(requests[i]);
+        }
+        System.out.println("TEST TEST TEST");
+        System.out.println(firstSubjInDb.getId());
+        // update subject IA
+        subjectRepo.save(firstSubjInDb);
+        
         // get the id of Lebron James (saved first)
         Long lebronId = studentRepo.findAll().iterator().next().getId();
+        // set Lebron james as default student for this test
+        TestController.setDefaultStudentId(lebronId);
 
         return "redirect:/class?studentId=" + lebronId;
     }

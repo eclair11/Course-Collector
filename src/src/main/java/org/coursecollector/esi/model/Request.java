@@ -22,10 +22,7 @@ public class Request {
     Long id;
 
     @Temporal(TemporalType.DATE)
-    Date date;
-
-    @OneToOne
-    Course course;
+    Date dateCourse;
 
     @ManyToOne
     Student student;
@@ -33,15 +30,9 @@ public class Request {
     @OneToOne
     Publication publication;
 
-    public Request(Course course, Student student) {
-        this.course = course;
+    public Request(Date dateCourse, Student student) {
         this.student = student;
-        this.date = new Date();
-    }
-
-    public Request(Course course, Student student, Publication publication) {
-        this(course, student);
-        this.publication = publication;
+        this.dateCourse = dateCourse;
     }
 
     public Request() {

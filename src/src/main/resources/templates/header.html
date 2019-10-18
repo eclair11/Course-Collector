@@ -12,11 +12,11 @@
                 <a class="nav-link sign-up" href="/login" target="_self">Log in</a>
                 <div class="dropdown nav-link">
                     <button class="dropbtn"><i class="fas fa-bell"></i></button>
-                    <span class="badge">3</span>
+                    <span class="badge">[[ ${#arrays.length(notifications)} ]]</span>
                     <div class="dropdown-content">
-                        <a href="/course?subjectId=17">M1 | GENIE LOGICIEL | 3 Septembre 2019</a>
-                        <a href="/course?subjectId=17">M1 | DOCUMENT NUMERIQUE | 3 Septembre 2019</a>
-                        <a href="/course?subjectId=17">M1 | DEV WEB ADV | 3 Septembre 2019</a>
+                        <div th:each="notif : ${notifications}">
+                            <a th:href="@{/course(subjectId=${notif[0]})}">[[ ${notif[1]} ]] | [[ ${notif[2]} ]] | [[ ${notif[3]} ]]</a>
+                        </div>
                     </div>
                 </div> 
             </nav>
