@@ -8,8 +8,7 @@ package org.coursecollector.esi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.text.SimpleDateFormat;  
+import java.util.Date; 
 
 import javax.inject.Inject;
 
@@ -144,10 +143,10 @@ public class TestController {
         
         // Create some Request
         Request[] requests = {
-            new Request(new Date(), students[0]),
-            new Request(new Date(), students[0]),
-            new Request(new Date(), students[0]),
-            new Request(new Date(), students[0])
+            new Request(new Date(2019 - 1900, 10, 3), students[0]),
+            new Request(new Date(2019 - 1900, 10, 4), students[0]),
+            new Request(new Date(2019 - 1900, 10, 5), students[0]),
+            new Request(new Date(2019 - 1900, 10, 6), students[0])
         };
         // save all request
         for (int i = 0; i < requests.length; i++) {

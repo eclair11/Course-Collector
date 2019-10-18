@@ -88,7 +88,7 @@ public class MainController {
                     notifications[notifCounter][0] = "" + subjects.get(j).getId();
                     notifications[notifCounter][1] = studentClasses.get(i).getName() + " " + studentClasses.get(i).getLevel();
                     notifications[notifCounter][2] = subjects.get(j).getName();
-                    notifications[notifCounter][3] = "" + requests.get(k).getDateCourse();
+                    notifications[notifCounter][3] = requests.get(k).getDateCourse().toString();
                     notifCounter++;
                 }
             }

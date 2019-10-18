@@ -14,8 +14,12 @@
                     <button class="dropbtn"><i class="fas fa-bell"></i></button>
                     <span class="badge">[[ ${#arrays.length(notifications)} ]]</span>
                     <div class="dropdown-content">
-                        <div th:each="notif : ${notifications}">
-                            <a th:href="@{/course(subjectId=${notif[0]})}">[[ ${notif[1]} ]] | [[ ${notif[2]} ]] | [[ ${notif[3]} ]]</a>
+                        <div th:each="notifInfo : ${notifications}">
+                            <a th:href="@{/course(subjectId=${notifInfo[0]})}">
+                                <span class="w-col-4"><small>class :</small> [[ ${notifInfo[1]} ]] </span> 
+                                <span class="w-col-4"><small>course :</small>[[ ${notifInfo[2]} ]]</span>  
+                                <span class="w-col-4"><small>date :</small>[[ ${notifInfo[3]} ]]</span>
+                            </a>
                         </div>
                     </div>
                 </div> 
