@@ -1,26 +1,33 @@
 package org.coursecollector.esi;
 
-import java.util.List;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.coursecollector.esi.model.Class;
 import org.coursecollector.esi.model.ClassRepository;
 import org.coursecollector.esi.model.CourseRepository;
+import org.coursecollector.esi.model.Publication;
 import org.coursecollector.esi.model.PublicationRepository;
+import org.coursecollector.esi.model.Request;
+import org.coursecollector.esi.model.RequestRepository;
 import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
-import org.coursecollector.esi.model.Request;
-import org.coursecollector.esi.model.RequestRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MainController {
@@ -58,6 +65,7 @@ public class MainController {
     public String listClasses(Model model, @RequestParam Long studentId) {
         Student student = studentRepo.findById(studentId).get();
         List<Class> listClass = student.getClasses();
+        model.addAttribute("student", student);
         model.addAttribute("class", listClass);
         // get notifications that concern the student
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
@@ -65,14 +73,16 @@ public class MainController {
     }
 
     @RequestMapping("/course")
-    public String listCourses(Model model, @RequestParam Long subjectId) {
-        // fetch the subject that correspond to the id
+    public String listCourses(Model model, @RequestParam Long studentId, @RequestParam Long subjectId) {
+        Student student = studentRepo.findById(studentId).get();
         Subject subject = subjectRepo.findById(subjectId).get();
-        // send the subject in the view
-        model.addAttribute("subject", subject);
+        Publication publication = new Publication();
         // bound new Request that will permit to add request using form in modal
         Request boundedReq = new Request();
         boundedReq.setSubjectId(subject.getId());
+        model.addAttribute("student", student);
+        model.addAttribute("subject", subject);
+        model.addAttribute("publication", publication);
         model.addAttribute("request", boundedReq);
         // get notifications that concern the student
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
@@ -144,11 +154,44 @@ public class MainController {
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "setting";
     }
-
-    @RequestMapping("/publish-success")
-    public String publishSuccess(Model model) {
+        
+    @RequestMapping(value = "/publish-success", method = RequestMethod.POST)
+    public String publishSuccess(Model model, @ModelAttribute("publication") Publication publication) {
         // get notifications that concern the student
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        return this.multiFileUpload(model, publication);
+    }
+
+    private String multiFileUpload(Model model, Publication publication) {
+        String uploadRootPath = "./src/main/resources/static/img/courses/";
+        File uploadRootDir = new File(uploadRootPath);
+        if (!uploadRootDir.exists()) {
+            uploadRootDir.mkdirs();
+        }
+
+        MultipartFile[] fileDatas = publication.getFiles();
+        List<String> linkedFiles = new ArrayList<String>();
+        List<String> failedFiles = new ArrayList<String>();
+
+        for (MultipartFile fileData : fileDatas) {
+            String name = fileData.getOriginalFilename();
+            if (name != null && name.length() > 0) {
+                try {
+                    File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                    stream.write(fileData.getBytes());
+                    stream.close();
+                    linkedFiles.add(serverFile.getAbsolutePath());
+                } catch (Exception e) {
+                    System.out.println("Error Write file: " + name);
+                    failedFiles.add(name);
+                }
+            }
+        }
+
+        publication.setLinks(linkedFiles);
+        publicationRepo.save(publication);
+        model.addAttribute("failedFiles", failedFiles);
         return "publish-success";
     }
 

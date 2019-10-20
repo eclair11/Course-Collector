@@ -7,7 +7,6 @@
     <meta th:replace="metas-header :: meta" />
     <!-- INCLUDE SHARED LINKS  -->
     <link th:replace="links-header :: link" />
-    <link href="css/class.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -23,7 +22,7 @@
         <div th:each="c : ${class}">
             <div class="card topcard">[[ ${c.name} ]] [[ ${c.level} ]]</div>
             <div class="card" th:each="s : ${c.subjects}">
-                <a th:href="@{/course(subjectId=${s.id})}">[[ ${s.name} ]]</a>
+                <a th:href="@{/course(studentId=${student.id},subjectId=${s.id})}">[[ ${s.name} ]]</a>
                 <button id="1" class="myBtn unsubscribe" title="Désinscription du cours">
                     <i class="fas fa-bell-slash"></i>
                 </button>

@@ -4,15 +4,11 @@
 
 <head>
     <title>Courses</title>
-
     <!-- INCLUDE SHARED METAS -->
     <meta th:replace="metas-header :: meta" />
     <!-- INCLUDE SHARED LINKS  -->
     <link th:replace="links-header :: link" />
-
-    <link href="css/class.css" rel="stylesheet" type="text/css" />
     <link href="css/course.css" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body>
@@ -21,17 +17,15 @@
     <header th:replace="header :: header"></header>
 
     <section class="w-container">
-
-        <div class="control">
-            <button id="request-button" class="w-button" type="button">Demander un cours</button>
-            <button id="share-button" class="w-button" type="button">Publier un cours</button>
-        </div>
-
+        <button id="request-button" class="w-button" type="button">Demander un cours</button>
+        <button id="share-button" class="w-button" type="button">Publier un cours</button>
         <div class="card topcard">[[ ${subject.name} ]]</div>
-        
-        
         <article th:each="publication : ${subject.publications}">
-            <div class="card" onclick="redirect()">[[ ${publication.course.dateCourse} ]] : [[ ${publication.course.name} ]]</div>
+            <div class="card">
+                <a href="http://localhost:8080/content">
+                    [[ ${publication.course.dateCourse} ]] : [[ ${publication.course.name} ]]
+                </a>
+            </div>
             <div class="divemoji">
                 <button class="emoji" id="" onclick="">&#128525;</button>
                 <span>[[ ${publication.numberLike} ]]</span>
@@ -39,7 +33,6 @@
                 <span>[[ ${publication.numberDislike} ]]</span>
             </div>
         </article>
-
 
         <div id="request-modal" class="modal">
             <div class="modal-content">
@@ -58,25 +51,27 @@
         <div id="share-modal" class="modal">
             <div class="modal-content">
                 <span id="share-close" class="close">&times;</span>
-                <form method="POST" action="/publish-success">
+                <form method="POST" th:action="@{/publish-success}" th:object="${publication}"
+                    enctype="multipart/form-data">
                     <div class="modal-body">
                         <span>Si vous publierez votre cours à la réponse d'une demande :</span><br>
-                        <select id="select-date" onchange="check()">
-                            <option value="0">--Choisissez la date du cours que vous publierez--</option>
-                            <option th:each="request : ${subject.requests}" th:value="${request.dateCourse}">[[ ${request.dateCourse} ]]</option>
+                        <select th:field="*{date}" onchange="check()">
+                            <option th:value="0">Choisissez la date du cours que vous publierez</option>
+                            <option th:value="19/11/2019">19/11/2019</option>
+                            <option th:value="25/11/2019">25/11/2019</option>
+                            <option th:value="30/11/2019">30/11/2019</option>
                         </select><br>
                         <span>Si vous publierez votre cours spontanément :</span><br>
-                        <input id="input-date" class="input-date" type="date"><br>
+                        <!--<input class="input-date" type="date" th:field="*{date}"><br>-->
                         <span>Sélectionnez les fichiers du cours :</span>
-                        <input type="file" name="img" multiple><br>
-                        <button type="submit" class="w-button">Ajouter les fichiers</button><br>
+                        <input type="file" multiple th:field="*{files}"><br>
                         <span>Si vous avez un commentaire à propos de votre publication (optionnel) :</span><br>
-                        <textarea cols="50" rows="10"></textarea>
+                        <textarea cols="50" rows="10" th:field="*{commentary}"></textarea><br>
+                        <button class="w-button" type="submit">Valider la publication</button>
                     </div>
                 </form>
             </div>
         </div>
-
     </section>
 
     <!-- INCLUDE FOOTER -->

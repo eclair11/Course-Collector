@@ -40,7 +40,3 @@ function check() {
     document.getElementById("input-date").disabled = false;
   }
 }
-
-function redirect() {
-  location.href = "http://localhost:8080/content";
-}
