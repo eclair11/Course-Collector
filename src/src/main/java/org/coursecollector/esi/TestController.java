@@ -158,8 +158,6 @@ public class TestController {
         for (int i = 0; i < requests.length; i++) {
             firstSubjInDb.getRequests().add(requests[i]);
         }
-        System.out.println("TEST TEST TEST");
-        System.out.println(firstSubjInDb.getId());
         // update subject IA
         subjectRepo.save(firstSubjInDb);
         

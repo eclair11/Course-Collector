@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -29,14 +30,26 @@ public class Request {
 
     @OneToOne
     Publication publication;
+    
+    @Transient
+    Long subjectId;
 
     public Request(Date dateCourse, Student student) {
         this.student = student;
         this.dateCourse = dateCourse;
     }
+    
 
     public Request() {
 
+    }
+    
+    // surcharged setters
+    public void setDateCourse(String date) {
+        int year = Integer.parseInt(date.split("-")[0]);
+        int month = Integer.parseInt(date.split("-")[1]);
+        int day = Integer.parseInt(date.split("-")[2]);
+        this.dateCourse = new Date(year - 1900, month, day);
     }
 
 }

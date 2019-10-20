@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
@@ -42,7 +44,7 @@ public class MainController {
     RequestRepository requestRepo;
     
     
-    private static final int MAX_NOTIFICATION_PER_STUDENT = 100;
+    private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
     
 
     @RequestMapping("/")
@@ -68,6 +70,10 @@ public class MainController {
         Subject subject = subjectRepo.findById(subjectId).get();
         // send the subject in the view
         model.addAttribute("subject", subject);
+        // bound new Request that will permit to add request using form in modal
+        Request boundedReq = new Request();
+        boundedReq.setSubjectId(subject.getId());
+        model.addAttribute("request", boundedReq);
         // get notifications that concern the student
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "course";
@@ -110,6 +116,19 @@ public class MainController {
         // get notifications that concern the student
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "login";
+    }
+    
+    @PostMapping("/addRequest")
+    public String addRequest(Model model, @ModelAttribute Request newRequest) {
+        // save the new request in DB
+        requestRepo.save(newRequest);
+        // get the subject 
+        Subject subject = subjectRepo.findById(newRequest.getSubjectId()).get();
+        // add new request to the current subject
+        subject.getRequests().add(newRequest);
+        // update subject
+        subjectRepo.save(subject);
+        return "redirect:/request-success";
     }
 
     @RequestMapping("/request-success")

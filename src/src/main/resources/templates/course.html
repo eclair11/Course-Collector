@@ -44,10 +44,11 @@
         <div id="request-modal" class="modal">
             <div class="modal-content">
                 <span id="request-close" class="close">&times;</span>
-                <form method="POST" action="request-success">
+                <form method="POST" th:action="@{/addRequest}" th:object="${request}">
                     <div class="modal-body">
                         <span>Choisissez la date du cours demandé :</span><br>
-                        <input type="date"><br>
+                        <input th:field="*{subjectId}" type="hidden">
+                        <input th:field="*{dateCourse}" type="date"><br>
                         <button type="submit" class="w-button">Valider la demande</button>
                     </div>
                 </form>
