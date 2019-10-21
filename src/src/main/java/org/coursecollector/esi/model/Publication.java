@@ -53,6 +53,9 @@ public class Publication {
     @Transient
     MultipartFile[] files;
 
+    @Transient
+    Long studentId;
+
     public Publication(Course course) {
         this.course = course;
     }

@@ -65,6 +65,7 @@
                         <!--<input class="input-date" type="date" th:field="*{date}"><br>-->
                         <span>Sélectionnez les fichiers du cours :</span>
                         <input type="file" multiple th:field="*{files}"><br>
+                        <input type="hidden" th:field="*{studentId}">
                         <span>Si vous avez un commentaire à propos de votre publication (optionnel) :</span><br>
                         <textarea cols="50" rows="10" th:field="*{commentary}"></textarea><br>
                         <button class="w-button" type="submit">Valider la publication</button>

@@ -76,11 +76,11 @@ public class MainController {
     public String listCourses(Model model, @RequestParam Long studentId, @RequestParam Long subjectId) {
         Student student = studentRepo.findById(studentId).get();
         Subject subject = subjectRepo.findById(subjectId).get();
-        Publication publication = new Publication();
         // bound new Request that will permit to add request using form in modal
         Request boundedReq = new Request();
         boundedReq.setSubjectId(subject.getId());
-        model.addAttribute("student", student);
+        Publication publication = new Publication();
+        publication.setStudentId(student.getId());
         model.addAttribute("subject", subject);
         model.addAttribute("publication", publication);
         model.addAttribute("request", boundedReq);
@@ -88,7 +88,6 @@ public class MainController {
         model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "course";
     }
-    
 
     public static String[][] listNotifications(StudentRepository studentRepo, Long studentId) {
         int numberNotificationInfos = 4;
@@ -189,6 +188,7 @@ public class MainController {
             }
         }
 
+        publication.setStudent(studentRepo.findById(publication.getStudentId()).get());
         publication.setLinks(linkedFiles);
         publicationRepo.save(publication);
         model.addAttribute("failedFiles", failedFiles);
