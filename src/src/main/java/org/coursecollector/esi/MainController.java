@@ -46,18 +46,17 @@ public class MainController {
 
     @Inject
     CourseRepository courseRepo;
-    
+
     @Inject
     RequestRepository requestRepo;
-    
-    
+
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
-    
 
     @RequestMapping("/")
     public String pageAccueil(Model model) {
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "index";
     }
 
@@ -68,7 +67,8 @@ public class MainController {
         model.addAttribute("student", student);
         model.addAttribute("class", listClass);
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "class";
     }
 
@@ -85,7 +85,8 @@ public class MainController {
         model.addAttribute("publication", publication);
         model.addAttribute("request", boundedReq);
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "course";
     }
 
@@ -101,14 +102,15 @@ public class MainController {
                 List<Request> requests = subjects.get(j).getRequests();
                 for (int k = 0; k < requests.size(); k++) {
                     notifications[notifCounter][0] = "" + subjects.get(j).getId();
-                    notifications[notifCounter][1] = studentClasses.get(i).getName() + " " + studentClasses.get(i).getLevel();
+                    notifications[notifCounter][1] = studentClasses.get(i).getName() + " "
+                            + studentClasses.get(i).getLevel();
                     notifications[notifCounter][2] = subjects.get(j).getName();
                     notifications[notifCounter][3] = requests.get(k).getDateCourse().toString();
                     notifCounter++;
                 }
             }
         }
-        
+
         // return extracted notifications
         return Arrays.copyOfRange(notifications, 0, notifCounter);
     }
@@ -116,22 +118,24 @@ public class MainController {
     @RequestMapping("/content")
     public String listCoursesContent(Model model) {
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "content";
     }
 
     @RequestMapping("/login")
     public String login(Model model) {
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "login";
     }
-    
+
     @PostMapping("/addRequest")
     public String addRequest(Model model, @ModelAttribute Request newRequest) {
         // save the new request in DB
         requestRepo.save(newRequest);
-        // get the subject 
+        // get the subject
         Subject subject = subjectRepo.findById(newRequest.getSubjectId()).get();
         // add new request to the current subject
         subject.getRequests().add(newRequest);
@@ -143,21 +147,24 @@ public class MainController {
     @RequestMapping("/request-success")
     public String confirmation(Model model) {
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "request-success";
     }
 
     @RequestMapping("/setting")
     public String setting(Model model) {
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "setting";
     }
-        
+
     @RequestMapping(value = "/publish-success", method = RequestMethod.POST)
     public String publishSuccess(Model model, @ModelAttribute("publication") Publication publication) {
         // get notifications that concern the student
-        model.addAttribute("notifications", MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return this.multiFileUpload(model, publication);
     }
 

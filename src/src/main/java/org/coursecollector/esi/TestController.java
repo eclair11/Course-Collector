@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.coursecollector.esi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date; 
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -32,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
-    
+
     // static attributes
-    public static Long defaultStudentId; 
+    public static Long defaultStudentId;
 
     @Inject
     StudentRepository studentRepo;
@@ -50,13 +44,13 @@ public class TestController {
 
     @Inject
     CourseRepository courseRepo;
-    
+
     @Inject
     RateRepository rateRepo;
-    
+
     @Inject
     RequestRepository requestRepo;
-    
+
     /**
      * method that set value of defaultStudentId
      */
@@ -78,24 +72,17 @@ public class TestController {
         }
 
         // Create Publication test
-        Publication[] publications = { 
-            new Publication(courses[0]), 
-            new Publication(courses[1]), 
-            new Publication(courses[2]), 
-            new Publication(courses[3]),
-            new Publication(courses[4]), 
-            new Publication(courses[5]) };
+        Publication[] publications = { new Publication(courses[0]), new Publication(courses[1]),
+                new Publication(courses[2]), new Publication(courses[3]), new Publication(courses[4]),
+                new Publication(courses[5]) };
 
         // Save all Publications in DB
         for (int i = 0; i < publications.length; i++) {
             publicationRepo.save(publications[i]);
         }
-        
-         // Create some Rate for the first publication
-        Rate[] rates = {
-            new Rate(true, publications[0]),
-            new Rate(false, publications[0])
-        };
+
+        // Create some Rate for the first publication
+        Rate[] rates = { new Rate(true, publications[0]), new Rate(false, publications[0]) };
         // save all Rates in DB
         for (int i = 0; i < rates.length; i++) {
             rateRepo.save(rates[i]);
@@ -110,7 +97,7 @@ public class TestController {
         // save all publications in Subject IA
         Subject[] subjects = { new Subject("IA"), new Subject("Advanced Algorithm"), new Subject("Complexity"),
                 new Subject("Turing Machine"), new Subject("Deep Learning"), new Subject("Advanced Web") };
-        
+
         // add some publications in the first subject : IA
         subjects[0].setPublications(new ArrayList<Publication>(Arrays.asList(publications)));
 
@@ -140,19 +127,17 @@ public class TestController {
         for (int i = 0; i < students.length; i++) {
             studentRepo.save(students[i]);
         }
-        
+
         // Create some Request
-        Request[] requests = {
-            new Request(new Date(2019 - 1900, 10, 3), students[0]),
-            new Request(new Date(2019 - 1900, 10, 4), students[0]),
-            new Request(new Date(2019 - 1900, 10, 5), students[0]),
-            new Request(new Date(2019 - 1900, 10, 6), students[0])
-        };
+        Request[] requests = { new Request(new Date(2019 - 1900, 10, 3), students[0]),
+                new Request(new Date(2019 - 1900, 10, 4), students[0]),
+                new Request(new Date(2019 - 1900, 10, 5), students[0]),
+                new Request(new Date(2019 - 1900, 10, 6), students[0]) };
         // save all request
         for (int i = 0; i < requests.length; i++) {
             requestRepo.save(requests[i]);
         }
-        
+
         // add requests to the first subject in DB
         Subject firstSubjInDb = subjectRepo.findAll().iterator().next();
         for (int i = 0; i < requests.length; i++) {
@@ -160,7 +145,7 @@ public class TestController {
         }
         // update subject IA
         subjectRepo.save(firstSubjInDb);
-        
+
         // get the id of Lebron James (saved first)
         Long lebronId = studentRepo.findAll().iterator().next().getId();
         // set Lebron james as default student for this test

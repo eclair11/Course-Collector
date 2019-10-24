@@ -2219,62 +2219,60 @@ p {
   }
 }
 
-
 /** STYLE BARRE DE RECHERCHE **/
-input[type=text] {
+input[type="text"] {
   width: 130px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
-  background-position: 10px 10px; 
+  background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   width: 100%;
 }
 
 .search-bar {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .search-bar i {
-  font-size: 30px !important; 
+  font-size: 30px !important;
 }
-
 
 /** STYLE DU BOUTON SE DESINSCRIRE   **/
 button.unsubscribe i {
-    color: #f44336;
+  color: #f44336;
 }
 
 button.unsubscribe {
-    position: absolute;
-    right: 0;
-    top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 button.unsbubscribe:hover {
-    color: #da190b;
+  color: #da190b;
 }
 
 button.download {
-    background-color: DodgerBlue;
-    color: white;
-    padding: 12px 30px;
-    cursor: pointer;
-    font-size: 20px;
-    width: 100%;
-    margin: 5px 0px 5px 0px;
+  background-color: DodgerBlue;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 100%;
+  margin: 5px 0px 5px 0px;
 }
 
 button.download:hover {
-    background-color: RoyalBlue;
+  background-color: RoyalBlue;
 }
 
 /* The Modal (background) */
@@ -2288,8 +2286,8 @@ button.download:hover {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -2302,7 +2300,7 @@ button.download:hover {
 }
 
 .modal-content p {
-    color: #f44336;
+  color: #f44336;
 }
 
 /* The Close Button */
@@ -2344,7 +2342,7 @@ span.close {
 
 /* The dropdown container */
 .dropdown {
-   float: left;
+  float: left;
   overflow: hidden;
 }
 
@@ -2364,14 +2362,13 @@ span.close {
   margin: 0; /* Important for vertical align on mobile phones */
 }
 
-
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -2397,12 +2394,12 @@ span.close {
 
 /** STYLE FOR SPECIFIC BACKGROUND **/
 .danger-bg {
-    background-color: #f44336;
-    color: white;
+  background-color: #f44336;
+  color: white;
 }
 
 .danger-bg:hover {
-    background-color: #da190b;
+  background-color: #da190b;
 }
 
 .card {
