@@ -10,11 +10,10 @@ import lombok.Data;
  *
  * @author Ibrahima DIALLO
  */
-
-
 @Entity
 @Data
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -23,12 +22,12 @@ public class User {
 
     String password;
 
-    public User(String role, String password){
-        this.role= role;
-        this.password=password;
+    public User(String role, String password) {
+        this.role = role;
+        this.password = password;
     }
 
-    public User(){
+    public User() {
 
     }
 

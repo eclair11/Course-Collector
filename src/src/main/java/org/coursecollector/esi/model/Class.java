@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.coursecollector.esi.model;
 
 import javax.persistence.OneToMany;
@@ -22,40 +16,38 @@ import java.util.ArrayList;
 @Data
 @Entity
 public class Class {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
-    
+
     String name;
-    int level; // year of the class : ex level = 1 for LICENCE 1 
-    
-    /* Correspondant list of options available for the class */
+
+    int level;
+
     @OneToMany
     List<Option> options = new ArrayList<>();
-    
-    /* Correspondant list of subjects mandatory for the class */
+
     @OneToMany
     List<Subject> subjects = new ArrayList<>();
-    
-    
+
     public Class(String name, int level) {
         this.name = name;
         this.level = level;
     }
-    
+
     public Class(String name, int level, List<Option> options) {
         this(name, level);
         this.options = options;
     }
-    
+
     public Class(String name, int level, List<Option> options, List<Subject> subjects) {
         this(name, level, options);
         this.subjects = subjects;
     }
-    
+
     public Class() {
-        
+
     }
 
 }

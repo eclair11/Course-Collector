@@ -10,8 +10,6 @@ import org.coursecollector.esi.model.Class;
 import org.coursecollector.esi.model.ClassRepository;
 import org.coursecollector.esi.model.Course;
 import org.coursecollector.esi.model.CourseRepository;
-import org.coursecollector.esi.model.Publication;
-import org.coursecollector.esi.model.PublicationRepository;
 import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
@@ -38,9 +36,6 @@ public class TestController {
 
     @Inject
     SubjectRepository subjectRepo;
-
-    @Inject
-    PublicationRepository publicationRepo;
 
     @Inject
     CourseRepository courseRepo;
@@ -71,27 +66,17 @@ public class TestController {
             courseRepo.save(courses[i]);
         }
 
-        // Create Publication test
-        Publication[] publications = { new Publication(courses[0]), new Publication(courses[1]),
-                new Publication(courses[2]), new Publication(courses[3]), new Publication(courses[4]),
-                new Publication(courses[5]) };
-
-        // Save all Publications in DB
-        for (int i = 0; i < publications.length; i++) {
-            publicationRepo.save(publications[i]);
-        }
-
         // Create some Rate for the first publication
-        Rate[] rates = { new Rate(true, publications[0]), new Rate(false, publications[0]) };
+        Rate[] rates = { new Rate(true, courses[0]), new Rate(false, courses[0]) };
         // save all Rates in DB
         for (int i = 0; i < rates.length; i++) {
             rateRepo.save(rates[i]);
         }
 
         // add Rates for the first publication
-        publications[0].setRates(new ArrayList<Rate>(Arrays.asList(rates)));
+        courses[0].setRates(new ArrayList<Rate>(Arrays.asList(rates)));
         // update this publication in DB
-        publicationRepo.save(publications[0]);
+        courseRepo.save(courses[0]);
 
         // Create Subject Test
         // save all publications in Subject IA
@@ -99,7 +84,7 @@ public class TestController {
                 new Subject("Turing Machine"), new Subject("Deep Learning"), new Subject("Advanced Web") };
 
         // add some publications in the first subject : IA
-        subjects[0].setPublications(new ArrayList<Publication>(Arrays.asList(publications)));
+        subjects[0].setCourses(new ArrayList<Course>(Arrays.asList(courses)));
 
         // Save all subject in DB
         for (int i = 0; i < subjects.length; i++) {
@@ -151,7 +136,7 @@ public class TestController {
         // set Lebron james as default student for this test
         TestController.setDefaultStudentId(lebronId);
 
-        return "redirect:/class?studentId=" + lebronId;
+        return "redirect:/class";
     }
 
 }

@@ -11,9 +11,8 @@ import javax.inject.Inject;
 
 import org.coursecollector.esi.model.Class;
 import org.coursecollector.esi.model.ClassRepository;
+import org.coursecollector.esi.model.Course;
 import org.coursecollector.esi.model.CourseRepository;
-import org.coursecollector.esi.model.Publication;
-import org.coursecollector.esi.model.PublicationRepository;
 import org.coursecollector.esi.model.Request;
 import org.coursecollector.esi.model.RequestRepository;
 import org.coursecollector.esi.model.Student;
@@ -42,9 +41,6 @@ public class MainController {
     SubjectRepository subjectRepo;
 
     @Inject
-    PublicationRepository publicationRepo;
-
-    @Inject
     CourseRepository courseRepo;
 
     @Inject
@@ -61,10 +57,9 @@ public class MainController {
     }
 
     @RequestMapping("/class")
-    public String listClasses(Model model, @RequestParam Long studentId) {
-        Student student = studentRepo.findById(studentId).get();
+    public String listClasses(Model model) {
+        Student student = studentRepo.findById(TestController.defaultStudentId).get();
         List<Class> listClass = student.getClasses();
-        model.addAttribute("student", student);
         model.addAttribute("class", listClass);
         // get notifications that concern the student
         model.addAttribute("notifications",
@@ -73,16 +68,15 @@ public class MainController {
     }
 
     @RequestMapping("/course")
-    public String listCourses(Model model, @RequestParam Long studentId, @RequestParam Long subjectId) {
-        Student student = studentRepo.findById(studentId).get();
+    public String listCourses(Model model, @RequestParam Long subjectId) {
         Subject subject = subjectRepo.findById(subjectId).get();
-        // bound new Request that will permit to add request using form in modal
+        Iterable<Request> requests = requestRepo.findAll();
+        Course course = new Course();
         Request boundedReq = new Request();
         boundedReq.setSubjectId(subject.getId());
-        Publication publication = new Publication();
-        publication.setStudentId(student.getId());
         model.addAttribute("subject", subject);
-        model.addAttribute("publication", publication);
+        model.addAttribute("actreq", requests);
+        model.addAttribute("course", course);
         model.addAttribute("request", boundedReq);
         // get notifications that concern the student
         model.addAttribute("notifications",
@@ -161,21 +155,21 @@ public class MainController {
     }
 
     @RequestMapping(value = "/publish-success", method = RequestMethod.POST)
-    public String publishSuccess(Model model, @ModelAttribute("publication") Publication publication) {
+    public String publishSuccess(Model model, @ModelAttribute("course") Course course) {
         // get notifications that concern the student
         model.addAttribute("notifications",
                 MainController.listNotifications(studentRepo, TestController.defaultStudentId));
-        return this.multiFileUpload(model, publication);
+        return this.multiFileUpload(model, course);
     }
 
-    private String multiFileUpload(Model model, Publication publication) {
+    private String multiFileUpload(Model model, Course course) {
         String uploadRootPath = "./src/main/resources/static/img/courses/";
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
 
-        MultipartFile[] fileDatas = publication.getFiles();
+        MultipartFile[] fileDatas = course.getFiles();
         List<String> linkedFiles = new ArrayList<String>();
         List<String> failedFiles = new ArrayList<String>();
 
@@ -195,9 +189,9 @@ public class MainController {
             }
         }
 
-        publication.setStudent(studentRepo.findById(publication.getStudentId()).get());
-        publication.setLinks(linkedFiles);
-        publicationRepo.save(publication);
+        course.setStudent(studentRepo.findById(TestController.defaultStudentId).get());
+        course.setLinks(linkedFiles);
+        courseRepo.save(course);
         model.addAttribute("failedFiles", failedFiles);
         return "publish-success";
     }

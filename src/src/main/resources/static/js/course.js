@@ -30,13 +30,17 @@ window.onclick = function(event) {
 };
 
 function check() {
-  var sel = document.getElementById("select-date");
-  if (sel.options[sel.selectedIndex].value > 0) {
-    document.getElementById("input-date").value = "";
-    document.getElementById("input-date").style.backgroundColor = "gray";
-    document.getElementById("input-date").disabled = true;
-  } else {
-    document.getElementById("input-date").style.backgroundColor = "";
-    document.getElementById("input-date").disabled = false;
+  if (document.getElementById("date-picker").checked == "1") {
+    document.getElementById("select-div").style.display = "block";
+    document.getElementById("input-div").style.display = "none";
+  } else if (document.getElementById("date-picker").checked == "0") {
+    document.getElementById("select-div").style.display = "none";
+    document.getElementById("input-div").style.display = "block";
   }
+}
+
+function insert() {
+  id = document.getElementById("input-date");
+  sd = document.getElementById("select-date");
+  id.value = sd.options[sd.selectedIndex].value;
 }

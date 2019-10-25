@@ -19,18 +19,18 @@ public class Rate {
     Boolean dislike;
 
     @ManyToOne
-    Publication publication;
+    Course course;
 
     @ManyToOne
     Student student;
 
-    public Rate(Boolean dislike, Publication publication) {
+    public Rate(Boolean dislike, Course course) {
         this.dislike = dislike;
-        this.publication = publication;
+        this.course = course;
     }
-    
-    public Rate(Boolean dislike, Publication publication, Student student) {
-        this(dislike, publication);
+
+    public Rate(Boolean dislike, Course course, Student student) {
+        this(dislike, course);
         this.student = student;
     }
 

@@ -23,7 +23,7 @@
         <div th:each="c : ${class}">
             <div class="card topcard">[[ ${c.name} ]] [[ ${c.level} ]]</div>
             <div class="card" th:each="s : ${c.subjects}">
-                <a th:href="@{/course(studentId=${student.id},subjectId=${s.id})}">[[ ${s.name} ]]</a>
+                <a th:href="@{/course(subjectId=${s.id})}">[[ ${s.name} ]]</a>
                 <button id="1" class="myBtn unsubscribe" title="Désinscription du cours">
                     <i class="fas fa-bell-slash"></i>
                 </button>
@@ -36,75 +36,9 @@
 
     <!-- MODAL -->
     <div id="modal-1" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
             <span class="close" id="close-1">&times;</span>
             <p>Do you really want to unsubscribe from M1 - DSC IA ?</p>
-            <form method="POST">
-                <input type="hidden" name="unsubscribe" value="1" />
-                <button type="submit" class="w-button">Yes</button>
-            </form>
-        </div>
-
-    </div>
-
-    <div id="modal-2" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close" id="close-2">&times;</span>
-            <p>Do you really want to unsubscribe from M1 - DSC ALGO ?</p>
-            <form method="POST">
-                <input type="hidden" name="unsubscribe" value="1" />
-                <button type="submit" class="w-button">Yes</button>
-            </form>
-        </div>
-
-    </div>
-
-    <div id="modal-3" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close" id="close-3">&times;</span>
-            <p>Do you really want to unsubscribe from M1 - DSC PROG ?</p>
-            <form method="POST">
-                <input type="hidden" name="unsubscribe" value="1" />
-                <button type="submit" class="w-button">Yes</button>
-            </form>
-        </div>
-
-    </div>
-
-    <div id="modal-4" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close" id="close-4">&times;</span>
-            <p>Do you really want to unsubscribe from M1 - MLDM IA ?</p>
-            <form method="POST">
-                <input type="hidden" name="unsubscribe" value="1" />
-                <button type="submit" class="w-button">Yes</button>
-            </form>
-        </div>
-
-    </div>
-
-    <div id="modal-5" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close" id="close-5">&times;</span>
-            <p>Do you really want to unsubscribe from M1 - MLDM ALGO ?</p>
-            <form method="POST">
-                <input type="hidden" name="unsubscribe" value="1" />
-                <button type="submit" class="w-button">Yes</button>
-            </form>
-        </div>
-
-    </div>
-
-    <div id="modal-6" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close" id="close-6">&times;</span>
-            <p>Do you really want to unsubscribe from M1 - MLDM PROG ?</p>
             <form method="POST">
                 <input type="hidden" name="unsubscribe" value="1" />
                 <button type="submit" class="w-button">Yes</button>

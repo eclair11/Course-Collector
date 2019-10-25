@@ -29,8 +29,8 @@ public class Request {
     Student student;
 
     @OneToOne
-    Publication publication;
-    
+    Course course;
+
     @Transient
     Long subjectId;
 
@@ -38,12 +38,11 @@ public class Request {
         this.student = student;
         this.dateCourse = dateCourse;
     }
-    
 
     public Request() {
 
     }
-    
+
     // surcharged setters
     public void setDateCourse(String date) {
         int year = Integer.parseInt(date.split("-")[0]);

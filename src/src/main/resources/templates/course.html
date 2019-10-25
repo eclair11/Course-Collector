@@ -17,20 +17,19 @@
     <header th:replace="header :: header"></header>
 
     <section class="w-container">
+
         <button id="request-button" class="w-button" type="button">Demander un cours</button>
         <button id="share-button" class="w-button" type="button">Publier un cours</button>
         <div class="card topcard">[[ ${subject.name} ]]</div>
-        <article th:each="publication : ${subject.publications}">
+        <article th:each="course : ${subject.courses}">
             <div class="card">
-                <a href="http://localhost:8080/content">
-                    [[ ${publication.course.dateCourse} ]] : [[ ${publication.course.name} ]]
-                </a>
+                <a href="@{/content}">[[ ${course.dateCourse} ]] : [[ ${course.name} ]]</a>
             </div>
             <div class="divemoji">
                 <button class="emoji" id="" onclick="">&#128525;</button>
-                <span>[[ ${publication.numberLike} ]]</span>
+                <span>[[ ${course.numberLike} ]]</span>
                 <button class="emoji" style='font-size:30px;'>&#129326;</button>
-                <span>[[ ${publication.numberDislike} ]]</span>
+                <span>[[ ${course.numberDislike} ]]</span>
             </div>
         </article>
 
@@ -41,7 +40,7 @@
                     <div class="modal-body">
                         <span>Choisissez la date du cours demandé :</span><br>
                         <input th:field="*{subjectId}" type="hidden">
-                        <input th:field="*{dateCourse}" type="date"><br>
+                        <input class="input-date" th:field="*{dateCourse}" type="date"><br>
                         <button type="submit" class="w-button">Valider la demande</button>
                     </div>
                 </form>
@@ -51,24 +50,30 @@
         <div id="share-modal" class="modal">
             <div class="modal-content">
                 <span id="share-close" class="close">&times;</span>
-                <form method="POST" th:action="@{/publish-success}" th:object="${publication}"
-                    enctype="multipart/form-data">
+                <form method="POST" th:action="@{/publish-success}" th:object="${course}" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <span>Si vous publierez votre cours à la réponse d'une demande :</span><br>
-                        <select th:field="*{date}" onchange="check()">
-                            <option th:value="0">Choisissez la date du cours que vous publierez</option>
-                            <option th:value="19/11/2019">19/11/2019</option>
-                            <option th:value="25/11/2019">25/11/2019</option>
-                            <option th:value="30/11/2019">30/11/2019</option>
-                        </select><br>
-                        <span>Si vous publierez votre cours spontanément :</span><br>
-                        <!--<input class="input-date" type="date" th:field="*{date}"><br>-->
+                        <span>Tapez le nom de votre cours :</span><br>
+                        <input required th:field="*{name}"><br>
+                        <input required id="date-picker" type="radio" name="date-picker" value="0" onchange="check(); insert();">
+                        Si vous publierez votre cours à la réponse d'une demande<br>
+                        <input id="date-picker" type="radio" name="date-picker" value="1" onchange="check(); insert();">
+                        Si vous publierez votre cours spontanément<br>
+                        <div id="select-div" style="display: none;">
+                            <select id="select-date" class="select-date" onchange="insert()">
+                                <option value="-1">--Choisir--</option>
+                                <div th:each="req : ${actreq}">
+                                    <option th:value="${req.dateCourse}">[[ ${req.dateCourse} ]]</option>
+                                </div>
+                            </select>
+                        </div>
+                        <div id="input-div" style="display: none;">
+                            <input required id="input-date" class="input-date" type="date" th:field="*{dateCourse}">
+                        </div>
                         <span>Sélectionnez les fichiers du cours :</span>
-                        <input type="file" multiple th:field="*{files}"><br>
-                        <input type="hidden" th:field="*{studentId}">
-                        <span>Si vous avez un commentaire à propos de votre publication (optionnel) :</span><br>
+                        <input required multiple type="file" th:field="*{files}"><br>
+                        <span>Si vous avez un commentaire à propos de votre course (optionnel) :</span><br>
                         <textarea cols="50" rows="10" th:field="*{commentary}"></textarea><br>
-                        <button class="w-button" type="submit">Valider la publication</button>
+                        <button class="w-button" type="submit">Valider la course</button>
                     </div>
                 </form>
             </div>
