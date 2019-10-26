@@ -1,5 +1,6 @@
-# ADV_WEB_2019
-Projet M1 Web avancée 2019 - Solofo Ibrahima Elias 
+# PROJET COURSE COLLECTOR 2019
+_Projet M1 Web avancée : Solofo Ibrahima Elias_
+
 
 ## Organisation des fichiers (pour l'instant)
   - _doc_ : diapos de présentation, diagrammes uml, video demo, ...
