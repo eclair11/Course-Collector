@@ -23,7 +23,7 @@
         <div class="card topcard">[[ ${subject.name} ]]</div>
         <article th:each="course : ${subject.courses}">
             <div class="card">
-                <a href="@{/content}">[[ ${course.dateCourse} ]] : [[ ${course.name} ]]</a>
+                <a th:href="@{/content(courseId=${course.id})}">[[ ${course.dateCourse} ]] : [[ ${course.name} ]]</a>
             </div>
             <div class="divemoji">
                 <button class="emoji" id="" onclick="">&#128525;</button>

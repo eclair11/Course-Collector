@@ -110,7 +110,9 @@ public class MainController {
     }
 
     @RequestMapping("/content")
-    public String listCoursesContent(Model model) {
+    public String listCoursesContent(Model model, @RequestParam Long courseId) {
+        Course course = courseRepo.findById(courseId).get();
+        model.addAttribute("course", course);
         // get notifications that concern the student
         model.addAttribute("notifications",
                 MainController.listNotifications(studentRepo, TestController.defaultStudentId));
@@ -164,6 +166,7 @@ public class MainController {
 
     private String multiFileUpload(Model model, Course course) {
         String uploadRootPath = "./src/main/resources/static/img/courses/";
+        String imgFolderPath = "img/courses/";
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
@@ -181,7 +184,7 @@ public class MainController {
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
                     stream.write(fileData.getBytes());
                     stream.close();
-                    linkedFiles.add(serverFile.getAbsolutePath());
+                    linkedFiles.add(imgFolderPath + name);
                 } catch (Exception e) {
                     System.out.println("Error Write file: " + name);
                     failedFiles.add(name);

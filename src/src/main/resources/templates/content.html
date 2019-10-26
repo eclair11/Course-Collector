@@ -18,18 +18,12 @@
 
     <section class="w-container">
 
-        <div>Publié par Nom Prénom le 20/06/1990</div>
+        <h3>Publié par [[${course.student.firstName}]] [[${course.student.lastName}]] le [[${course.dateCourse}]]</h3>
 
-        <div class="card topcard">FORMAT IMG</div>
+        <div class="card">FORMAT IMG</div>
         <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img class="slideshow-img" src="img/courses/001.jpg">
-            </div>
-            <div class="mySlides fade">
-                <img class="slideshow-img" src="img/courses/002.jpg">
-            </div>
-            <div class="mySlides fade">
-                <img class="slideshow-img" src="img/courses/007.jpg">
+            <div class="mySlides fade" th:each="link : ${course.links}">
+                <img class="slideshow-img" th:src="@{${link}}">
             </div>
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -37,19 +31,19 @@
         <br>
         <div style="text-align:center">
             <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
         </div>
 
-        <div class="card topcard">FORMAT PDF</div>
+        <div class="card">FORMAT PDF</div>
         <div style="text-align:center">
             <iframe src="pdf/courses/cloud.pdf" frameborder="0" height="700px" width="100%"></iframe>
         </div>
+        
         <div class="w-section">
             <button id="myBtn" class="download" title="download this course">
                 <i class="fas fa-download"></i>Download this course
             </button>
         </div>
+        
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
