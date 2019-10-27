@@ -18,9 +18,9 @@
 
     <section class="w-container">
 
-        <h3>Publié par [[${course.student.firstName}]] [[${course.student.lastName}]] le [[${course.dateCourse}]]</h3>
+        <h3>Published by [[${course.student.firstName}]] [[${course.student.lastName}]]</h3>
 
-        <div class="card">FORMAT IMG</div>
+        <div class="card">Pictures of the course</div>
         <div class="slideshow-container">
             <div class="mySlides fade" th:each="link : ${course.links}">
                 <img class="slideshow-img" th:src="@{${link}}">
@@ -33,7 +33,7 @@
             <span class="dot" onclick="currentSlide(1)"></span>
         </div>
 
-        <div class="card">FORMAT PDF</div>
+        <div class="card">Extracted document of the course</div>
         <div style="text-align:center">
             <iframe src="pdf/courses/cloud.pdf" frameborder="0" height="700px" width="100%"></iframe>
         </div>

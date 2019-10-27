@@ -2,55 +2,55 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <title>List of Subjects</title>
-        <!-- INCLUDE SHARED METAS -->
-        <meta th:replace="metas-header :: meta" />
-        <!-- INCLUDE SHARED LINKS  -->
-        <link th:replace="links-header :: link" />
-    </head>
+<head>
+    <title>Subjects List</title>
+    <!-- INCLUDE SHARED METAS -->
+    <meta th:replace="metas-header :: meta" />
+    <!-- INCLUDE SHARED LINKS  -->
+    <link th:replace="links-header :: link" />
+</head>
 
-    <body>
+<body>
 
-        <!-- INCLUDE HEADER -->
-        <header th:replace="header :: header"></header>
+    <!-- INCLUDE HEADER -->
+    <header th:replace="header :: header"></header>
 
-        <section class="w-container">
-            <form class="search-bar">
-                <i class="fas fa-search"></i><br>
-                <input type="text" name="search" placeholder="Cherchez un cours">
-            </form>
-            <div th:each="c : ${class}">
-                <div th:each="option : ${c.options}">
-                    <div class="card topcard">[[ ${c.name} ]] [[ ${c.level} ]] - [[ ${option.name} ]]</div>
-                    <div class="card" th:each="s : ${option.subjects}">
-                        <a th:href="@{/course(subjectId=${s.id})}">[[ ${s.name} ]]</a>
-                        <button id="1" class="myBtn unsubscribe" title="Désinscription du cours">
-                            <i class="fas fa-bell-slash"></i>
-                        </button>
-                    </div>
+    <section class="w-container">
+        <form class="search-bar">
+            <i class="fas fa-search"></i><br>
+            <input type="text" name="search" placeholder="Cherchez un cours">
+        </form>
+        <div th:each="c : ${class}">
+            <div th:each="option : ${c.options}">
+                <div class="card topcard">[[ ${c.name} ]] [[ ${c.level} ]] - [[ ${option.name} ]]</div>
+                <div class="card" th:each="s : ${option.subjects}">
+                    <a th:href="@{/course(subjectId=${s.id})}">[[ ${s.name} ]]</a>
+                    <button id="1" class="myBtn unsubscribe" title="Désinscription du cours">
+                        <i class="fas fa-bell-slash"></i>
+                    </button>
                 </div>
             </div>
-        </section>
-
-        <!-- INCLUDE FOOTER -->
-        <footer th:replace="footer :: footer"></footer>
-
-        <!-- MODAL -->
-        <div id="modal-1" class="modal">
-            <div class="modal-content">
-                <span class="close" id="close-1">&times;</span>
-                <p>Do you really want to unsubscribe from M1 - DSC IA ?</p>
-                <form method="POST">
-                    <input type="hidden" name="unsubscribe" value="1" />
-                    <button type="submit" class="w-button">Yes</button>
-                </form>
-            </div>
         </div>
+    </section>
 
-        <!-- INCLUDE SHARED SCRIPTS  -->
-        <script th:replace="scripts-page :: script"></script>
+    <!-- MODAL -->
+    <div id="modal-1" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-1">&times;</span>
+            <p>Do you really want to unsubscribe from M1 - DSC IA ?</p>
+            <form method="POST">
+                <input type="hidden" name="unsubscribe" value="1" />
+                <button type="submit" class="w-button">Yes</button>
+            </form>
+        </div>
+    </div>
 
-    </body>
+    <!-- INCLUDE FOOTER -->
+    <footer th:replace="footer :: footer"></footer>
+
+    <!-- INCLUDE SHARED SCRIPTS  -->
+    <script th:replace="scripts-page :: script"></script>
+
+</body>
 
 </html>

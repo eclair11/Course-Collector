@@ -192,7 +192,7 @@ public class MainController {
         subject.getRequests().add(newRequest);
         // update subject
         subjectRepo.save(subject);
-        return "redirect:/request-success?subjectId=" + subject.getId() ;
+        return "redirect:/request-success?subjectId=" + subject.getId();
     }
 
     /**
@@ -278,8 +278,7 @@ public class MainController {
         correspondantSubject.getCourses().add(course);
         // update subject
         subjectRepo.save(correspondantSubject);
-        model.addAttribute("courseId", course.getId());
-        model.addAttribute("subjectId", "9");
+        model.addAttribute("course", course);
         model.addAttribute("failedFiles", failedFiles);
         return "publish-success";
     }
