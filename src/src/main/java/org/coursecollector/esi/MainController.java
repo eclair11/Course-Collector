@@ -77,6 +77,8 @@ public class MainController {
         Subject subject = subjectRepo.findById(subjectId).get();
         Iterable<Request> requests = requestRepo.findAll();
         Course course = new Course();
+        // bound the subject to the course
+        course.setSubjectId(subject.getId());
         Request boundedReq = new Request();
         boundedReq.setSubjectId(subject.getId());
         model.addAttribute("subject", subject);
@@ -157,14 +159,16 @@ public class MainController {
         subject.getRequests().add(newRequest);
         // update subject
         subjectRepo.save(subject);
-        return "redirect:/request-success";
+        return "redirect:/request-success?subjectId=" + subject.getId() ;
     }
 
     @RequestMapping("/request-success")
-    public String confirmation(Model model) {
+    public String confirmation(Model model, @RequestParam Long subjectId) {
         // get notifications that concern the student
         model.addAttribute("notifications",
                 MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        // send the subjectId to the viewModel
+        model.addAttribute("subjectId", subjectId);
         return "request-success";
     }
 
@@ -211,10 +215,18 @@ public class MainController {
                 }
             }
         }
-
+        // add student and links to the course
         course.setStudent(studentRepo.findById(TestController.defaultStudentId).get());
         course.setLinks(linkedFiles);
+        // save new course in DB
         courseRepo.save(course);
+        
+        // add course to the correspondant subject
+        Subject correspondantSubject = subjectRepo.findById(course.getSubjectId()).get();
+        correspondantSubject.getCourses().add(course);
+        // update subject
+        subjectRepo.save(correspondantSubject);
+        
         model.addAttribute("failedFiles", failedFiles);
         return "publish-success";
     }

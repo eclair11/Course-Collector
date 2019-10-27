@@ -30,23 +30,15 @@
         
         <!-- Page qui affiche la confirmation  quand la demande est acceptée -->
         <section class="content">
-            <div class="suc">
-
-                <p class="success"> Your request has been accepted successfully !!</p>
-
-            </div>
-            <div class="control">
-
-                <button id="request-button" class="w-button" type="button" OnClick="window.location.href='http://localhost:8080/courses'"> Request another course </button>
-
-            </div>
-
-            <div class="control">
-
-                <button id="request-button" class="w-button" type="button" OnClick="window.location.href='http://localhost:8080/'"> Back to Home </button>
-
-            </div>
+             <section class="section centered">
+            <i class="icons fas fa-check-circle"></i>
+            <h2>Your request has been added successfully !</h2>
+            <nav class="section centered">
+                <a class="w-button" th:href="@{/course(subjectId=${subjectId})}"> Request another course </a>
+                <a class="w-button" href="/"> Back to Home </a>
+            </nav>
         </section>
+            
 
 
 

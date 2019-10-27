@@ -41,6 +41,9 @@ public class Course {
 
     @ManyToOne
     Student student;
+    
+    @Transient
+    Long subjectId;
 
     @OneToMany
     List<Rate> rates = new ArrayList<>();

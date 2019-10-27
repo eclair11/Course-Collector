@@ -53,6 +53,7 @@
                 <form method="POST" th:action="@{/publish-success}" th:object="${course}" enctype="multipart/form-data">
                     <div class="modal-body">
                         <span>Tapez le nom de votre cours :</span><br>
+                        <input type="hidden" th:field="*{subjectId}">
                         <input required th:field="*{name}"><br>
                         <input required id="date-picker" type="radio" name="date-picker" value="0" onchange="check(); insert();">
                         Si vous publierez votre cours à la réponse d'une demande<br>
