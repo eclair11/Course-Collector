@@ -29,6 +29,15 @@ public class Student extends User {
     @ManyToMany
     List<Class> classes = new ArrayList<>();
 
+    /**
+     * 
+     * @param role
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param option
+     * @param level
+     */
     public Student(String role, String password, String firstName, String lastName, String option, int level) {
         super(role, password);
         this.firstName = firstName;
@@ -37,12 +46,25 @@ public class Student extends User {
         this.level = level;
     }
 
+    /**
+     * 
+     * @param role
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param option
+     * @param level
+     * @param classes
+     */
     public Student(String role, String password, String firstName, String lastName, String option, int level,
             List<Class> classes) {
         this(role, password, firstName, lastName, option, level);
         this.classes = classes;
     }
 
+    /**
+     * 
+     */
     public Student() {
 
     }

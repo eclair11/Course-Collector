@@ -14,6 +14,10 @@ import javax.persistence.Transient;
 
 import lombok.Data;
 
+/**
+ *
+ * @author Elias ROMDAN
+ */
 @Data
 @Entity
 public class Request {
@@ -34,16 +38,27 @@ public class Request {
     @Transient
     Long subjectId;
 
+    /**
+     * 
+     * @param dateCourse
+     * @param student
+     */
     public Request(Date dateCourse, Student student) {
         this.student = student;
         this.dateCourse = dateCourse;
     }
 
+    /**
+     * 
+     */
     public Request() {
 
     }
 
-    // surcharged setters
+    /**
+     * 
+     * @param date
+     */
     public void setDateCourse(String date) {
         int year = Integer.parseInt(date.split("-")[0]);
         int month = Integer.parseInt(date.split("-")[1]);

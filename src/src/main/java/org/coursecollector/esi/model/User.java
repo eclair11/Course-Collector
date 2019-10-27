@@ -22,11 +22,19 @@ public class User {
 
     String password;
 
+    /**
+     * 
+     * @param role
+     * @param password
+     */
     public User(String role, String password) {
         this.role = role;
         this.password = password;
     }
 
+    /**
+     * 
+     */
     public User() {
 
     }

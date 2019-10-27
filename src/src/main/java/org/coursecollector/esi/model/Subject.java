@@ -29,20 +29,38 @@ public class Subject {
     @OneToMany
     List<Course> courses = new ArrayList<>();
 
+    /**
+     * 
+     * @param name
+     */
     public Subject(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @param name
+     * @param courses
+     */
     public Subject(String name, List<Course> courses) {
         this(name);
         this.courses = courses;
     }
 
+    /**
+     * 
+     * @param name
+     * @param requests
+     * @param courses
+     */
     public Subject(String name, List<Request> requests, List<Course> courses) {
         this(name, courses);
         this.requests = requests;
     }
 
+    /**
+     * 
+     */
     public Subject() {
 
     }

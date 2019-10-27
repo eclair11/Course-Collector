@@ -60,11 +60,19 @@ public class Course {
     @ElementCollection(targetClass = String.class)
     List<String> links = new ArrayList<>();
 
+    /**
+     * 
+     * @param name
+     * @param dateCourse
+     */
     public Course(String name, Date dateCourse) {
         this.name = name;
         this.dateCourse = dateCourse;
     }
 
+    /**
+     * 
+     */
     public Course() {
 
     }

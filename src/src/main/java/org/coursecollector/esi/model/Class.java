@@ -28,16 +28,30 @@ public class Class {
     @ManyToMany
     List<Option> options = new ArrayList<>();
 
+    /**
+     * 
+     * @param name
+     * @param level
+     */
     public Class(String name, int level) {
         this.name = name;
         this.level = level;
     }
 
+    /**
+     * 
+     * @param name
+     * @param level
+     * @param options
+     */
     public Class(String name, int level, List<Option> options) {
         this(name, level);
         this.options = options;
     }
 
+    /**
+     * 
+     */
     public Class() {
 
     }

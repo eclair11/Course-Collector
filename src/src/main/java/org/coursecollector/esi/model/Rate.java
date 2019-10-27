@@ -8,6 +8,10 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+/**
+ *
+ * @author Elias ROMDAN
+ */
 @Data
 @Entity
 public class Rate {

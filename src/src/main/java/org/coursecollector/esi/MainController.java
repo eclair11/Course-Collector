@@ -47,12 +47,17 @@ public class MainController {
 
     @Inject
     RequestRepository requestRepo;
-    
+
     @Inject
     OptionRepository optionRepo;
 
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
 
+    /**
+     * 
+     * @param model Object to send data to the view
+     * @return
+     */
     @RequestMapping("/")
     public String pageAccueil(Model model) {
         // get notifications that concern the student
@@ -61,6 +66,11 @@ public class MainController {
         return "index";
     }
 
+    /**
+     * 
+     * @param model Object to send data to the view
+     * @return HTML page class
+     */
     @RequestMapping("/class")
     public String listClasses(Model model) {
         Student student = studentRepo.findById(TestController.defaultStudentId).get();
@@ -72,6 +82,12 @@ public class MainController {
         return "class";
     }
 
+    /**
+     * 
+     * @param model     Object to send data to the view
+     * @param subjectId Unique identifier of the subject
+     * @return HTML page course
+     */
     @RequestMapping("/course")
     public String listCourses(Model model, @RequestParam Long subjectId) {
         Subject subject = subjectRepo.findById(subjectId).get();
@@ -90,15 +106,16 @@ public class MainController {
                 MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "course";
     }
-    
+
     /**
-     * @author s.rabonarijaona
+     * Get list of class where the student is subscribed and get the option that
+     * concern the student then go through all the subject in this option and
+     * finally get all request of each of those subject.
      * 
-     * Get list of class where the student is subscribed
-     * Get the option that concern the student
-     * then go through all the subject in this option
-     * and finally get all request of each of those subject
+     * @author Solofo RABONARIJAONA
      * 
+     * @param studentRepo
+     * @param studentId
      * @return String[][] - all the notification that concern the student
      */
     public static String[][] listNotifications(StudentRepository studentRepo, Long studentId) {
@@ -117,7 +134,7 @@ public class MainController {
                         for (int l = 0; l < requests.size(); l++) {
                             notifications[notifCounter][0] = "" + subjects.get(k).getId();
                             notifications[notifCounter][1] = studentClasses.get(i).getName() + " "
-                                + studentClasses.get(i).getLevel() + " " + options.get(j).getName();
+                                    + studentClasses.get(i).getLevel() + " " + options.get(j).getName();
                             notifications[notifCounter][2] = subjects.get(k).getName();
                             notifications[notifCounter][3] = requests.get(l).getDateCourse().toString();
                             notifCounter++;
@@ -126,11 +143,16 @@ public class MainController {
                 }
             }
         }
-
         // return extracted notifications
         return Arrays.copyOfRange(notifications, 0, notifCounter);
     }
 
+    /**
+     * 
+     * @param model    Object to send data to the view
+     * @param courseId Unique identifier of the course
+     * @return HTML page content
+     */
     @RequestMapping("/content")
     public String listCoursesContent(Model model, @RequestParam Long courseId) {
         Course course = courseRepo.findById(courseId).get();
@@ -141,6 +163,11 @@ public class MainController {
         return "content";
     }
 
+    /**
+     * 
+     * @param model Object to send data to the view
+     * @return HTML page login
+     */
     @RequestMapping("/login")
     public String login(Model model) {
         // get notifications that concern the student
@@ -149,6 +176,12 @@ public class MainController {
         return "login";
     }
 
+    /**
+     * 
+     * @param model      Object to send data to the view
+     * @param newRequest
+     * @return Redirection to the HTML page request-success
+     */
     @PostMapping("/addRequest")
     public String addRequest(Model model, @ModelAttribute Request newRequest) {
         // save the new request in DB
@@ -162,6 +195,11 @@ public class MainController {
         return "redirect:/request-success?subjectId=" + subject.getId() ;
     }
 
+    /**
+     * 
+     * @param model Object to send data to the view
+     * @return HTML page request-success
+     */
     @RequestMapping("/request-success")
     public String confirmation(Model model, @RequestParam Long subjectId) {
         // get notifications that concern the student
@@ -172,6 +210,11 @@ public class MainController {
         return "request-success";
     }
 
+    /**
+     * 
+     * @param model Object to send data to the view
+     * @return HTML page setting
+     */
     @RequestMapping("/setting")
     public String setting(Model model) {
         // get notifications that concern the student
@@ -180,6 +223,12 @@ public class MainController {
         return "setting";
     }
 
+    /**
+     * 
+     * @param model  Object to send data to the view
+     * @param course Unique identifier of the course
+     * @return Function multiFileUpload
+     */
     @RequestMapping(value = "/publish-success", method = RequestMethod.POST)
     public String publishSuccess(Model model, @ModelAttribute("course") Course course) {
         // get notifications that concern the student
@@ -188,6 +237,12 @@ public class MainController {
         return this.multiFileUpload(model, course);
     }
 
+    /**
+     * 
+     * @param model  Object to send data to the view
+     * @param course Unique identifier of the course
+     * @return HTML page publish-success
+     */
     private String multiFileUpload(Model model, Course course) {
         String uploadRootPath = "./src/main/resources/static/img/courses/";
         String imgFolderPath = "img/courses/";
@@ -195,11 +250,9 @@ public class MainController {
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
-
         MultipartFile[] fileDatas = course.getFiles();
         List<String> linkedFiles = new ArrayList<String>();
         List<String> failedFiles = new ArrayList<String>();
-
         for (MultipartFile fileData : fileDatas) {
             String name = fileData.getOriginalFilename();
             if (name != null && name.length() > 0) {
@@ -220,13 +273,13 @@ public class MainController {
         course.setLinks(linkedFiles);
         // save new course in DB
         courseRepo.save(course);
-        
         // add course to the correspondant subject
         Subject correspondantSubject = subjectRepo.findById(course.getSubjectId()).get();
         correspondantSubject.getCourses().add(course);
         // update subject
         subjectRepo.save(correspondantSubject);
-        
+        model.addAttribute("courseId", course.getId());
+        model.addAttribute("subjectId", "9");
         model.addAttribute("failedFiles", failedFiles);
         return "publish-success";
     }

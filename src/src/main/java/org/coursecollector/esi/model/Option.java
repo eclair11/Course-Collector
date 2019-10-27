@@ -22,14 +22,21 @@ public class Option {
     long id;
 
     String name;
-    
+
     @ManyToMany
     List<Subject> subjects = new ArrayList<>();
 
+    /**
+     * 
+     * @param name
+     */
     public Option(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     */
     public Option() {
 
     }

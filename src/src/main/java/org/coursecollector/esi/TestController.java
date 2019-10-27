@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 
-    // static attributes
     public static Long defaultStudentId;
 
     @Inject
@@ -47,17 +46,24 @@ public class TestController {
 
     @Inject
     RequestRepository requestRepo;
-    
+
     @Inject
     OptionRepository optionRepo;
 
     /**
-     * method that set value of defaultStudentId
+     * Method that set value of defaultStudentId
+     * 
+     * @param id Default student identifier
      */
     public static void setDefaultStudentId(Long id) {
         defaultStudentId = id;
     }
 
+    /**
+     * 
+     * @param model
+     * @return
+     */
     @RequestMapping("/test-data")
     public String generateTestData(Model model) {
 
@@ -95,18 +101,15 @@ public class TestController {
         for (int i = 0; i < subjects.length; i++) {
             subjectRepo.save(subjects[i]);
         }
-        
+
         // create some Option
-        Option[] options = {
-            new Option("INFORMATIQUE DSC"),
-            new Option("INFORMATIQUE MLDM"),
-            new Option("INFORMATIQUE CPS2")
-        };
+        Option[] options = { new Option("INFORMATIQUE DSC"), new Option("INFORMATIQUE MLDM"),
+                new Option("INFORMATIQUE CPS2") };
         // add some subjects in options
         options[0].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2]));
         options[1].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
         options[2].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
-        
+
         // Save all option in DB
         for (int i = 0; i < options.length; i++) {
             optionRepo.save(options[i]);
