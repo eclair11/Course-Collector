@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Data;
+import javax.persistence.ManyToMany;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +22,9 @@ public class Option {
     long id;
 
     String name;
+    
+    @ManyToMany
+    List<Subject> subjects = new ArrayList<>();
 
     public Option(String name) {
         this.name = name;

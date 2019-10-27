@@ -18,6 +18,8 @@ import org.coursecollector.esi.model.Rate;
 import org.coursecollector.esi.model.RateRepository;
 import org.coursecollector.esi.model.Request;
 import org.coursecollector.esi.model.RequestRepository;
+import org.coursecollector.esi.model.Option;
+import org.coursecollector.esi.model.OptionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,9 @@ public class TestController {
 
     @Inject
     RequestRepository requestRepo;
+    
+    @Inject
+    OptionRepository optionRepo;
 
     /**
      * method that set value of defaultStudentId
@@ -90,11 +95,28 @@ public class TestController {
         for (int i = 0; i < subjects.length; i++) {
             subjectRepo.save(subjects[i]);
         }
+        
+        // create some Option
+        Option[] options = {
+            new Option("INFORMATIQUE DSC"),
+            new Option("INFORMATIQUE MLDM"),
+            new Option("INFORMATIQUE CPS2")
+        };
+        // add some subjects in options
+        options[0].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2]));
+        options[1].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
+        options[2].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
+        
+        // Save all option in DB
+        for (int i = 0; i < options.length; i++) {
+            optionRepo.save(options[i]);
+        }
 
         // Create Class Test
         Class[] classes = { new Class("Master", 1), new Class("Master", 2) };
-        classes[0].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2]));
-        classes[1].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
+        // add some option to classes
+        classes[0].setOptions(Arrays.asList(options[0], options[1], options[2]));
+        classes[1].setOptions(Arrays.asList(options[0], options[1], options[2]));
 
         // Save all classes in DB
         for (int i = 0; i < classes.length; i++) {
@@ -104,9 +126,12 @@ public class TestController {
         // Create Students test
         Student[] students = { new Student("USER", "1234", "Lebron", "James", "Informatique", 4),
                 new Student("USER", "1234", "Kobe", "Bryant", "Informatique", 4) };
-
+        // set student class
         students[0].setClasses(Arrays.asList(classes));
         students[1].setClasses(Arrays.asList(classes));
+        // set student option
+        students[0].setOption(options[0].getName());
+        students[1].setOption(options[0].getName());
 
         // Save all Students in DB
         for (int i = 0; i < students.length; i++) {

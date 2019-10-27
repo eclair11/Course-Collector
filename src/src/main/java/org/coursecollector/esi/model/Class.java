@@ -1,6 +1,6 @@
 package org.coursecollector.esi.model;
 
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +25,8 @@ public class Class {
 
     int level;
 
-    @OneToMany
+    @ManyToMany
     List<Option> options = new ArrayList<>();
-
-    @OneToMany
-    List<Subject> subjects = new ArrayList<>();
 
     public Class(String name, int level) {
         this.name = name;
@@ -39,11 +36,6 @@ public class Class {
     public Class(String name, int level, List<Option> options) {
         this(name, level);
         this.options = options;
-    }
-
-    public Class(String name, int level, List<Option> options, List<Subject> subjects) {
-        this(name, level, options);
-        this.subjects = subjects;
     }
 
     public Class() {

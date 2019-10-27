@@ -19,6 +19,8 @@ import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
+import org.coursecollector.esi.model.Option;
+import org.coursecollector.esi.model.OptionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,6 +47,9 @@ public class MainController {
 
     @Inject
     RequestRepository requestRepo;
+    
+    @Inject
+    OptionRepository optionRepo;
 
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
 
@@ -83,7 +88,17 @@ public class MainController {
                 MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "course";
     }
-
+    
+    /**
+     * @author s.rabonarijaona
+     * 
+     * Get list of class where the student is subscribed
+     * Get the option that concern the student
+     * then go through all the subject in this option
+     * and finally get all request of each of those subject
+     * 
+     * @return String[][] - all the notification that concern the student
+     */
     public static String[][] listNotifications(StudentRepository studentRepo, Long studentId) {
         int numberNotificationInfos = 4;
         int notifCounter = 0;
@@ -91,16 +106,21 @@ public class MainController {
         Student student = studentRepo.findById(studentId).get();
         List<Class> studentClasses = student.getClasses();
         for (int i = 0; i < studentClasses.size(); i++) {
-            List<Subject> subjects = studentClasses.get(i).getSubjects();
-            for (int j = 0; j < subjects.size(); j++) {
-                List<Request> requests = subjects.get(j).getRequests();
-                for (int k = 0; k < requests.size(); k++) {
-                    notifications[notifCounter][0] = "" + subjects.get(j).getId();
-                    notifications[notifCounter][1] = studentClasses.get(i).getName() + " "
-                            + studentClasses.get(i).getLevel();
-                    notifications[notifCounter][2] = subjects.get(j).getName();
-                    notifications[notifCounter][3] = requests.get(k).getDateCourse().toString();
-                    notifCounter++;
+            List<Option> options = studentClasses.get(i).getOptions();
+            for (int j = 0; j < options.size(); j++) {
+                if (options.get(j).getName() == student.getOption()) {
+                    List<Subject> subjects = options.get(j).getSubjects();
+                    for (int k = 0; k < subjects.size(); k++) {
+                        List<Request> requests = subjects.get(k).getRequests();
+                        for (int l = 0; l < requests.size(); l++) {
+                            notifications[notifCounter][0] = "" + subjects.get(k).getId();
+                            notifications[notifCounter][1] = studentClasses.get(i).getName() + " "
+                                + studentClasses.get(i).getLevel() + " " + options.get(j).getName();
+                            notifications[notifCounter][2] = subjects.get(k).getName();
+                            notifications[notifCounter][3] = requests.get(l).getDateCourse().toString();
+                            notifCounter++;
+                        }
+                    }
                 }
             }
         }

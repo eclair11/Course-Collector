@@ -27,8 +27,8 @@
                 <br/>
                 <br/>
                 <ul>
-                    <li>
-                        <div><strong>LICENCE 1</strong> <button class="editBtn" id="edit-1"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1"><i class="fas fa-trash-alt"></i>  </button></div>
+                    <li th:each="class : ${classes}">
+                        <div><strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> <button class="editBtn" th:id="'edit-' + ${class.id}"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" th:id="'del-' + ${class.id}"><i class="fas fa-trash-alt"></i>  </button></div>
                         <h3>Options</h3>
                         <button class="w-button myBtn" id="1-1"><i class="fas fa-plus"></i> Add new option</button>
                         <ul>
