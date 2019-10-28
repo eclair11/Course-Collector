@@ -1,15 +1,36 @@
 # PROJET COURSE COLLECTOR 2019
-_Projet M1 Web avancée : Solofo Ibrahima Elias_
+_Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
+
+## Sujet du projet
+ - Notre idée de projet consiste à créer une application Web "Course Collector".
+ "Course Collector" a pour but de rendre le suivi des cours et la préparation des examens pour les étudiants plus faciles.
+ Chaque étudiant aura la possibilité de demander la publication d'un cours qu'il lui manque ou de la même façon publier un cours suite à une demande de publication.
+ Il aura également la possibilité de voter un cours pour faire en sorte que les cours seront triés selon la qualité.
+ Nous utiliserons la technologie OCR (Optical Character Recognition) pour extraire le contenu des images de cours dans un document texte sous format PDF.
+ Les documents extraits permettront par la suite aux étudiants de faire une recherche sur le contenu des cours.
+
+## Instruction pour obtenir et lancer le projet
+ - git clone https://github.com/Enjana-mavitrika/ADV_WEB_2019.git
+ - git checkout master (si vous êtes sur la branche dev)
+ - Ouvrir le dossier src qui se trouve dans ADV_WEB_2019 avec visual Studio Code
+ - Lancer l'application course-collector à travers le Spring-Boot Dashboard
+ - Se connecter à l'adresse http://localhost:8080/
 
 ## Organisation des fichiers (pour l'instant)
-  - _doc_ : diapos de présentation, diagrammes uml, video demo, ...
-  - _src_ : code source du projet
+ - _doc_ : diapos de présentation, diagrammes UML, vidéo de démonstration, ...
+ - _src_ : code source du projet
+
+## Description de l'architecture
+ - Les fichiers html qui se trouvent dans le dossier templates constituent la vue de notre application, ils interagissent directement avec les contrôleurs qui se trouvent dans
+ le dossier main/java/org/coursecollector/esi par l'intermédiaire de Thymeleaf.
+ - Les fichiers java qui se trouvent dans le dossier model constituent les entités de notre application, ils intéragissent directement avec une base de données en mémoire H2.
+ - Le dossier static regroupe toutes les ressources qui complètent les vues comme les feuilles de style, les scripts JS, les images...
 
 ## Méthode de travail 
- - Code et commentaires en anglais
- - Nom de variable en camel case
- - Mettre à jour le diagramme de classe du model en cas de modification dans le code
- - rajouter les liens, auteur et licences des bibliothèques ou code externe intégré à l'application
+ - Code et commentaires en Anglais.
+ - Nom de variable en Camel Case.
+ - Mettre à jour le diagramme de classe du Model en cas de modification dans le code.
+ - Rajouter les liens, auteurs et licences des bibliothèques ou codes externes intégré à l'application.
 
 ## Liens utiles
  - Diagramme de classe du Model : https://www.draw.io/?state=%7B%22ids%22:%5B%221Bo0PLwGzm4GqWp639xA17IJqcUhRvAqL%22%5D,%22action%22:%22open%22,%22userId%22:%22{userId}%22%7D#G1Bo0PLwGzm4GqWp639xA17IJqcUhRvAqL
@@ -27,22 +48,3 @@ _Projet M1 Web avancée : Solofo Ibrahima Elias_
 
 ## Images des cours
  - https://jedecouvrelavie.wordpress.com/cours-papier/
-
-## Les fonctionnalités disponibles
- - Visualiser les classes, options et matières d'un étudiant à travers la page class.html
- - Visualiser les cours publiés de chaque matière à travers la page course.html
- - Demander la publication d'un cours selon la date de son déroulement à travers la page course.html
- - Publier un cours en répondant à une demande ou de façon spontanée à travers la page course.html
- - Visualiser le contenu d'un cours en défilant ses images à droite et à gauche à travers la page content.html
- - Visualiser les votes accordés à chaque cours
- - Ajouter une classe, les options pour chaque classe et les matières pour chaque option via la page d'administration admin.html
- - Mettre à jour une classe, une option et une matière via la page d'administration admin.html 
-
-## Les fonctionnalités en cours de développement
- - Se connecter à l'application
- - Gérer la session d'un utilisateur
- - Sécuriser les requêtes HTTP
- - Télécharger un cours
- - Gérer la désinscription d'un étudiant d'une matière
- - Afficher les informations d'un étudiant
- - Voter un cours
