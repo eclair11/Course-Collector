@@ -3,6 +3,7 @@ package org.coursecollector.esi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -77,24 +78,40 @@ public class TestController {
             courseRepo.save(courses[i]);
         }
 
-        // Create some Rate for the first publication
+        // Create some Rate for the first course
         Rate[] rates = { new Rate(true, courses[0]), new Rate(false, courses[0]) };
         // save all Rates in DB
         for (int i = 0; i < rates.length; i++) {
             rateRepo.save(rates[i]);
         }
 
-        // add Rates for the first publication
+        // add Rates for the first course
         courses[0].setRates(new ArrayList<Rate>(Arrays.asList(rates)));
-        // update this publication in DB
+        // update this course in DB
         courseRepo.save(courses[0]);
 
-        // Create Subject Test
-        // save all publications in Subject IA
-        Subject[] subjects = { new Subject("IA"), new Subject("Advanced Algorithm"), new Subject("Complexity"),
-                new Subject("Turing Machine"), new Subject("Deep Learning"), new Subject("Advanced Web") };
+        // create list of links + pages
+        List<String> links0 = new ArrayList<>(
+                Arrays.asList("img/courses/001.jpeg", "img/courses/002.jpeg", "img/courses/003.jpeg"));
+        List<Integer> pages0 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<String> links1 = new ArrayList<>(Arrays.asList("img/courses/004.jpeg", "img/courses/005.jpeg"));
+        List<Integer> pages1 = new ArrayList<>(Arrays.asList(1, 2));
+        List<String> links2 = new ArrayList<>(Arrays.asList("img/courses/006.jpeg"));
+        List<Integer> pages2 = new ArrayList<>(Arrays.asList(1));
+        List<String> links3 = new ArrayList<>(Arrays.asList("img/courses/007.jpeg"));
+        List<Integer> pages3 = new ArrayList<>(Arrays.asList(1));
+        List<String> links4 = new ArrayList<>(Arrays.asList("img/courses/008.jpeg", "img/courses/009.jpeg"));
+        List<Integer> pages4 = new ArrayList<>(Arrays.asList(1, 2));
+        List<String> links5 = new ArrayList<>(Arrays.asList("img/courses/001.jpeg", "img/courses/002.jpeg",
+                "img/courses/003.jpeg", "img/courses/004.jpeg", "img/courses/005.jpeg", "img/courses/006.jpeg"));
+        List<Integer> pages5 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        // add some publications in the first subject : IA
+        // Create Subject Test
+        // save all courses in Subject IA
+        Subject[] subjects = { new Subject("Introduction to IA"), new Subject("Advanced Algorithm"), new Subject("Complexity"),
+                new Subject("Data Analysis"), new Subject("Deep Learning"), new Subject("Advanced Web Development") };
+
+        // add some courses in the first subject : IA
         subjects[0].setCourses(new ArrayList<Course>(Arrays.asList(courses)));
 
         // Save all subject in DB
@@ -104,11 +121,13 @@ public class TestController {
 
         // create some Option
         Option[] options = { new Option("INFORMATIQUE DSC"), new Option("INFORMATIQUE MLDM"),
-                new Option("INFORMATIQUE CPS2") };
+                new Option("INFORMATIQUE CPS2"), new Option("INFORMATIQUE DSC"), new Option("INFORMATIQUE MLDM") };
         // add some subjects in options
-        options[0].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2]));
-        options[1].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
-        options[2].setSubjects(Arrays.asList(subjects[3], subjects[4], subjects[5]));
+        options[0].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
+        options[1].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
+        options[2].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
+        options[3].setSubjects(Arrays.asList(subjects[3], subjects[4]));
+        options[4].setSubjects(Arrays.asList(subjects[3], subjects[4]));
 
         // Save all option in DB
         for (int i = 0; i < options.length; i++) {
@@ -119,7 +138,7 @@ public class TestController {
         Class[] classes = { new Class("Master", 1), new Class("Master", 2) };
         // add some option to classes
         classes[0].setOptions(Arrays.asList(options[0], options[1], options[2]));
-        classes[1].setOptions(Arrays.asList(options[0], options[1], options[2]));
+        classes[1].setOptions(Arrays.asList(options[3], options[4]));
 
         // Save all classes in DB
         for (int i = 0; i < classes.length; i++) {
@@ -139,6 +158,31 @@ public class TestController {
         // Save all Students in DB
         for (int i = 0; i < students.length; i++) {
             studentRepo.save(students[i]);
+        }
+
+        // add links + pages + uploader for the courses
+        courses[0].setLinks(links0);
+        courses[0].setPages(pages0);
+        courses[0].setStudent(students[0]);
+        courses[1].setLinks(links1);
+        courses[1].setPages(pages1);
+        courses[1].setStudent(students[0]);
+        courses[2].setLinks(links2);
+        courses[2].setPages(pages2);
+        courses[2].setStudent(students[0]);
+        courses[3].setLinks(links3);
+        courses[3].setPages(pages3);
+        courses[3].setStudent(students[1]);
+        courses[4].setLinks(links4);
+        courses[4].setPages(pages4);
+        courses[4].setStudent(students[1]);
+        courses[5].setLinks(links5);
+        courses[5].setPages(pages5);
+        courses[5].setStudent(students[1]);
+
+        // update courses
+        for (int i = 0; i < courses.length; i++) {
+            courseRepo.save(courses[i]);
         }
 
         // Create some Request

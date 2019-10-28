@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>List of Courses</title>
+    <title>Courses List</title>
     <!-- INCLUDE SHARED METAS -->
     <meta th:replace="metas-header :: meta" />
     <!-- INCLUDE SHARED LINKS  -->
@@ -18,8 +18,8 @@
 
     <section class="w-container">
 
-        <button id="request-button" class="w-button" type="button">Demander un cours</button>
-        <button id="share-button" class="w-button" type="button">Publier un cours</button>
+        <button id="request-button" class="w-button" type="button">Request a course</button>
+        <button id="share-button" class="w-button" type="button">Publish a course</button>
         <div class="card topcard">[[ ${subject.name} ]]</div>
         <article th:each="course : ${subject.courses}">
             <div class="card">
@@ -38,10 +38,10 @@
                 <span id="request-close" class="close">&times;</span>
                 <form method="POST" th:action="@{/addRequest}" th:object="${request}">
                     <div class="modal-body">
-                        <span>Choisissez la date du cours demandé :</span><br>
+                        <span>Choose the date of the course you are requesting</span><br>
                         <input th:field="*{subjectId}" type="hidden">
                         <input class="input-date" th:field="*{dateCourse}" type="date"><br>
-                        <button type="submit" class="w-button">Valider la demande</button>
+                        <button type="submit" class="w-button">Confirm</button>
                     </div>
                 </form>
             </div>
@@ -52,16 +52,16 @@
                 <span id="share-close" class="close">&times;</span>
                 <form method="POST" th:action="@{/publish-success}" th:object="${course}" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <span>Tapez le nom de votre cours :</span><br>
+                        <span>Enter the course's name</span><br>
                         <input type="hidden" th:field="*{subjectId}">
                         <input required th:field="*{name}"><br>
                         <input required id="date-picker" type="radio" name="date-picker" value="0" onchange="check(); insert();">
-                        Si vous publierez votre cours à la réponse d'une demande<br>
+                        You publish the course in response to a request<br>
                         <input id="date-picker" type="radio" name="date-picker" value="1" onchange="check(); insert();">
-                        Si vous publierez votre cours spontanément<br>
+                        You publish the course spontaneously<br>
                         <div id="select-div" style="display: none;">
                             <select id="select-date" class="select-date" onchange="insert()">
-                                <option value="-1">--Choisir--</option>
+                                <option value="-1">--Choose--</option>
                                 <div th:each="req : ${actreq}">
                                     <option th:value="${req.dateCourse}">[[ ${req.dateCourse} ]]</option>
                                 </div>
@@ -70,15 +70,16 @@
                         <div id="input-div" style="display: none;">
                             <input required id="input-date" class="input-date" type="date" th:field="*{dateCourse}">
                         </div>
-                        <span>Sélectionnez les fichiers du cours :</span>
+                        <span>Choose the pictures of the course</span>
                         <input required multiple type="file" th:field="*{files}"><br>
-                        <span>Si vous avez un commentaire à propos de votre course (optionnel) :</span><br>
+                        <span>If you have a commentary about the publication (optionnal):</span><br>
                         <textarea cols="50" rows="10" th:field="*{commentary}"></textarea><br>
-                        <button class="w-button" type="submit">Valider la course</button>
+                        <button class="w-button" type="submit">Confirm</button>
                     </div>
                 </form>
             </div>
         </div>
+
     </section>
 
     <!-- INCLUDE FOOTER -->
