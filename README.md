@@ -19,6 +19,11 @@ _Projet M1 Web avancée : Solofo Ibrahima Elias_
  - https://o7planning.org/en/11679/spring-boot-file-upload-example | Open Source
  - https://codepen.io/maheshambure21/pen/VYJQYG | Open Source
  - https://w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow  | Open Source
+ 
+## Librairies
+ - https://fontawesome.com/license/free
+ - Modernizr 2.7.1 (Custom Build) | MIT & BSD
+ - Webfont | http://www.apache.org/licenses/LICENSE-2.0
 
 ## Images des cours
  - https://jedecouvrelavie.wordpress.com/cours-papier/
@@ -29,6 +34,9 @@ _Projet M1 Web avancée : Solofo Ibrahima Elias_
  - Demander la publication d'un cours selon la date de son déroulement à travers la page course.html
  - Publier un cours en répondant à une demande ou de façon spontanée à travers la page course.html
  - Visualiser le contenu d'un cours en défilant ses images à droite et à gauche à travers la page content.html
+ - Visualiser les votes accordés à chaque cours
+ - Ajouter une classe, les options pour chaque classe et les matières pour chaque option via la page d'administration admin.html
+ - Mettre à jour une classe, une option et une matière via la page d'administration admin.html 
 
 ## Les fonctionnalités en cours de développement
  - Se connecter à l'application
@@ -37,3 +45,4 @@ _Projet M1 Web avancée : Solofo Ibrahima Elias_
  - Télécharger un cours
  - Gérer la désinscription d'un étudiant d'une matière
  - Afficher les informations d'un étudiant
+ - Voter un cours
