@@ -22,3 +22,18 @@ _Projet M1 Web avancée : Solofo Ibrahima Elias_
 
 ## Images des cours
  - https://jedecouvrelavie.wordpress.com/cours-papier/
+
+## Les fonctionnalités disponibles
+ - Visualiser les classes, options et matières d'un étudiant à travers la page class.html
+ - Visualiser les cours publiés de chaque matière à travers la page course.html
+ - Demander la publication d'un cours selon la date de son déroulement à travers la page course.html
+ - Publier un cours en répondant à une demande ou de façon spontanée à travers la page course.html
+ - Visualiser le contenu d'un cours en défilant ses images à droite et à gauche à travers la page content.html
+
+## Les fonctionnalités en cours de développement
+ - Se connecter à l'application
+ - Gérer la session d'un utilisateur
+ - Sécuriser les requêtes HTTP
+ - Télécharger un cours
+ - Gérer la désinscription d'un étudiant d'une matière
+ - Afficher les informations d'un étudiant

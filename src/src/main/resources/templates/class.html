@@ -18,7 +18,7 @@
     <section class="w-container">
         <form class="search-bar">
             <i class="fas fa-search"></i><br>
-            <input type="text" name="search" placeholder="Cherchez un cours">
+            <input type="text" name="search" placeholder="Search for a course">
         </form>
         <div th:each="c : ${class}">
             <div th:each="option : ${c.options}">
