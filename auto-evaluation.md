@@ -1,4 +1,4 @@
-## Temps passé (en heures) par chaque membre du projet (les parties de chaque membre)
+## Temps passé (en heures) par chaque membre du projet
 
  - Ibrahima DIALLO : 25
  - Solofo RABONARIJAONA : 30
