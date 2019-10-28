@@ -30,20 +30,20 @@
         </div>
         <br>
         <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" th:each="page : ${course.pages}" th:onclick="'currentSlide(\'' + ${page} + '\')'"></span>
         </div>
 
         <div class="card">Extracted document of the course</div>
         <div style="text-align:center">
-            <iframe src="pdf/courses/cloud.pdf" frameborder="0" height="700px" width="100%"></iframe>
+            <iframe src="pdf/courses/ad.pdf" frameborder="0" height="700px" width="100%"></iframe>
         </div>
-        
+
         <div class="w-section">
             <button id="myBtn" class="download" title="download this course">
                 <i class="fas fa-download"></i>Download this course
             </button>
         </div>
-        
+
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>

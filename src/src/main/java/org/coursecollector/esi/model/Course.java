@@ -60,6 +60,9 @@ public class Course {
     @ElementCollection(targetClass = String.class)
     List<String> links = new ArrayList<>();
 
+    @ElementCollection(targetClass = Integer.class)
+    List<Integer> pages = new ArrayList<>();
+
     /**
      * 
      * @param name

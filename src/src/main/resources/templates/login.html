@@ -14,9 +14,6 @@
 
 <body>
 
-    <!-- INCLUDE HEADER -->
-    <header th:replace="header :: header"></header>
-
     <div class="hero section">
         <div class="w-container">
             <h1 class="hero-heading">Help your classmates by sharing your course</h1>
@@ -28,24 +25,18 @@
 
     <section class="content">
         <div id="container">
-            <form action="" onsubmit="return verifForm(this)" method="POST">
-                <h2 class="aligner"> Connexion </h2>
-                <label><b> Student ID </b></label>
-                <!-- onblur="verifStudentID(this)" -->
-                <input type="text" placeholder="Enter your student ID" name="studentID" required />
-                <label><b> Password </b></label>
-                <input type="password" placeholder="Enter your password" name="password" required />
-                <br />
-                <input type="submit" id='submit' value='LOGIN' />
-                <br />
+            <form action="@{/login}" onsubmit="return verifForm(this)" method="POST">
+                <h2 class="aligner">Connection</h2>
+                <label><b>Student identifier</b></label>
+                <input type="text" placeholder="Enter your identifier" name="studentID" onblur="verifStudentID(this)" required />
+                <label><b>Student password</b></label>
+                <input type="password" placeholder="Enter your password" name="password" required /><br />
+                <input type="submit" id='submit' value='Login' /><br />
                 <input type="radio" name="" value="">Remember me
                 <p class="forgot"><a href="" target="_blank">Forgot your Login?</a></p>
             </form>
         </div>
     </section>
-
-    <!-- INCLUDE FOOTER -->
-    <footer th:replace="footer :: footer"></footer>
 
     <!-- INCLUDE SHARED SCRIPTS  -->
     <script th:replace="scripts-page :: script"></script>

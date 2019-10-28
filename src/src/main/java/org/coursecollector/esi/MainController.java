@@ -13,14 +13,14 @@ import org.coursecollector.esi.model.Class;
 import org.coursecollector.esi.model.ClassRepository;
 import org.coursecollector.esi.model.Course;
 import org.coursecollector.esi.model.CourseRepository;
+import org.coursecollector.esi.model.Option;
+import org.coursecollector.esi.model.OptionRepository;
 import org.coursecollector.esi.model.Request;
 import org.coursecollector.esi.model.RequestRepository;
 import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
-import org.coursecollector.esi.model.Option;
-import org.coursecollector.esi.model.OptionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,10 +60,7 @@ public class MainController {
      */
     @RequestMapping("/")
     public String pageAccueil(Model model) {
-        // get notifications that concern the student
-        model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
-        return "index";
+        return "redirect:/login";
     }
 
     /**
@@ -170,9 +167,6 @@ public class MainController {
      */
     @RequestMapping("/login")
     public String login(Model model) {
-        // get notifications that concern the student
-        model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "login";
     }
 
@@ -251,8 +245,10 @@ public class MainController {
             uploadRootDir.mkdirs();
         }
         MultipartFile[] fileDatas = course.getFiles();
-        List<String> linkedFiles = new ArrayList<String>();
-        List<String> failedFiles = new ArrayList<String>();
+        List<String> linkedFiles = new ArrayList<>();
+        List<String> failedFiles = new ArrayList<>();
+        List<Integer> pages = new ArrayList<>();
+        int i = 1;
         for (MultipartFile fileData : fileDatas) {
             String name = fileData.getOriginalFilename();
             if (name != null && name.length() > 0) {
@@ -262,15 +258,18 @@ public class MainController {
                     stream.write(fileData.getBytes());
                     stream.close();
                     linkedFiles.add(imgFolderPath + name);
+                    pages.add(i);
+                    i++;
                 } catch (Exception e) {
                     System.out.println("Error Write file: " + name);
                     failedFiles.add(name);
                 }
             }
         }
-        // add student and links to the course
+        // add student, links and pages to the course
         course.setStudent(studentRepo.findById(TestController.defaultStudentId).get());
         course.setLinks(linkedFiles);
+        course.setPages(pages);
         // save new course in DB
         courseRepo.save(course);
         // add course to the correspondant subject
