@@ -1,8 +1,8 @@
 ## Temps passé (en heures) par chaque membre du projet (les parties de chaque membre)
 
- -
- -
- -
+ - Ibrahima DIALLO : 25
+ - Solofo RABONARIJAONA : 30
+ - Elias ROMDAN : 35
 
 ## Bonnes pratiques
 
