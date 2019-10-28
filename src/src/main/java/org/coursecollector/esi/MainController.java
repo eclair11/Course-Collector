@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.Collection;
 
 @Controller
 public class MainController {
@@ -61,9 +62,15 @@ public class MainController {
     @RequestMapping("/")
     public String pageAccueil(Model model) {
         // get notifications that concern the student
-        model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
-        return "index";
+        //model.addAttribute("notifications",
+          //      MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+        
+        // load data test if necessary 
+        if (((Collection<Class>)classRepo.findAll()).size() == 0) {
+            return "redirect:/test-data";
+        }
+        // otherwise redirect to the default student's list of classes
+        return "redirect:/class";
     }
 
     /**

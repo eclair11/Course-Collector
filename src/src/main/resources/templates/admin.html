@@ -28,177 +28,193 @@
                 <br/>
                 <ul>
                     <li th:each="class : ${classes}">
-                        <div><strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> <button class="editBtn" th:id="'edit-' + ${class.id}"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" th:id="'del-' + ${class.id}"><i class="fas fa-trash-alt"></i>  </button></div>
+                        <div th:id="${class.id}"><strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> <button class="editBtn" th:id="'edit-' + ${class.id}"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" th:id="'del-' + ${class.id}"><i class="fas fa-trash-alt"></i>  </button></div>
                         <h3>Options</h3>
-                        <button class="w-button myBtn" id="1-1"><i class="fas fa-plus"></i> Add new option</button>
+                        <button class="w-button myBtn" th:id="'1-' + ${class.id}"><i class="fas fa-plus"></i> Add new option</button>
                         <ul>
-                            <li>
-                                <div><strong>Informatique</strong> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1-1"><i class="fas fa-trash-alt"></i>  </button></div>
+                            <li th:each="option : ${class.options}">
+                                <div th:id="'option-' + ${option.id}"><strong>[[ ${option.name} ]]</strong> <button class="editBtn" th:id="'edit-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-trash-alt"></i>  </button></div>
                                 <h3>Subjects</h3>
-                                <button class="w-button myBtn" id="1-1-1"><i class="fas fa-plus"></i> Add new subject</button>
-                                <ul>
-                                    <li><em>Base de donnée 1</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1-1-1"><i class="fas fa-trash-alt"></i>  </button></li>
-                                    <li><em>Programmation impérative 1</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" id="del-1-1-2"><i class="fas fa-trash-alt"></i>  </button></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <div><strong>LICENCE 2</strong> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></div>
-                        <h3>Options</h3>
-                        <button class="w-button myBtn" id="2-1"><i class="fas fa-plus"></i> Add new option</button>
-                        <ul>
-                            <li>
-                                <div><strong>Informatique</strong> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></div>
-
-                                <h3>Subjects</h3>
-                                <button class="w-button myBtn" id="2-1-1"><i class="fas fa-plus"></i> Add new subject</button>
-                                <ul>
-                                    <li><em>Base de donnée 2</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></li>
-                                    <li><em>Programmation impérative 2</em> <button><i class="fas fa-edit"></i> edit</button> <button class="danger-bg"><i class="fas fa-trash-alt"></i>  </button></li>
-                                </ul>
+                                <button class="w-button myBtn" th:id="'1-'+ ${class.id} + '-' + ${option.id}"><i class="fas fa-plus"></i> Add new subject</button>
+                                <table>
+                                    <tr>
+                                        <th> Subject</th>
+                                        <th>edit</th>
+                                        <th>delete</th>
+                                    </tr>
+                                    <tr th:each="subject : ${option.subjects}">
+                                        <td th:id="'subject-' + ${subject.id}">[[ ${subject.name} ]]</td>
+                                        <td><button th:id="'edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="editBtn"><i class="fas fa-edit"></i> edit</button></td>
+                                        <td><button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>
+                                </table>
                             </li>
                         </ul>
                     </li>
 
                 </ul>
             </section>
-
+            <div id="bottom"></div>
 
         </section>
 
         <!-- INCLUDE FOOTER -->
         <footer th:replace="footer :: footer"></footer>
-        
-        
-        <!-- EDIT MODALS  -->
-        
-        <!-- MODAL -->
-        <div id="modal-edit-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-edit-1">&times;</span>
-                <p>Edit class name</p>
-                <form>
-                    <input type="text" value="LICENCE 1" class="w-input" />
-                    <input type="submit" value="Update">
-                </form>
-            </div>
-        </div>
-        
-        
-        
-        <!-- DELETE MODALS -->
-        
-        <!-- MODAL -->
-        <div id="modal-del-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-del-1">&times;</span>
-                <p>Are you sure to delete this class ?</p>
-                <small>All options and subjects that correspond to this class will be deleted too</small>
-                <p><a href="?delete=1" class="w-button">Yes</a></p>
-            </div>
-        </div>
-        
-        <!-- MODAL -->
-        <div id="modal-del-1-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-del-1-1">&times;</span>
-                <p>Are you sure to delete this option ?</p>
-                <small>All subjects that correspond to this option will be deleted too</small>
-                <p><a href="?delete=1" class="w-button">Yes</a></p>
-            </div>
-        </div>
-        
-        <!-- MODAL -->
-        <div id="modal-del-1-1-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-del-1-1-1">&times;</span>
-                <p>Are you sure to delete this subject ?</p>
-                <small>All contents that correspond to this option will be deleted too</small>
-                <p><a href="?delete=1" class="w-button">Yes</a></p>
-            </div>
-        </div>
-        
-        <!-- MODAL -->
-        <div id="modal-del-1-1-2" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-del-1-1-2">&times;</span>
-                <p>Are you sure to delete this subject ?</p>
-                <small>All contents that correspond to this option will be deleted too</small>
-                <p><a href="?delete=1" class="w-button">Yes</a></p>
-            </div>
-        </div>
 
-        <!-- MODAL -->
+        
+        
+        
+        <!-- ADD NEW CLASS MODAL -->
         <div id="modal-1" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close" id="close-1">&times;</span>
                 <p>Add new class</p>
-                <form method="POST">
-                    <input type="text" name="className" placeholder="Enter class name" class="w-input w-block"/>
+                <form method="POST" action="/addClass">
+                    <label>name : <input required type="text" name="className" placeholder="Enter class name" class="w-input w-block"/></label>
+                    <label>level : <input required type="number" name="classLevel" class="w-input w-block" min="1" max="8"></label>
                     <input type="submit" class="w-button w-button" value="Add" />
                 </form>
             </div>
         </div>
 
-        <!-- MODAL -->
-        <div id="modal-1-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-1-1">&times;</span>
-                <p>Add new option</p>
-                <form method="POST">
-                    <input type="text" name="className" placeholder="Enter option name" class="w-input w-block"/>
-                    <input type="submit" class="w-button w-button" value="Add" />
-                </form>
+        <!-- CLASS MODALS -->
+        <div  th:each="class : ${classes}">
+
+            <!-- EDIT CLASS MODALS  -->
+            <div th:id="'modal-edit-' + ${class.id}" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close" th:id="'close-edit-' + ${class.id}">&times;</span>
+                    <p>Edit class :</p>
+                    <form method="POST" action="/updateClass">
+                        <input type="hidden" name="classId" th:value="${class.id}">
+                        <label>name : <input type="text" name="newClassName" class="w-input" th:value="${class.name}" /></label>
+                        <label>level : <input type="number" name="newClassLevel" class="w-input" th:value="${class.level}"></label>
+                        <input type="submit" value="Update" />
+                    </form>
+                </div>
             </div>
+
+            <!-- DELETE CLASS MODALS -->
+            <div th:id="'modal-del-' + ${class.id}" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close" th:id="'close-del-' + ${class.id}">&times;</span>
+                    <!--
+                    <p>Are you sure to delete this class : <strong>[[ ${class.name} ]]</strong></p>
+                    <small>All options and subjects that correspond to this class will be deleted too</small>
+                    <p><a th:href="@{/deleteClass(classId=${class.id})}" class="w-button">Yes</a></p>
+                    -->
+                    <p th:replace="feature-warning :: p"></p>
+                    
+                </div>
+            </div>
+            
+            
+
+                <!-- ADD NEW OPTIONS MODALS -->
+                <div th:id="'modal-1-' + ${class.id}" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close" th:id="'close-1-' + ${class.id}">&times;</span>
+                        <p>Add new option in class <strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> :</p>
+                        <form method="POST" action="/addOption">
+                            <input type="hidden" name="classId" th:value="${class.id}"/>
+                            <input required type="text" name="optionName" placeholder="Enter option name" class="w-input w-block"/>
+                            <input type="submit" class="w-button w-button" value="Add" />
+                        </form>
+                    </div>
+                </div>
+
+
+            <!-- OPTIONS MODALS -->
+            <div th:each="option : ${class.options}">
+
+                <!-- EDIT OPTION MODALS  -->
+                <div th:id="'modal-edit-' + ${class.id} + '-' + ${option.id}" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close" th:id="'close-edit-' + ${class.id} + '-' + ${option.id}">&times;</span>
+                        <p>Edit Option :</p>
+                        <form method="POST" action="/updateOption">
+                            <input type="hidden" name="optionId" th:value="${option.id}">
+                            <label>name : <input type="text" name="newOptionName" class="w-input" th:value="${option.name}" /></label>
+                            <input type="submit" value="Update" />
+                        </form>
+                    </div>
+                </div>
+
+                <!-- DELETE OPTION MODALS -->
+                <div th:id="'modal-del-' + ${class.id} + '-' + ${option.id}" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        
+                        <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id}">&times;</span>
+                        <!--
+                        <p>Are you sure to delete option : <strong>[[ ${option.name} ]] </strong> from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
+                        <small>All subjects that correspond to this option will be deleted too</small>
+                        <p><a th:href="@{/deleteOption(optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
+                        -->
+                        <p th:replace="feature-warning :: p"></p>
+                    </div>
+                </div>
+                
+                
+                
+                <!-- ADD NEW SUBJECTS MODALS -->
+                <div th:id="'modal-1-' + ${class.id} + '-' + ${option.id}" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close" th:id="'close-1-' + ${class.id} + '-' + ${option.id}">&times;</span>
+                        <p>Add new subject in option <strong>[[ ${option.name} ]]</strong> from class <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> :</p>
+                        <form method="POST" action="/addSubject">
+                            <input type="hidden" name="optionId" th:value="${option.id}"/>
+                            <input required type="text" name="subjectName" placeholder="Enter subject name" class="w-input w-block"/>
+                            <input type="submit" class="w-button w-button" value="Add" />
+                        </form>
+                    </div>
+                </div>
+                
+                
+                <!-- SUBJECTS MODALS--->
+                <div th:each="subject : ${option.subjects}">
+                    
+                     <!-- EDIT SUBJECT MODALS  -->
+                    <div th:id="'modal-edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close" th:id="'close-edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}">&times;</span>
+                            <p>Edit Subject :</p>
+                            <form method="POST" action="/updateSubject">
+                                <input type="hidden" name="subjectId" th:value="${subject.id}">
+                                <label>name : <input type="text" name="newSubjectName" class="w-input" th:value="${subject.name}" /></label>
+                                <input type="submit" value="Update" />
+                            </form>
+                        </div>
+                    </div>
+                     
+                     <!-- DELETE SUBJECT MODALS -->
+                    <div th:id="'modal-del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            
+                            <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}">&times;</span>
+                            <!--
+                            <p>Are you sure to delete subject : <strong>[[ ${subject.name} ]]</strong> from option : <em>[[ ${option.name} ]] </em>, and from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
+                            <small>All courses that correspond to this subject will be deleted too</small>
+                            <p><a th:href="@{/deleteSubject(subjectId=${subject.id}, optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
+                            -->
+                            <p th:replace="feature-warning :: p"></p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
         </div>
 
-        <!-- MODAL -->
-        <div id="modal-1-1-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-1-1-1">&times;</span>
-                <p>Add new subject</p>
-                <form method="POST">
-                    <input type="text" name="className" placeholder="Enter subject name" class="w-input w-block"/>
-                    <input type="submit" class="w-button w-button" value="Add" />
-                </form>
-            </div>
-        </div>
-
-        <!-- MODAL -->
-        <div id="modal-2-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-2-1">&times;</span>
-                <p>Add new option</p>
-                <form method="POST">
-                    <input type="text" name="className" placeholder="Enter option name" class="w-input w-block"/>
-                    <input type="submit" class="w-button w-button" value="Add" />
-                </form>
-            </div>
-        </div>
-
-        <!-- MODAL -->
-        <div id="modal-2-1-1" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" id="close-2-1-1">&times;</span>
-                <p>Add new subject</p>
-                <form method="POST">
-                    <input type="text" name="className" placeholder="Enter subject name" class="w-input w-block"/>
-                    <input type="submit" class="w-button w-button" value="Add" />
-                </form>
-            </div>
-        </div>
 
         <script src="lib/webfont.js"></script>
         <script type="text/javascript">WebFont.load({
@@ -208,12 +224,6 @@
             });
         </script>
         <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
-        <script>
-            function redirect() {
-                location.href = "http://localhost:8080/courses";
-            }
-            ;
-        </script>
         <script src="lib/modernizr-2.7.1.js" type="text/javascript"></script>
         <script src="js/modals.js" type="text/javascript"></script>
 
