@@ -21,6 +21,8 @@ import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
+import org.coursecollector.esi.model.Rate;
+import org.coursecollector.esi.model.RateRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,6 +53,9 @@ public class MainController {
 
     @Inject
     OptionRepository optionRepo;
+    
+    @Inject
+    RateRepository rateRepo;
 
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
 
@@ -104,10 +109,50 @@ public class MainController {
         model.addAttribute("actreq", requests);
         model.addAttribute("course", course);
         model.addAttribute("request", boundedReq);
+        model.addAttribute("studentId", TestController.defaultStudentId);
         // get notifications that concern the student
         model.addAttribute("notifications",
                 MainController.listNotifications(studentRepo, TestController.defaultStudentId));
         return "course";
+    }
+    
+    /**
+     * Rate a course
+     * @author Solofo R.
+     * @param @RequestParam int like
+     * @param @RequestParam Long studentId
+     * @param @RequestParam Long courseId
+     * @param @RequestParam Long subjectId
+     * @return String
+     */
+    @RequestMapping("/rateCourse")
+    public String rateCourse(@RequestParam int like, @RequestParam Long studentId, @RequestParam Long courseId, @RequestParam Long subjectId) {
+        boolean dislike = (like == 0) ? true : false;
+        Course course = courseRepo.findById(courseId).get();
+        Student student = studentRepo.findById(studentId).get();
+        Rate rate = null;
+        // check if the student has already rate the course
+        for (int i = 0; i < course.getRates().size(); i++) {
+            if (course.getRates().get(i).getStudent() != null) {
+                if (course.getRates().get(i).getStudent().getId() == studentId) {
+                    rate = course.getRates().get(i);
+                    // update rate
+                    rate.setDislike(dislike);
+                }
+            }
+        }
+        // if not create new Rate
+        if (rate == null) {
+            rate = new Rate(dislike, course, student);
+            // add new rate to the course
+            course.getRates().add(rate);
+        }
+        // save or update new rate in DB
+        rateRepo.save(rate);
+        // update course
+        courseRepo.save(course);
+        
+        return  "redirect:/course?subjectId=" + subjectId + "#course-" + courseId;
     }
 
     /**

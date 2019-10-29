@@ -44,3 +44,18 @@ function insert() {
   sd = document.getElementById("select-date");
   id.value = sd.options[sd.selectedIndex].value;
 }
+
+
+/**
+ * Function that permit user to like or dislike a course
+ * @author Solofo R.
+ * @param boolean like - true if like false otherwise
+ * @param number studentId
+ * @param number courseId
+ * @param number subjectId
+ */
+function like(like=true, studentId, courseId, subjectId) {
+    const likeValue = (like) ? 1 : 0;
+    window.location.href="/rateCourse?like=" + likeValue + "&studentId=" + studentId + "&courseId=" + courseId + "&subjectId=" + subjectId;
+}
+

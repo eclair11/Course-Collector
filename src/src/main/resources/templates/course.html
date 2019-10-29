@@ -22,13 +22,13 @@
         <button id="share-button" class="w-button" type="button">Publish a course</button>
         <div class="card topcard">[[ ${subject.name} ]]</div>
         <article th:each="course : ${subject.courses}">
-            <div class="card">
+            <div class="card" th:id="'course-' + ${course.id}">
                 <a th:href="@{/content(courseId=${course.id})}">[[ ${course.dateCourse} ]] : [[ ${course.name} ]]</a>
             </div>
             <div class="divemoji">
-                <button class="emoji" id="" onclick="">&#128525;</button>
+                <button class="emoji" id="" th:onclick="'like(true,' + ${studentId} + ',' + ${course.id} + ',' + ${subject.id} + ')'">&#128525;</button>
                 <span>[[ ${course.numberLike} ]]</span>
-                <button class="emoji" style='font-size:30px;'>&#129326;</button>
+                <button class="emoji" style='font-size:30px;' th:onclick="'like(false,' + ${studentId} + ',' + ${course.id} + ',' + ${subject.id} + ')'">&#129326;</button>
                 <span>[[ ${course.numberDislike} ]]</span>
             </div>
         </article>
