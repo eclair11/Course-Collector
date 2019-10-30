@@ -127,11 +127,21 @@ public class TestController {
         options[1].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
         options[2].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
         options[3].setSubjects(Arrays.asList(subjects[3], subjects[4]));
-        options[4].setSubjects(Arrays.asList(subjects[3], subjects[4]));
+        options[4].setSubjects(Arrays.asList(subjects[3], subjects[4]));    
 
         // Save all option in DB
         for (int i = 0; i < options.length; i++) {
             optionRepo.save(options[i]);
+        }
+        
+        // update subject's options
+        List<Option> optionList = (List<Option>) optionRepo.findAll();
+        for (Option option : optionList) {
+            for (Subject subj : option.getSubjects()) {
+                subj.getOptions().add(option);
+                // update subject
+                subjectRepo.save(subj);
+            }
         }
 
         // Create Class Test

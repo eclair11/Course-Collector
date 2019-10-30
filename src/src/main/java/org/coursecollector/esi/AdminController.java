@@ -153,6 +153,35 @@ public class AdminController {
         return "redirect:/admin#subject-" + subjectId;
     }
     
+    /**
+     * Delete subject API
+     * @author Solofo R.
+     * @param @RequestParam Long subjectId
+     * @param @RequestParam Long optionId
+     * @param @RequestParam Long classId
+     */
+    @RequestMapping("/deleteSubject")
+    public String deleteSubject(@RequestParam Long subjectId, @RequestParam Long optionId, @RequestParam Long classId) {
+        Subject subject = subjectRepo.findById(subjectId).get();
+        // get all option that contains the subject and update them
+        for (int i = 0; i < subject.getOptions().size(); i++) {
+            Option option = subject.getOptions().get(i);
+            boolean isRemoved = false;
+            // delete from list of subject in option the subject with id subjectId
+            for (int j = 0; j < option.getSubjects().size() && !isRemoved; j++) {
+                if (option.getSubjects().get(j).getId() == subjectId) { // if found the subject
+                    option.getSubjects().remove(j); // then remove it
+                    isRemoved = true; // stop searching
+                }
+            }
+            // update option in DB
+            optionRepo.save(option);
+        }
+        // delete subject from DB
+        subjectRepo.deleteById(subjectId);
+        
+        return "redirect:/admin#option-" + optionId;
+    }
     
     
     /**

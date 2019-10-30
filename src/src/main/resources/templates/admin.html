@@ -202,12 +202,9 @@
                         <div class="modal-content">
                             
                             <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}">&times;</span>
-                            <!--
                             <p>Are you sure to delete subject : <strong>[[ ${subject.name} ]]</strong> from option : <em>[[ ${option.name} ]] </em>, and from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
                             <small>All courses that correspond to this subject will be deleted too</small>
                             <p><a th:href="@{/deleteSubject(subjectId=${subject.id}, optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
-                            -->
-                            <p th:replace="feature-warning :: p"></p>
                         </div>
                     </div>
                     

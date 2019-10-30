@@ -1,6 +1,7 @@
 package org.coursecollector.esi.model;
 
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,9 @@ public class Subject {
 
     @OneToMany
     List<Course> courses = new ArrayList<>();
+    
+    @ManyToMany
+    List<Option> options = new ArrayList<>();
 
     /**
      * 
