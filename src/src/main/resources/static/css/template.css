@@ -235,6 +235,8 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333;
+  position: relative;
+  padding-bottom: 220px;
 }
 img {
   max-width: 100%;
@@ -1830,9 +1832,10 @@ p {
 .section.footer {
   background-color: #363b48;
   text-align: center;
-  position: auto;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  height: 220px;
 }
 
 .company {
@@ -1999,10 +2002,9 @@ p {
 
 .footer-text {
   display: inline-block;
-  margin-top: 11px;
   font-family: Montserrat, sans-serif;
   color: #7d8391;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .social-icon {
@@ -2159,9 +2161,6 @@ p {
     margin-right: -1px;
     margin-bottom: 37px;
     float: none;
-  }
-  .footer-text {
-    margin-bottom: 22px;
   }
   .social-icon.first {
     margin-left: 1px;
