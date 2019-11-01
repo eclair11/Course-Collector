@@ -7,6 +7,7 @@
         <meta th:replace="metas-header :: meta"/>
         <!-- INCLUDE SHARED LINKS  -->
         <link th:replace="links-header :: link"/>
+        <link href="css/toggle.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -26,46 +27,78 @@
                 <button class="w-button myBtn" id="1"><i class="fas fa-plus"></i> Add new class</button>
                 <br/>
                 <br/>
-                <ul>
-                    <li th:each="class : ${classes}">
-                        <div th:id="${class.id}"><strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> <button class="editBtn" th:id="'edit-' + ${class.id}"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" th:id="'del-' + ${class.id}"><i class="fas fa-trash-alt"></i>  </button></div>
-                        <h3>Options</h3>
-                        <button class="w-button myBtn" th:id="'1-' + ${class.id}"><i class="fas fa-plus"></i> Add new option</button>
-                        <br/><br/><br/>
-                        <ul>
-                            <li th:each="option : ${class.options}">
-                                <div th:id="'option-' + ${option.id}"><strong>[[ ${option.name} ]]</strong> <button class="editBtn" th:id="'edit-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-edit"></i> edit</button> <button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-trash-alt"></i>  </button></div>
-                                <h3>Subjects</h3>
-                                <button class="w-button myBtn" th:id="'1-'+ ${class.id} + '-' + ${option.id}"><i class="fas fa-plus"></i> Add new subject</button>
+                <table>
+                    <tr>
+                        <th>Class name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr th:each="class : ${classes}" th:id="${class.id}">
+
+                        <td>
+                            <button class="toggle-btn" th:id="'class-'+${class.id}"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></button> <strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong>
+
+                            <div  th:id="'content-class-'+${class.id}" class="toggle-content">
+                                <h3>Options</h3>
+                                <button class="w-button myBtn" th:id="'1-' + ${class.id}"><i class="fas fa-plus"></i> Add new option</button>
+                                <br/><br/><br/>
                                 <table>
                                     <tr>
-                                        <th> Subject</th>
-                                        <th>edit</th>
-                                        <th>delete</th>
+                                        <th>Option name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
-                                    <tr th:each="subject : ${option.subjects}">
-                                        <td th:id="'subject-' + ${subject.id}">[[ ${subject.name} ]]</td>
-                                        <td><button th:id="'edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="editBtn"><i class="fas fa-edit"></i> edit</button></td>
-                                        <td><button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}"><i class="fas fa-trash-alt"></i></button></td>
+                                    <tr th:each="option : ${class.options}" th:id="'option-' + ${option.id}">
+                                        <td>
+                                            <button class="toggle-btn" th:id="'toggle-option-'+${option.id}"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></button> <strong>[[ ${option.name} ]]</strong>  
+                                            <div th:id="'content-toggle-option-'+${option.id}" class="toggle-content">
+                                                <h3>Subjects</h3>
+                                                <button class="w-button myBtn" th:id="'1-'+ ${class.id} + '-' + ${option.id}"><i class="fas fa-plus"></i> Add new subject</button>
+                                                <table>
+                                                    <tr>
+                                                        <th> Subject name</th>
+                                                        <th>edit</th>
+                                                        <th>delete</th>
+                                                    </tr>
+                                                    <tr th:each="subject : ${option.subjects}">
+                                                        <td th:id="'subject-' + ${subject.id}">[[ ${subject.name} ]]</td>
+                                                        <td><button th:id="'edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="editBtn"><i class="fas fa-edit"></i> edit</button></td>
+                                                        <td><button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}"><i class="fas fa-trash-alt"></i></button></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="editBtn" th:id="'edit-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-edit"></i> edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-trash-alt"></i>  </button>
+                                        </td>
                                     </tr>
                                 </table>
-                            </li>
-                        </ul>
-                    </li>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="editBtn" th:id="'edit-' + ${class.id}"><i class="fas fa-edit"></i> edit</button>
+                        </td>
+                        <td>
+                            <button class="danger-bg delBtn" th:id="'del-' + ${class.id}"><i class="fas fa-trash-alt"></i>  </button>
+                        </td>
+                    </tr>
 
-                </ul>
+                </table>
             </section>
             <div id="bottom"></div>
-            
+
         </section>
 
 
         <!-- INCLUDE FOOTER -->
         <footer th:replace="footer :: footer"></footer>
 
-        
-        
-        
+
+
+
         <!-- ADD NEW CLASS MODAL -->
         <div id="modal-1" class="modal">
             <!-- Modal content -->
@@ -109,25 +142,25 @@
                     <p><a th:href="@{/deleteClass(classId=${class.id})}" class="w-button">Yes</a></p>
                     -->
                     <p th:replace="feature-warning :: p"></p>
-                    
+
                 </div>
             </div>
-            
-            
 
-                <!-- ADD NEW OPTIONS MODALS -->
-                <div th:id="'modal-1-' + ${class.id}" class="modal">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <span class="close" th:id="'close-1-' + ${class.id}">&times;</span>
-                        <p>Add new option in class <strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> :</p>
-                        <form method="POST" action="/addOption">
-                            <input type="hidden" name="classId" th:value="${class.id}"/>
-                            <input required type="text" name="optionName" placeholder="Enter option name" class="w-input w-block"/>
-                            <input type="submit" class="w-button w-button" value="Add" />
-                        </form>
-                    </div>
+
+
+            <!-- ADD NEW OPTIONS MODALS -->
+            <div th:id="'modal-1-' + ${class.id}" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close" th:id="'close-1-' + ${class.id}">&times;</span>
+                    <p>Add new option in class <strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> :</p>
+                    <form method="POST" action="/addOption">
+                        <input type="hidden" name="classId" th:value="${class.id}"/>
+                        <input required type="text" name="optionName" placeholder="Enter option name" class="w-input w-block"/>
+                        <input type="submit" class="w-button w-button" value="Add" />
+                    </form>
                 </div>
+            </div>
 
 
             <!-- OPTIONS MODALS -->
@@ -151,7 +184,7 @@
                 <div th:id="'modal-del-' + ${class.id} + '-' + ${option.id}" class="modal">
                     <!-- Modal content -->
                     <div class="modal-content">
-                        
+
                         <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id}">&times;</span>
                         <!--
                         <p>Are you sure to delete option : <strong>[[ ${option.name} ]] </strong> from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
@@ -161,9 +194,9 @@
                         <p th:replace="feature-warning :: p"></p>
                     </div>
                 </div>
-                
-                
-                
+
+
+
                 <!-- ADD NEW SUBJECTS MODALS -->
                 <div th:id="'modal-1-' + ${class.id} + '-' + ${option.id}" class="modal">
                     <!-- Modal content -->
@@ -177,12 +210,12 @@
                         </form>
                     </div>
                 </div>
-                
-                
+
+
                 <!-- SUBJECTS MODALS--->
                 <div th:each="subject : ${option.subjects}">
-                    
-                     <!-- EDIT SUBJECT MODALS  -->
+
+                    <!-- EDIT SUBJECT MODALS  -->
                     <div th:id="'modal-edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="modal">
                         <!-- Modal content -->
                         <div class="modal-content">
@@ -195,29 +228,30 @@
                             </form>
                         </div>
                     </div>
-                     
-                     <!-- DELETE SUBJECT MODALS -->
+
+                    <!-- DELETE SUBJECT MODALS -->
                     <div th:id="'modal-del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="modal">
                         <!-- Modal content -->
                         <div class="modal-content">
-                            
+
                             <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}">&times;</span>
                             <p>Are you sure to delete subject : <strong>[[ ${subject.name} ]]</strong> from option : <em>[[ ${option.name} ]] </em>, and from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
                             <small>All courses that correspond to this subject will be deleted too</small>
                             <p><a th:href="@{/deleteSubject(subjectId=${subject.id}, optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
 
         </div>
 
 
-    <!-- INCLUDE SHARED SCRIPTS  -->
-    <script th:replace="scripts-page :: script"></script>
+        <!-- INCLUDE SHARED SCRIPTS  -->
+        <script th:replace="scripts-page :: script"></script>
+        <script src="js/toggle.js"></script>
 
-</body>
+    </body>
 
 </html>

@@ -40,6 +40,15 @@ public class Subject {
     public Subject(String name) {
         this.name = name;
     }
+    
+    /**
+     * @param String name
+     * @param Option option
+     */
+    public Subject(String name, Option option) {
+        this(name);
+        this.options.add(option);
+    }
 
     /**
      * 

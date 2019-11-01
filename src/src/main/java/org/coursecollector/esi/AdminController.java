@@ -125,7 +125,7 @@ public class AdminController {
     @PostMapping("addSubject")
     public String addNewSubject(@RequestParam Long optionId, @RequestParam String subjectName) {
         Option option = optionRepo.findById(optionId).get();
-        Subject newSubject = new Subject(subjectName);
+        Subject newSubject = new Subject(subjectName, option);
         // save subject in DB
         subjectRepo.save(newSubject);
         // add new subject to the option

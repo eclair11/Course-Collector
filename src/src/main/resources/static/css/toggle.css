@@ -1,0 +1,31 @@
+/*
+    Style sheet that comes with the module toggle.js
+    that permit to show and hide element in web page
+*/
+/* 
+    Created on : 31 oct. 2019, 14:17:29
+    Author     : Solofo R.
+*/
+
+/* remove default list item style */
+li {
+    list-style: none;
+}
+
+/* style table */
+table, td, th {
+  border: 1px solid black;
+}
+
+.toggle-btn i {
+    font-size: 20px;
+}
+
+/* hide the second icon in toggle btn by default */
+.toggle-btn i:nth-of-type(2) {
+    display: none;
+}
+
+.toggle-content {
+    display: none;
+}
