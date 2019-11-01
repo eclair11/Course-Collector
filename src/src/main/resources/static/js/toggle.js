@@ -16,7 +16,7 @@ toggleBtns.forEach((btn) => {
         // get the element to toggle identified by 'content-${btnId}'
         const eltToToggle = document.querySelector("#content-" + btnId);
         // if the element is hidden
-        if (eltToToggle.style.display === "none") {
+        if (eltToToggle.style.display != "block") {
             // show the element 
             eltToToggle.style.display = "block";
             // hide the first icon inside the button and show the last one
