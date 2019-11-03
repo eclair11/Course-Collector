@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Collection;
+import org.coursecollector.esi.service.OcrService;
 
 @Controller
 public class MainController {
@@ -56,6 +57,9 @@ public class MainController {
     
     @Inject
     RateRepository rateRepo;
+    
+    @Inject
+    OcrService ocr;
 
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
 
@@ -304,6 +308,11 @@ public class MainController {
             String name = fileData.getOriginalFilename();
             if (name != null && name.length() > 0) {
                 try {
+                    // test ocr service
+                    System.out.println("EXTRACTED TEXT FROM " + name + " : ");
+                    System.out.println("------------------");
+                    System.out.println(ocr.multipartFileToString(fileData));
+                    
                     File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
                     stream.write(fileData.getBytes());
