@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Collection;
 import org.coursecollector.esi.service.OcrService;
+import org.coursecollector.esi.service.PdfService;
 
 @Controller
 public class MainController {
@@ -59,7 +60,10 @@ public class MainController {
     RateRepository rateRepo;
     
     @Inject
-    OcrService ocr;
+    OcrService ocrServ;
+    
+    @Inject
+    PdfService pdfServ;
 
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
 
@@ -294,7 +298,9 @@ public class MainController {
      */
     private String multiFileUpload(Model model, Course course) {
         String uploadRootPath = "./src/main/resources/static/img/courses/";
+        String pdfUploadRootPath = "./src/main/resources/static/pdf/courses/";
         String imgFolderPath = "img/courses/";
+        String pdfFolderPath = "pdf/courses/";
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
@@ -304,14 +310,14 @@ public class MainController {
         List<String> failedFiles = new ArrayList<>();
         List<Integer> pages = new ArrayList<>();
         int i = 1;
+        String text = "";
+        
         for (MultipartFile fileData : fileDatas) {
             String name = fileData.getOriginalFilename();
             if (name != null && name.length() > 0) {
                 try {
-                    // test ocr service
-                    System.out.println("EXTRACTED TEXT FROM " + name + " : ");
-                    System.out.println("------------------");
-                    System.out.println(ocr.multipartFileToString(fileData));
+                    // convert img into text using OCR service
+                    text += "\n\n\n" + ocrServ.multipartFileToString(fileData);
                     
                     File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
@@ -326,10 +332,18 @@ public class MainController {
                 }
             }
         }
+        try {
+            // convert extracted text by OCR service to PDF file
+            pdfServ.textToPdf(text, pdfUploadRootPath, course.getName());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+                    
         // add student, links and pages to the course
         course.setStudent(studentRepo.findById(TestController.defaultStudentId).get());
         course.setLinks(linkedFiles);
         course.setPages(pages);
+        course.setPdfLink(pdfFolderPath + course.getName() + ".pdf");
         // save new course in DB
         courseRepo.save(course);
         // add course to the correspondant subject

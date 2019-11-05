@@ -59,6 +59,8 @@ public class Course {
 
     @ElementCollection(targetClass = String.class)
     List<String> links = new ArrayList<>();
+    
+    String pdfLink;
 
     @ElementCollection(targetClass = Integer.class)
     List<Integer> pages = new ArrayList<>();
