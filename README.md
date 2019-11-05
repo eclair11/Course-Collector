@@ -9,22 +9,41 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  Nous utiliserons la technologie OCR (Optical Character Recognition) pour extraire le contenu des images de cours dans un document texte sous format PDF.
  Les documents extraits permettront par la suite aux étudiants de faire une recherche sur le contenu des cours.
 
+
+
 ## Instruction pour obtenir et lancer le projet
- - git clone https://github.com/Enjana-mavitrika/ADV_WEB_2019.git
- - git checkout master (si vous êtes sur la branche dev)
- - Ouvrir le dossier src qui se trouve dans ADV_WEB_2019 avec visual Studio Code
+
+### Recuperer le projet
+ - `git clone https://github.com/Enjana-mavitrika/ADV_WEB_2019.git`
+ - `git checkout master`
+
+### Installer tesseract-ocr sur votre machine (obligatoire pour lancer l'application) 
+ - `sudo apt install tesseract-ocr`
+ - En cas de problème suivre le tuto **[ici](https://github.com/tesseract-ocr/tesseract/wiki/Compiling#linux)**
+
+### Lancer l'application 
+ - Ouvrir le dossier src qui se trouve dans ADV_WEB_2019 avec visual Studio Code ou Netbeans
  - Lancer l'application course-collector à travers le Spring-Boot Dashboard
- - Se connecter à l'adresse http://localhost:8080/
+ - Se connecter à l'adresse **[localhost](http://localhost:8080/)**
+
+
 
 ## Organisation des fichiers (pour l'instant)
  - _doc_ : diapos de présentation, diagrammes UML, vidéo de démonstration, ...
  - _src_ : code source du projet
 
+
+
 ## Description de l'architecture
+
  - Les fichiers html qui se trouvent dans le dossier templates constituent la vue de notre application, ils interagissent directement avec les contrôleurs qui se trouvent dans
  le dossier main/java/org/coursecollector/esi par l'intermédiaire de Thymeleaf.
  - Les fichiers java qui se trouvent dans le dossier model constituent les entités de notre application, ils intéragissent directement avec une base de données en mémoire H2.
  - Le dossier static regroupe toutes les ressources qui complètent les vues comme les feuilles de style, les scripts JS, les images...
+### Diagramme Entités-relations des modèles
+ ![diagramme entités-relations des modèles](/doc/diagramme_entités_relations_des_modèles.png)
+
+
 
 ## Méthode de travail 
  - Code et commentaires en Anglais.
@@ -32,19 +51,31 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - Mettre à jour le diagramme de classe du Model en cas de modification dans le code.
  - Rajouter les liens, auteurs et licences des bibliothèques ou codes externes intégré à l'application.
 
+
+
 ## Liens utiles
  - Diagramme de classe du Model : https://www.draw.io/?state=%7B%22ids%22:%5B%221Bo0PLwGzm4GqWp639xA17IJqcUhRvAqL%22%5D,%22action%22:%22open%22,%22userId%22:%22{userId}%22%7D#G1Bo0PLwGzm4GqWp639xA17IJqcUhRvAqL
+
+
 
 ## Codes adaptés
  - https://github.com/necolas/normalize.css | MIT License
  - https://o7planning.org/en/11679/spring-boot-file-upload-example | Open Source
  - https://codepen.io/maheshambure21/pen/VYJQYG | Open Source
  - https://w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow  | Open Source
+ - https://www.roseindia.net/java/java-conversion/TextToPDF.shtml | Open Source
+ - https://stackabuse.com/tesseract-simple-java-optical-character-recognition/
  
+
+
 ## Librairies
  - https://fontawesome.com/license/free
  - Modernizr 2.7.1 (Custom Build) | MIT & BSD
  - Webfont | http://www.apache.org/licenses/LICENSE-2.0
+ - **[iText PDF](https://itextpdf.com/fr)** | Open Source AGPL
+ - **[Tesseract OCR](https://github.com/tesseract-ocr)** | Apache License 2.0
+
+
 
 ## Images des cours
  - https://jedecouvrelavie.wordpress.com/cours-papier/
