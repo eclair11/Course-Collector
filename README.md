@@ -41,7 +41,7 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - Les fichiers java qui se trouvent dans le dossier model constituent les entités de notre application, ils intéragissent directement avec une base de données en mémoire H2.
  - Le dossier static regroupe toutes les ressources qui complètent les vues comme les feuilles de style, les scripts JS, les images...
 ### Diagramme Entités-relations des modèles
- ![diagramme entités-relations des modèles](https://github.com/Enjana-mavitrika/ADV_WEB_2019/doc/diagramme_entit%C3%A9s_relations_des_mod%C3%A8les.png)
+ ![diagramme entités-relations des modèles](https://github.com/Enjana-mavitrika/ADV_WEB_2019/blob/dev/doc/diagramme_entités_relations_des_modèles.png)
 
 
 
