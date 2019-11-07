@@ -297,13 +297,18 @@ public class MainController {
      * @return HTML page publish-success
      */
     private String multiFileUpload(Model model, Course course) {
-        String uploadRootPath = "./src/main/resources/static/img/courses/";
-        String pdfUploadRootPath = "./src/main/resources/static/pdf/courses/";
-        String imgFolderPath = "img/courses/";
-        String pdfFolderPath = "pdf/courses/";
+        // get subject of this course 
+        Subject subject = subjectRepo.findById(course.getSubjectId()).get();
+        String uploadRootPath = "./src/main/resources/static/img/courses/" + subject.getName() + "/";
+        String pdfUploadRootPath = "./src/main/resources/static/pdf/courses/" + subject.getName() + "/";
+        String imgFolderPath = "img/courses/" + subject.getName() + "/";
+        String pdfFolderPath = "pdf/courses/" + subject.getName() + "/";
+        String pdfFileName = course.getName() + "_" + course.getDateCourse();
         File uploadRootDir = new File(uploadRootPath);
-        if (!uploadRootDir.exists()) {
+        File pdfUploadRootDir = new File(pdfUploadRootPath);
+        if (!(uploadRootDir.exists() && pdfUploadRootDir.exists())) {
             uploadRootDir.mkdirs();
+            pdfUploadRootDir.mkdirs();
         }
         MultipartFile[] fileDatas = course.getFiles();
         List<String> linkedFiles = new ArrayList<>();
@@ -313,7 +318,7 @@ public class MainController {
         String text = "";
         
         for (MultipartFile fileData : fileDatas) {
-            String name = fileData.getOriginalFilename();
+            String name = course.getDateCourse() + "_" + fileData.getOriginalFilename();
             if (name != null && name.length() > 0) {
                 try {
                     // convert img into text using OCR service
@@ -334,7 +339,7 @@ public class MainController {
         }
         try {
             // convert extracted text by OCR service to PDF file
-            pdfServ.textToPdf(text, pdfUploadRootPath, course.getName());
+            pdfServ.textToPdf(text, pdfUploadRootPath, pdfFileName);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -343,7 +348,7 @@ public class MainController {
         course.setStudent(studentRepo.findById(TestController.defaultStudentId).get());
         course.setLinks(linkedFiles);
         course.setPages(pages);
-        course.setPdfLink(pdfFolderPath + course.getName() + ".pdf");
+        course.setPdfLink(pdfFolderPath + pdfFileName + ".pdf");
         // save new course in DB
         courseRepo.save(course);
         // add course to the correspondant subject

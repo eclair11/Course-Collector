@@ -53,7 +53,12 @@ public class OcrService {
      */
     public String multipartFileToString(MultipartFile file) throws IOException, TesseractException  {
         File convFile = this.multipartFileToFile(file);
-        return this.ocr.doOCR(convFile);
+        // extract text from img file
+        String extractedText = this.ocr.doOCR(convFile);
+        // delete file from disk
+        convFile.delete();
+        
+        return extractedText;
     }
     
     /**

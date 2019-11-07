@@ -11,24 +11,23 @@
 const toggleBtns = document.querySelectorAll(".toggle-btn");
 toggleBtns.forEach((btn) => {
     btn.addEventListener("mousedown", function(e) {
-        const currentBtn = e.target;
-        const btnId = currentBtn.id;
+        const btnId = btn.id;
         // get the element to toggle identified by 'content-${btnId}'
         const eltToToggle = document.querySelector("#content-" + btnId);
         // if the element is hidden
-        if (eltToToggle.style.display != "block") {
+        if (eltToToggle.style.display !== "block") {
             // show the element 
             eltToToggle.style.display = "block";
             // hide the first icon inside the button and show the last one
-            currentBtn.firstElementChild.style.display = "none";
-            currentBtn.lastElementChild.style.display = "inline";
+            btn.firstElementChild.style.display = "none";
+            btn.lastElementChild.style.display = "inline";
         }
         else {
             // show the element 
             eltToToggle.style.display = "none";
             // show the first icon inside the button and hide the last one
-            currentBtn.firstElementChild.style.display = "inline";
-            currentBtn.lastElementChild.style.display = "none";
+            btn.firstElementChild.style.display = "inline";
+            btn.lastElementChild.style.display = "none";
         }
     });
 });
