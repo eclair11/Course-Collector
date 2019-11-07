@@ -13,7 +13,7 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
 
 ## Instruction pour obtenir et lancer le projet
 
-### Recuperer le projet
+### Recuperer le projet
  - `git clone https://github.com/Enjana-mavitrika/ADV_WEB_2019.git`
  - `git checkout master`
 
