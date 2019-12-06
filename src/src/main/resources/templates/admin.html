@@ -105,7 +105,7 @@
             <div class="modal-content">
                 <span class="close" id="close-1">&times;</span>
                 <p>Add new class</p>
-                <form method="POST" action="/addClass">
+                <form method="POST" th:action="@{/admin/addClass}">
                     <label>name : <input required type="text" name="className" placeholder="Enter class name" class="w-input w-block"/></label>
                     <label>level : <input required type="number" name="classLevel" class="w-input w-block" min="1" max="8"></label>
                     <input type="submit" class="w-button w-button" value="Add" />
@@ -122,7 +122,7 @@
                 <div class="modal-content">
                     <span class="close" th:id="'close-edit-' + ${class.id}">&times;</span>
                     <p>Edit class :</p>
-                    <form method="POST" action="/updateClass">
+                    <form method="POST" th:action="@{/admin/updateClass}">
                         <input type="hidden" name="classId" th:value="${class.id}">
                         <label>name : <input type="text" name="newClassName" class="w-input" th:value="${class.name}" /></label>
                         <label>level : <input type="number" name="newClassLevel" class="w-input" th:value="${class.level}"></label>
@@ -154,9 +154,19 @@
                 <div class="modal-content">
                     <span class="close" th:id="'close-1-' + ${class.id}">&times;</span>
                     <p>Add new option in class <strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong> :</p>
-                    <form method="POST" action="/addOption">
+                    <form method="POST" th:action="@{/admin/addOptionClass}">
                         <input type="hidden" name="classId" th:value="${class.id}"/>
-                        <input required type="text" name="optionName" placeholder="Enter option name" class="w-input w-block"/>
+                        <label>
+                            Choose an existing option
+                            <select class="w-select" name="optionId">
+                                <option selected value="0">Choose option</option>
+                                <option th:each="option : ${options}" th:value="${option.id}">[[ ${option.name} ]]</option>
+                            </select>
+                        </label>
+                        <label>
+                            Create new option
+                            <input type="text" name="optionName" placeholder="Enter option name" class="w-input w-block"/>
+                        </label>
                         <input type="submit" class="w-button w-button" value="Add" />
                     </form>
                 </div>
@@ -172,7 +182,7 @@
                     <div class="modal-content">
                         <span class="close" th:id="'close-edit-' + ${class.id} + '-' + ${option.id}">&times;</span>
                         <p>Edit Option :</p>
-                        <form method="POST" action="/updateOption">
+                        <form method="POST" th:action="@{/admin/updateOption}">
                             <input type="hidden" name="optionId" th:value="${option.id}">
                             <label>name : <input type="text" name="newOptionName" class="w-input" th:value="${option.name}" /></label>
                             <input type="submit" value="Update" />
@@ -186,12 +196,12 @@
                     <div class="modal-content">
 
                         <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id}">&times;</span>
-                        <!--
+                        
                         <p>Are you sure to delete option : <strong>[[ ${option.name} ]] </strong> from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
                         <small>All subjects that correspond to this option will be deleted too</small>
-                        <p><a th:href="@{/deleteOption(optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
-                        -->
-                        <p th:replace="feature-warning :: p"></p>
+                        <p><a th:href="@{/admin/deleteOption(optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
+                       
+                        <!-- <p th:replace="feature-warning :: p"></p> -->
                     </div>
                 </div>
 
@@ -203,7 +213,7 @@
                     <div class="modal-content">
                         <span class="close" th:id="'close-1-' + ${class.id} + '-' + ${option.id}">&times;</span>
                         <p>Add new subject in option <strong>[[ ${option.name} ]]</strong> from class <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> :</p>
-                        <form method="POST" action="/addSubject">
+                        <form method="POST" th:action="@{/admin/addSubject}">
                             <input type="hidden" name="optionId" th:value="${option.id}"/>
                             <input required type="text" name="subjectName" placeholder="Enter subject name" class="w-input w-block"/>
                             <input type="submit" class="w-button w-button" value="Add" />
@@ -221,7 +231,7 @@
                         <div class="modal-content">
                             <span class="close" th:id="'close-edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}">&times;</span>
                             <p>Edit Subject :</p>
-                            <form method="POST" action="/updateSubject">
+                            <form method="POST" th:action="@{/admin/updateSubject}">
                                 <input type="hidden" name="subjectId" th:value="${subject.id}">
                                 <label>name : <input type="text" name="newSubjectName" class="w-input" th:value="${subject.name}" /></label>
                                 <input type="submit" value="Update" />
@@ -237,7 +247,7 @@
                             <span class="close" th:id="'close-del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}">&times;</span>
                             <p>Are you sure to delete subject : <strong>[[ ${subject.name} ]]</strong> from option : <em>[[ ${option.name} ]] </em>, and from class: <em>[[ ${class.name} ]] [[ ${class.level} ]]</em> ?</p>
                             <small>All courses that correspond to this subject will be deleted too</small>
-                            <p><a th:href="@{/deleteSubject(subjectId=${subject.id}, optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
+                            <p><a th:href="@{/admin/deleteSubject(subjectId=${subject.id}, optionId=${option.id}, classId=${class.id})}" class="w-button">Yes</a></p>
                         </div>
                     </div>
 

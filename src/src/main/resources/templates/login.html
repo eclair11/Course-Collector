@@ -3,47 +3,158 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Authentification</title>
-    <!-- INCLUDE SHARED METAS -->
-    <meta th:replace="metas-header :: meta" />
-    <!-- INCLUDE SHARED LINKS  -->
-    <link th:replace="links-header :: link" />
-    <link href="css/login.css" rel="stylesheet" type="text/css" />
-    <script src="js/login.js" type="text/javascript"></script>
+  <title>Authentification</title>
+  <!-- INCLUDE SHARED METAS -->
+  <meta th:replace="metas-header :: meta" />
+  <!-- INCLUDE SHARED LINKS  -->
+  <link th:replace="links-header :: link" />
+  <link href="css/login.css" rel="stylesheet" type="text/css" />
+  <script src="js/login.js" type="text/javascript"></script>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #form-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+     
+    }
+
+    form {
+      border: 3px solid #f1f1f1;
+      width: 45%;
+      margin-top: 20px;
+    }
+
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="hero section">
-        <div class="w-container">
-            <h1 class="hero-heading">Help your classmates by sharing your course</h1>
-            <p class="hero-subhead">
-                Take photos of your courses and publish them here to help those who missed a class to catch up.
-            </p>
-        </div>
+  <div class="hero section">
+    <div class="w-container">
+      <img src="img/logo_transparent.png" alt="logo application" width="130" />
+      <h1 class="hero-heading">Help your classmates by sharing your course<br/>
+      Or maybe you are the one who really need help.</h1>
+      <p class="hero-subhead">
+        Take photos of your courses and publish them here to help those who missed a class to catch up.
+      </p>
     </div>
+  </div>
 
-    <section class="content">
-        
-        <div id="container">
-            
-            <p th:replace="feature-warning :: p"></p>
-            
-            <form action="@{/login}" onsubmit="return verifForm(this)" method="POST">
-                <h2 class="aligner">Connection</h2>
-                <label><b>Student identifier</b></label>
-                <input type="text" placeholder="Enter your identifier" name="studentID" onblur="verifStudentID(this)" required />
-                <label><b>Student password</b></label>
-                <input type="password" placeholder="Enter your password" name="password" required /><br />
-                <input type="submit" id='submit' value='Login' /><br />
-                <input type="radio" name="" value="">Remember me
-                <p class="forgot"><a href="" target="_blank">Forgot your Login?</a></p>
-            </form>
+  <div id="form-container">
+    <form th:action="@{/login}" method="post" onsubmit="return verifForm(this)">
+
+      <div th:if="${param.error}" class="alert error">
+        Invalid username and password.
+      </div>
+      <div th:if="${param.logout}" class="alert warning">
+        You have been logged out.
+      </div>
+      <h2>Log in</h2>
+      <div class="container">
+        <label for="username"><b>studentID</b></label>
+        <input type="text" id="username" name="username" onblur="verifStudentID(this)" required />
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">Login</button>
+      </div>
+    </form>
+
+    <form th:action="@{/signUp}" method="post" th:object="${student}">
+
+      <div th:if="${isRegistered}" class="alert success">
+          You have been registered successfully !
         </div>
-    </section>
 
-    <!-- INCLUDE SHARED SCRIPTS  -->
-    <script th:replace="scripts-page :: script"></script>
+      <h2>Sign up </h2>
+      
+      <div class="container">
+        <label for="username"><b>studentID</b></label>
+        <input type="text" th:field="*{userName}" required />
+
+        <label for="class"><b>Register to</b></label>
+        <select id="class" th:field="*{classId}" class="w-select">
+          <option th:each="class : ${classes}" th:value="${class.id}" selected>[[${ class.name }]] [[ ${class.level} ]]</option>
+        </select>
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" th:field="*{derivedPassword}" required />
+
+        <label for="password"><b>Confirm password</b></label>
+        <input type="password" id="password2" required />
+
+        <button class="info" type="submit">Sign up</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- INCLUDE SHARED SCRIPTS  -->
+  <script th:replace="scripts-page :: script"></script>
 
 </body>
 

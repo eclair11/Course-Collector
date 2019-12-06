@@ -15,6 +15,7 @@ import org.coursecollector.esi.model.Student;
 import org.coursecollector.esi.model.StudentRepository;
 import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
+import org.coursecollector.esi.service.UserService;
 import org.coursecollector.esi.model.Rate;
 import org.coursecollector.esi.model.RateRepository;
 import org.coursecollector.esi.model.Request;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 
-    public static Long defaultStudentId;
+    public static String defaultStudentId;
 
     @Inject
     StudentRepository studentRepo;
@@ -51,12 +52,15 @@ public class TestController {
     @Inject
     OptionRepository optionRepo;
 
+    @Inject
+    UserService uService;
+
     /**
      * Method that set value of defaultStudentId
      * 
      * @param id Default student identifier
      */
-    public static void setDefaultStudentId(Long id) {
+    public static void setDefaultStudentId(String id) {
         defaultStudentId = id;
     }
 
@@ -108,8 +112,9 @@ public class TestController {
 
         // Create Subject Test
         // save all courses in Subject IA
-        Subject[] subjects = { new Subject("Introduction to IA"), new Subject("Advanced Algorithm"), new Subject("Complexity"),
-                new Subject("Data Analysis"), new Subject("Deep Learning"), new Subject("Advanced Web Development") };
+        Subject[] subjects = { new Subject("Introduction to IA"), new Subject("Advanced Algorithm"),
+                new Subject("Complexity"), new Subject("Data Analysis"), new Subject("Deep Learning"),
+                new Subject("Advanced Web Development") };
 
         // add some courses in the first subject : IA
         subjects[0].setCourses(new ArrayList<Course>(Arrays.asList(courses)));
@@ -121,19 +126,17 @@ public class TestController {
 
         // create some Option
         Option[] options = { new Option("INFORMATIQUE DSC"), new Option("INFORMATIQUE MLDM"),
-                new Option("INFORMATIQUE CPS2"), new Option("INFORMATIQUE DSC"), new Option("INFORMATIQUE MLDM") };
+                new Option("INFORMATIQUE CPS2") };
         // add some subjects in options
         options[0].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
         options[1].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
         options[2].setSubjects(Arrays.asList(subjects[0], subjects[1], subjects[2], subjects[5]));
-        options[3].setSubjects(Arrays.asList(subjects[3], subjects[4]));
-        options[4].setSubjects(Arrays.asList(subjects[3], subjects[4]));    
 
         // Save all option in DB
         for (int i = 0; i < options.length; i++) {
             optionRepo.save(options[i]);
         }
-        
+
         // update subject's options
         List<Option> optionList = (List<Option>) optionRepo.findAll();
         for (Option option : optionList) {
@@ -148,23 +151,48 @@ public class TestController {
         Class[] classes = { new Class("Master", 1), new Class("Master", 2) };
         // add some option to classes
         classes[0].setOptions(Arrays.asList(options[0], options[1], options[2]));
-        classes[1].setOptions(Arrays.asList(options[3], options[4]));
+        classes[1].setOptions(Arrays.asList(options[1], options[2]));
 
         // Save all classes in DB
         for (int i = 0; i < classes.length; i++) {
             classRepo.save(classes[i]);
         }
 
+        // update option's classes
+        List<Class> classList = (List<Class>) classRepo.findAll();
+        for (Option option : optionList) {
+            for (Class classe : classList) {
+                option.getClasses().add(classe);
+                // update option
+                // optionRepo.save(option);
+            }
+        }
+
+        // for (int i = 0; i < optionList.size(); i++) {
+        // optionRepo.save(optionList.get(i));
+        // }
+
+        // optionRepo.saveAll(optionList);
+
+        // create admin
+        Student admin = new Student(AdminController.adminName, "", 5);
+        admin.setClasses(Arrays.asList(classes));
+        uService.setComputingDerivedPassword(admin, AdminController.adminPass);
+        studentRepo.save(admin);
+        uService.makeUserAdmin(admin.getUserName());
+
         // Create Students test
-        Student[] students = { new Student("USER", "1234", "Lebron", "James", "Informatique", 4),
-                new Student("USER", "1234", "Kobe", "Bryant", "Informatique", 4) };
+        Student[] students = { new Student("Solofo", options[0].getName(), 4),
+                new Student("Elias", options[1].getName(), 4) };
         // set student class
         students[0].setClasses(Arrays.asList(classes));
         students[1].setClasses(Arrays.asList(classes));
         // set student option
         students[0].setOption(options[0].getName());
         students[1].setOption(options[0].getName());
-
+        // set password
+        uService.setComputingDerivedPassword(students[0], "solofo");
+        uService.setComputingDerivedPassword(students[1], "elias");
         // Save all Students in DB
         for (int i = 0; i < students.length; i++) {
             studentRepo.save(students[i]);
@@ -214,7 +242,7 @@ public class TestController {
         subjectRepo.save(firstSubjInDb);
 
         // get the id of Lebron James (saved first)
-        Long lebronId = studentRepo.findAll().iterator().next().getId();
+        String lebronId = studentRepo.findAll().iterator().next().getUserName();
         // set Lebron james as default student for this test
         TestController.setDefaultStudentId(lebronId);
 

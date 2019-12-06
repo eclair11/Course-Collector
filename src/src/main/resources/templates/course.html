@@ -26,9 +26,9 @@
                 <a th:href="@{/content(courseId=${course.id})}">[[ ${course.dateCourse} ]] : [[ ${course.name} ]]</a>
             </div>
             <div class="divemoji">
-                <button class="emoji" id="" th:onclick="'like(true,' + ${studentId} + ',' + ${course.id} + ',' + ${subject.id} + ')'">&#128525;</button>
+                <button class="emoji" id="" th:onclick="like(true,[[${studentId}]],[[${course.id}]],[[${subject.id}]])">&#128525;</button>
                 <span>[[ ${course.numberLike} ]]</span>
-                <button class="emoji" style='font-size:30px;' th:onclick="'like(false,' + ${studentId} + ',' + ${course.id} + ',' + ${subject.id} + ')'">&#129326;</button>
+                <button class="emoji" style='font-size:30px;' th:onclick="like(false,[[${studentId}]],[[${course.id}]],[[${subject.id}]])">&#129326;</button>
                 <span>[[ ${course.numberDislike} ]]</span>
             </div>
         </article>

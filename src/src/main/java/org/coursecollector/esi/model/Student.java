@@ -2,6 +2,7 @@ package org.coursecollector.esi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,15 +13,15 @@ import java.util.ArrayList;
 /**
  *
  * @author Ibrahima DIALLO
+ * @author Solofo R.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
 public class Student extends User {
 
-    String firstName;
-
-    String lastName;
+    @Transient
+    Long classId;
 
     String option;
 
@@ -30,18 +31,12 @@ public class Student extends User {
     List<Class> classes = new ArrayList<>();
 
     /**
-     * 
-     * @param role
-     * @param password
-     * @param firstName
-     * @param lastName
-     * @param option
-     * @param level
+     * @param String
+     * @param String
+     * @param int
      */
-    public Student(String role, String password, String firstName, String lastName, String option, int level) {
-        super(role, password);
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Student(String username, String option, int level) {
+        super(username);
         this.option = option;
         this.level = level;
     }
@@ -56,9 +51,8 @@ public class Student extends User {
      * @param level
      * @param classes
      */
-    public Student(String role, String password, String firstName, String lastName, String option, int level,
-            List<Class> classes) {
-        this(role, password, firstName, lastName, option, level);
+    public Student(String username, String option, int level, List<Class> classes) {
+        this(username, option, level);
         this.classes = classes;
     }
 

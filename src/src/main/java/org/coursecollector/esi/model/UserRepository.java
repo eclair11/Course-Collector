@@ -1,11 +1,13 @@
 package org.coursecollector.esi.model;
-
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author Ibrahima DIIALLO
+ * @author
  */
-public interface UserRepository extends CrudRepository<Course, Long> {
+public interface UserRepository extends CrudRepository<User, String> {
 
+    public List<User> findAllByOrderByUserName();
+    
 }

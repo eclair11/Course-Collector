@@ -56,6 +56,7 @@ function insert() {
  */
 function like(like=true, studentId, courseId, subjectId) {
     const likeValue = (like) ? 1 : 0;
-    window.location.href="/rateCourse?like=" + likeValue + "&studentId=" + studentId + "&courseId=" + courseId + "&subjectId=" + subjectId;
+    console.log("like");
+    window.location.href="/rateCourse?like=" + likeValue + "&studentUsername=" + studentId + "&courseId=" + courseId + "&subjectId=" + subjectId;
 }
 

@@ -3,6 +3,7 @@ package org.coursecollector.esi.model;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,11 +42,11 @@ public class Course {
 
     @ManyToOne
     Student student;
-    
+
     @Transient
     Long subjectId;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Rate> rates = new ArrayList<>();
 
     @Transient
@@ -59,7 +60,7 @@ public class Course {
 
     @ElementCollection(targetClass = String.class)
     List<String> links = new ArrayList<>();
-    
+
     String pdfLink;
 
     @ElementCollection(targetClass = Integer.class)

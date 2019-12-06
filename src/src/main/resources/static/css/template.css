@@ -1873,6 +1873,16 @@ p {
   background-color: #3ac2ab;
 }
 
+.nav-link.sign-out {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f44336;
+}
+
+.nav-link.sign-out:hover {
+  background-color: #b11206;
+}
+
 .nav-column {
   padding-top: 10px;
   text-align: right;
@@ -2433,5 +2443,28 @@ span.close {
 a {
   text-decoration: none;
   color: #ffffff;
+}
+
+/* Style for alert messages */
+.alert {
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.error {
+  background-color: #f56257; /* Red */
+}
+
+.success {
+  background-color: #6abc6d;
+}
+
+.info {
+  background-color: #46a7f5;
+}
+
+.warning {
+  background-color: #ffa92a;
 }
 

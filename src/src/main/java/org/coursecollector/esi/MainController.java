@@ -23,6 +23,8 @@ import org.coursecollector.esi.model.Subject;
 import org.coursecollector.esi.model.SubjectRepository;
 import org.coursecollector.esi.model.Rate;
 import org.coursecollector.esi.model.RateRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Collection;
 import org.coursecollector.esi.service.OcrService;
 import org.coursecollector.esi.service.PdfService;
+import org.coursecollector.esi.service.UserService;
 
 @Controller
 public class MainController {
@@ -55,17 +58,22 @@ public class MainController {
 
     @Inject
     OptionRepository optionRepo;
-    
+
     @Inject
     RateRepository rateRepo;
-    
+
     @Inject
     OcrService ocrServ;
-    
+
     @Inject
     PdfService pdfServ;
 
+    @Inject
+    UserService uService;
+
     private static final int MAX_NOTIFICATION_PER_STUDENT = 300;
+
+    public static String authStudentId = null;
 
     /**
      * 
@@ -74,11 +82,13 @@ public class MainController {
      */
     @RequestMapping("/")
     public String pageAccueil(Model model) {
-        // load data test if necessary 
-        if (((Collection<Class>)classRepo.findAll()).size() == 0) {
+        // get the authenticated user if logged in
+        MainController.authStudentId = SecurityContextHolder.getContext().getAuthentication().getName();
+        // load data test if necessary
+        if (((Collection<Class>) classRepo.findAll()).size() == 0) {
             return "redirect:/test-data";
         }
-        // otherwise redirect to the default student's list of classes
+        // otherwise redirect to the logged in Student class
         return "redirect:/class";
     }
 
@@ -88,13 +98,15 @@ public class MainController {
      * @return HTML page class
      */
     @RequestMapping("/class")
-    public String listClasses(Model model) {
-        Student student = studentRepo.findById(TestController.defaultStudentId).get();
+    public String listClasses(Authentication auth, Model model) {
+        System.out.println("Student = " + MainController.authStudentId);
+        Student student = studentRepo.findById(MainController.authStudentId).get();
         List<Class> listClass = student.getClasses();
         model.addAttribute("class", listClass);
+        model.addAttribute("student", student);
         // get notifications that concern the student
         model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
         return "class";
     }
 
@@ -117,15 +129,16 @@ public class MainController {
         model.addAttribute("actreq", requests);
         model.addAttribute("course", course);
         model.addAttribute("request", boundedReq);
-        model.addAttribute("studentId", TestController.defaultStudentId);
+        model.addAttribute("studentId", MainController.authStudentId);
         // get notifications that concern the student
         model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
         return "course";
     }
-    
+
     /**
      * Rate a course
+     * 
      * @author Solofo R.
      * @param @RequestParam int like
      * @param @RequestParam Long studentId
@@ -134,15 +147,16 @@ public class MainController {
      * @return String
      */
     @RequestMapping("/rateCourse")
-    public String rateCourse(@RequestParam int like, @RequestParam Long studentId, @RequestParam Long courseId, @RequestParam Long subjectId) {
+    public String rateCourse(@RequestParam int like, @RequestParam String studentUsername, @RequestParam Long courseId,
+            @RequestParam Long subjectId) {
         boolean dislike = (like == 0) ? true : false;
         Course course = courseRepo.findById(courseId).get();
-        Student student = studentRepo.findById(studentId).get();
+        Student student = studentRepo.findById(studentUsername).get();
         Rate rate = null;
         // check if the student has already rate the course
         for (int i = 0; i < course.getRates().size(); i++) {
             if (course.getRates().get(i).getStudent() != null) {
-                if (course.getRates().get(i).getStudent().getId() == studentId) {
+                if (course.getRates().get(i).getStudent().getUserName().equals(studentUsername)) {
                     rate = course.getRates().get(i);
                     // update rate
                     rate.setDislike(dislike);
@@ -159,8 +173,8 @@ public class MainController {
         rateRepo.save(rate);
         // update course
         courseRepo.save(course);
-        
-        return  "redirect:/course?subjectId=" + subjectId + "#course-" + courseId;
+
+        return "redirect:/course?subjectId=" + subjectId + "#course-" + courseId;
     }
 
     /**
@@ -174,29 +188,28 @@ public class MainController {
      * @param studentId
      * @return String[][] - all the notification that concern the student
      */
-    public static String[][] listNotifications(StudentRepository studentRepo, Long studentId) {
+    public static String[][] listNotifications(StudentRepository studentRepo, String studentUsername) {
         int numberNotificationInfos = 4;
         int notifCounter = 0;
         String[][] notifications = new String[MAX_NOTIFICATION_PER_STUDENT][numberNotificationInfos];
-        Student student = studentRepo.findById(studentId).get();
+        Student student = studentRepo.findById(studentUsername).get();
         List<Class> studentClasses = student.getClasses();
         for (int i = 0; i < studentClasses.size(); i++) {
             List<Option> options = studentClasses.get(i).getOptions();
             for (int j = 0; j < options.size(); j++) {
-                //if (options.get(j).getName() == student.getOption()) {
-                    List<Subject> subjects = options.get(j).getSubjects();
-                    for (int k = 0; k < subjects.size(); k++) {
-                        List<Request> requests = subjects.get(k).getRequests();
-                        for (int l = 0; l < requests.size(); l++) {
-                            notifications[notifCounter][0] = "" + subjects.get(k).getId();
-                            notifications[notifCounter][1] = studentClasses.get(i).getName() + " "
-                                    + studentClasses.get(i).getLevel() + " " + options.get(j).getName();
-                            notifications[notifCounter][2] = subjects.get(k).getName();
-                            notifications[notifCounter][3] = requests.get(l).getDateCourse().toString();
-                            notifCounter++;
-                        }
+                List<Subject> subjects = options.get(j).getSubjects();
+                for (int k = 0; k < subjects.size(); k++) {
+                    List<Request> requests = subjects.get(k).getRequests();
+                    for (int l = 0; l < requests.size(); l++) {
+                        notifications[notifCounter][0] = "" + subjects.get(k).getId();
+                        notifications[notifCounter][1] = studentClasses.get(i).getName() + " "
+                                + studentClasses.get(i).getLevel() + " " + options.get(j).getName();
+                        notifications[notifCounter][2] = subjects.get(k).getName();
+                        notifications[notifCounter][3] = requests.get(l).getDateCourse().toString();
+                        notifCounter++;
                     }
-                //}
+                }
+                // }
             }
         }
         // return extracted notifications
@@ -215,7 +228,7 @@ public class MainController {
         model.addAttribute("course", course);
         // get notifications that concern the student
         model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
         return "content";
     }
 
@@ -226,6 +239,39 @@ public class MainController {
      */
     @RequestMapping("/login")
     public String login(Model model) {
+        // bound a student for registration
+        Student student = new Student();
+        // load data test if necessary
+        if (((Collection<Class>) classRepo.findAll()).size() == 0) {
+            return "redirect:/test-data";
+        }
+        // get all available class for new subscriber
+        Iterable<Class> classes = classRepo.findAll();
+        model.addAttribute("classes", classes);
+        model.addAttribute("student", student);
+        // create student for test
+        return "login";
+    }
+
+    /**
+     * Controller that handle sign up action
+     * 
+     * @param model Object to send data to the view
+     * @return HTML page login
+     */
+    @RequestMapping("/signUp")
+    public String signUpAction(Model model, @ModelAttribute Student newStudent) {
+        // get available class for new subscriber
+        Iterable<Class> classes = classRepo.findAll();
+        model.addAttribute("classes", classes);
+        // create new student account
+        Class classe = classRepo.findById(newStudent.getClassId()).get();
+        newStudent.getClasses().add(classe);
+        uService.setComputingDerivedPassword(newStudent, newStudent.getDerivedPassword());
+        studentRepo.save(newStudent);
+        // notify that the new student was registered successfully
+        model.addAttribute("isRegistered", true);
+        System.out.println("enregistré ");
         return "login";
     }
 
@@ -257,7 +303,7 @@ public class MainController {
     public String confirmation(Model model, @RequestParam Long subjectId) {
         // get notifications that concern the student
         model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
         // send the subjectId to the viewModel
         model.addAttribute("subjectId", subjectId);
         return "request-success";
@@ -272,7 +318,7 @@ public class MainController {
     public String setting(Model model) {
         // get notifications that concern the student
         model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
         return "setting";
     }
 
@@ -286,7 +332,7 @@ public class MainController {
     public String publishSuccess(Model model, @ModelAttribute("course") Course course) {
         // get notifications that concern the student
         model.addAttribute("notifications",
-                MainController.listNotifications(studentRepo, TestController.defaultStudentId));
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
         return this.multiFileUpload(model, course);
     }
 
@@ -297,7 +343,7 @@ public class MainController {
      * @return HTML page publish-success
      */
     private String multiFileUpload(Model model, Course course) {
-        // get subject of this course 
+        // get subject of this course
         Subject subject = subjectRepo.findById(course.getSubjectId()).get();
         String uploadRootPath = "./src/main/resources/static/img/courses/" + subject.getName() + "/";
         String pdfUploadRootPath = "./src/main/resources/static/pdf/courses/" + subject.getName() + "/";
@@ -316,14 +362,14 @@ public class MainController {
         List<Integer> pages = new ArrayList<>();
         int i = 1;
         String text = "";
-        
+
         for (MultipartFile fileData : fileDatas) {
             String name = course.getDateCourse() + "_" + fileData.getOriginalFilename();
             if (name != null && name.length() > 0) {
                 try {
                     // convert img into text using OCR service
                     text += "\n\n\n" + ocrServ.multipartFileToString(fileData);
-                    
+
                     File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
                     BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
                     stream.write(fileData.getBytes());
@@ -343,9 +389,9 @@ public class MainController {
         } catch (Exception e) {
             System.out.println(e);
         }
-                    
+
         // add student, links and pages to the course
-        course.setStudent(studentRepo.findById(TestController.defaultStudentId).get());
+        course.setStudent(studentRepo.findById(MainController.authStudentId).get());
         course.setLinks(linkedFiles);
         course.setPages(pages);
         course.setPdfLink(pdfFolderPath + pdfFileName + ".pdf");
