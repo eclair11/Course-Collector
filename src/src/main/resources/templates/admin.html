@@ -33,7 +33,7 @@
                     <tr>
                         <th>Class name</th>
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <!-- <th>Delete</th> -->
                     </tr>
                     <tr v-for="classe in classes" v-bind:id="classe.id">
 
@@ -83,9 +83,9 @@
                         <td>
                             <button class="editBtn" v-bind:id="'edit-' + classe.id"  v-on:click="handleModal"><i class="fas fa-edit"></i> edit</button>
                         </td>
-                        <td>
+                        <!-- <td>
                             <button class="danger-bg delBtn" v-bind:id="'del-' + classe.id" v-on:click="handleModal"><i class="fas fa-trash-alt"></i>  </button>
-                        </td>
+                        </td> -->
                     </tr>
 
                 </table>
