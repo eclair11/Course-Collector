@@ -10,6 +10,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import lombok.Data;
 
 /**
@@ -25,6 +27,9 @@ public class User {
     String displayName;
 
     String derivedPassword;
+
+    @Transient
+    String newPassword;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

@@ -38,25 +38,6 @@
             <iframe th:src="${course.pdfLink}" frameborder="0" height="700px" width="100%"></iframe>
         </div>
 
-        <div class="w-section">
-            <button id="myBtn" class="download" title="download this course">
-                <i class="fas fa-download"></i>Download this course
-            </button>
-        </div>
-
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p th:replace="feature-warning :: p"></p>
-                <p>Choose the format of the files to download :</p>
-                <form method="POST">
-                    <label><input type="checkbox" name="format" value="img" /> image(jpg, png, svg)</label>
-                    <label><input type="checkbox" name="format" value="text" /> texte(pdf)</label>
-                    <button type="submit" class="w-button">Confirm</button>
-                </form>
-            </div>
-        </div>
-
     </section>
 
     <!-- INCLUDE FOOTER -->

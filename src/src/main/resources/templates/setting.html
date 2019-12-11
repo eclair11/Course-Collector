@@ -19,78 +19,31 @@
 
     <section class="w-content">
 
-        <div id="container">
+        <div id="container" th:object="${student}">
             
-            <p th:replace="feature-warning :: p"></p>
+            <h2 class="aligner">Setting</h2>
 
-            <form action="" onsubmit="" method="POST">
-                
-                <h2 class="aligner">Setting</h2>
-                
-                <label><b>Username</b></label>
-                <input type="text" name="username" value="Ibrah" readonly />
-                
-                <label><b>Firstname</b></label>
-                <input type="text" name="firstname" value="Ibrahima" readonly />
-                
-                <label><b>Lastname</b></label>
-                <input type="text" name="lastnamename" value="Diallo" readonly />
-                
-                <label><b>Email</b></label>
-                <input id="email" type="email" name="email" value="ibrahimabory@gmail.com" />
-                <button id="email-button" class="w-button" type="button">Edit</button><br />
-                
-                <label><b>Password</b></label>
-                <input id="pwd" type="password" name="password" value="" />
-                <button id="pwd-button" class="w-button" type="button">Edit</button>
-                <button id="remove-button" class="w-button" style="width:100%" type="button">Delete account</button>
-                
-            </form>
+            <label><b>Username</b></label>
+            <input type="text" name="username" th:value="${student.userName}" readonly />
+            
+            <label><b>Password</b></label>
+            <input type="password" name="password" value="000000000000" readonly />
+            <button id="pwd-button" class="w-button" type="button">Edit password</button>
 
         </div>
 
     </section>
 
-    <!-- Modal pour la modification de l'adresse mail -->
-    <div id="email-modal" class="modal">
-        <div class="modal-content">
-            <span id="email-close" class="close">&times;</span>
-            <form method="POST">
-                <div class="text-modal">Edit the email address</div>
-                <div class="body-modal">
-                    <input id="modal-email" type="email"><br />
-                    <button type="submit" class="w-button">Confirm</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal pour la modification du mot de passe -->
+    <!-- MODAL MODIF PASSWORD -->
     <div id="pwd-modal" class="modal">
         <div class="modal-content">
-            <span id="pwd-close" class="close">&times;</span>
-            <form method="POST">
+            <span class="close" id="pwd-close">&times;</span>
+            <form th:action="@{/modif}" method="POST" th:object="${student}">
                 <div class="text-modal">Edit the password</div>
                 <div class="body-modal">
                     <label>New password:</label>
-                    <input id="modal-pwd1" type="password"><br />
-                    <label>Confirm password:</label>
-                    <input id="modal-pwd2" type="password"><br />
+                    <input id="pwd" type="password" th:field="*{newPassword}"><br />
                     <button type="submit" class="w-button">Confirm</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal pour la suppression de compte -->
-    <div id="remove-modal" class="modal">
-        <div class="modal-content">
-            <span id="remove-close" class="close">&times;</span>
-            <form method="POST">
-                <div class="body-modal">
-                    <label>Enter your password to remove your account</label>
-                    <input id="remove-pwd" type="password"><br>
-                    <button id="remove-sub" type="submit" class="w-button">Confirm</button>
                 </div>
             </form>
         </div>

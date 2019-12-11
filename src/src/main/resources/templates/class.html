@@ -34,7 +34,7 @@
                 <div class="card topcard">[[ ${c.name} ]] [[ ${c.level} ]] - [[ ${option.name} ]]</div>
                 <div class="card" th:each="s : ${option.subjects}">
                     <a th:href="@{/course(subjectId=${s.id})}">[[ ${s.name} ]]</a>
-                    <button id="1" class="myBtn unsubscribe" title="Désinscription du cours">
+                    <button id="1" class="myBtn unsubscribe" title="Course Unsubscribe">
                         <i class="fas fa-bell-slash"></i>
                     </button>
                 </div>
