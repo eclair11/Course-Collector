@@ -316,9 +316,32 @@ public class MainController {
      */
     @RequestMapping("/setting")
     public String setting(Model model) {
+        String id = MainController.authStudentId;
+        Student student = studentRepo.findById(id).get();
         // get notifications that concern the student
         model.addAttribute("notifications",
                 MainController.listNotifications(studentRepo, MainController.authStudentId));
+        // send student object to the viewModel
+        model.addAttribute("student", student);
+        return "setting";
+    }
+
+    /**
+     * 
+     * @param model Object to send data to the view
+     * @param newPassword New password 
+     * @return HTML page setting
+     */
+    @RequestMapping(value = "/modif", method = RequestMethod.POST)
+    public String modifParamAccount(Model model, @RequestParam(name = "newPassword") String newPassword) {
+        String id = MainController.authStudentId;
+        Student student = studentRepo.findById(id).get();
+        uService.saveUserComputingDerivedPassword(student, newPassword);
+        // get notifications that concern the student
+        model.addAttribute("notifications",
+                MainController.listNotifications(studentRepo, MainController.authStudentId));
+        // send student object to the viewModel
+        model.addAttribute("student", student);
         return "setting";
     }
 

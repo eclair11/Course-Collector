@@ -5,13 +5,13 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - Notre idée de projet consiste à créer une application Web "Course Collector".
  "Course Collector" a pour but de rendre le suivi des cours et la préparation des examens pour les étudiants plus faciles.
  Chaque étudiant aura la possibilité de demander la publication d'un cours qu'il lui manque ou de la même façon publier un cours suite à une demande de publication.
- Il aura également la possibilité de voter un cours pour faire en sorte que les cours seront triés selon la qualité.
+ Il aura également la possibilité de voter un cours pour faire en sorte que les cours soient triés selon la qualité.
  Nous utiliserons la technologie OCR (Optical Character Recognition) pour extraire le contenu des images de cours dans un document texte sous format PDF.
  Les documents extraits permettront par la suite aux étudiants de faire une recherche sur le contenu des cours.
 
 
 
-## Instruction pour obtenir et lancer le projet
+## Instructions pour obtenir et lancer le projet
 
 ### Recuperer le projet
  - `git clone https://github.com/Enjana-mavitrika/ADV_WEB_2019.git`
@@ -28,18 +28,22 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
 
 
 
-## Organisation des fichiers (pour l'instant)
+## Organisation des fichiers 
  - _doc_ : diapos de présentation, diagrammes UML, vidéo de démonstration, ...
  - _src_ : code source du projet
+ - _src/main/java/org/coursecolletor/esi : contient les classes de Configuration et les classes Controlleur de l'application
+ - _src/main/java/org/coursecolletor/esi/api/ : contient les classes REST Api de l'application
+ - _src/main/java/org/coursecolletor/esi/service/ : contient les classes services de l'application
+ - _src/main/java/org/coursecolletor/esi/model/ : contient les classes Model et CrudRepository de l'application
 
 
 
 ## Description de l'architecture
 
- - Les fichiers html qui se trouvent dans le dossier templates constituent la vue de notre application, ils interagissent directement avec les contrôleurs qui se trouvent dans
- le dossier main/java/org/coursecollector/esi par l'intermédiaire de Thymeleaf.
+ - Les fichiers html qui se trouvent dans le dossier templates constituent la vue de notre application, ils interagissent directement avec les contrôleurs qui se trouvent dans le dossier main/java/org/coursecollector/esi par l'intermédiaire de Thymeleaf.
  - Les fichiers java qui se trouvent dans le dossier model constituent les entités de notre application, ils intéragissent directement avec une base de données en mémoire H2.
  - Le dossier static regroupe toutes les ressources qui complètent les vues comme les feuilles de style, les scripts JS, les images...
+ - Le dossier service contient les classes pour l'intégration de l'OCR et la sécurité
 ### Diagramme Entités-relations des modèles
  ![diagramme entités-relations des modèles](https://github.com/Enjana-mavitrika/ADV_WEB_2019/blob/dev/doc/diagramme_entit%C3%A9s_relations_des_mod%C3%A8les)
 

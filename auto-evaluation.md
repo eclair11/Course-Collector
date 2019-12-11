@@ -1,8 +1,15 @@
 ## Temps passé (en heures) par chaque membre du projet
 
- - Ibrahima DIALLO : 25
- - Solofo RABONARIJAONA : 30
- - Elias ROMDAN : 35
+ - Ibrahima DIALLO : 35
+ - Solofo RABONARIJAONA : 50
+ - Elias ROMDAN : 45
+ 
+## Répartition des tâches
+Au cours de ce projet, nous avons utilisé l'outil de gestion de projet **Framaboard** pour le suivi de notre projet, nous avons partagé les tâches de telle sorte que chaque membre du groupe puisse travailler sur toutes les parties du projet et pouvoir utiliser toutes les technologies qui ont été vues en cours.
+
+ - Premiere partie du projet : Nous nous sommes partagé équitablement la création des différentes pages web. Chacun a pu générer des pages dymaniques avec Spring et Thymeleaf et pratiqué les technologies HTML, CSS, Javascript. Pour éviter les incohérences nous avons élaborer ensemble préalablement un diagramme entités relations des modèles et chaque développeur pouvait le modifier et informer les autres des changements qu'il a eu à apporter.
+ 
+ - Deuxième partie du projet : **Solofo** s'est occupé de la mise en place de l'architecture pour intégrer Vue.js, ajout des sessions et  securité, de l'intégration de la librairie OCR, migration des page admin, connexion et inscription en vue.js . **Elias** : création d'une API pour télécharger un cours, migration de la page setting en vue.js et la correction du bug sur les dates. **Ibrahima** : mise à jour des documents textuels sur le git et la préparation des diapos de la soutenance.
 
 ## Bonnes pratiques
 
@@ -26,5 +33,5 @@ Vous écrivez du logiciel donc :
 
  - tester beaucoup et souvent : 14/20
  - automatiser les tests qui peuvent l'être : 0/20
- - documenter comment utiliser, compiler, tester et lancer votre projet : 14/20
+ - documenter comment utiliser, compiler, tester et lancer votre projet : 16/20
  - documenter comment comprendre et reprendre votre projet : 12/20

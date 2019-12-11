@@ -61,4 +61,8 @@ public class UserService implements UserDetailsService {
         return repo.findAllByOrderByUserName();
     }
 
+    public String encodePassword(String rawPassword) {
+        return encoder.encode(rawPassword);
+    }
+
 }
