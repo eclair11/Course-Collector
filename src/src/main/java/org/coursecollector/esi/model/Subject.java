@@ -1,6 +1,9 @@
 package org.coursecollector.esi.model;
 
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,12 +28,15 @@ public class Subject {
 
     String name;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     List<Request> requests = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     List<Course> courses = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany
     List<Option> options = new ArrayList<>();
 

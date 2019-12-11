@@ -8,6 +8,7 @@
         <!-- INCLUDE SHARED LINKS  -->
         <link th:replace="links-header :: link"/>
         <link href="css/toggle.css" rel="stylesheet" type="text/css" />
+        <script src="lib/vue.js"></script>
 
     </head>
 
@@ -16,6 +17,7 @@
         <!-- INCLUDE HEADER -->
         <header th:replace="header :: header"></header>
 
+        <main id="main">
 
         <section class="w-container">
 
@@ -24,7 +26,7 @@
             <section class="section">
                 <h2>Manage classes, options and subjects</h2>
                 <h3>Classes</h3>
-                <button class="w-button myBtn" id="1"><i class="fas fa-plus"></i> Add new class</button>
+                <button class="w-button myBtn" id="1" v-on:click="handleModal"><i class="fas fa-plus"></i> Add new class</button>
                 <br/>
                 <br/>
                 <table>
@@ -33,14 +35,14 @@
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
-                    <tr th:each="class : ${classes}" th:id="${class.id}">
+                    <tr v-for="classe in classes" v-bind:id="classe.id">
 
                         <td>
-                            <button class="toggle-btn" th:id="'class-'+${class.id}"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></button> <strong>[[ ${class.name} ]] [[ ${class.level} ]]</strong>
+                            <button class="toggle-btn" v-bind:id="'class-'+ classe.id" v-on:click="toggleContent"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></button> <strong>{{ classe.name }} {{ classe.level }}</strong>
 
-                            <div  th:id="'content-class-'+${class.id}" class="toggle-content">
+                            <div  v-bind:id="'content-class-'+ classe.id" class="toggle-content">
                                 <h3>Options</h3>
-                                <button class="w-button myBtn" th:id="'1-' + ${class.id}"><i class="fas fa-plus"></i> Add new option</button>
+                                <button class="w-button myBtn" v-bind:id="'1-' + classe.id" v-on:click="handleModal"><i class="fas fa-plus"></i> Add new option</button>
                                 <br/><br/><br/>
                                 <table>
                                     <tr>
@@ -48,41 +50,41 @@
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
-                                    <tr th:each="option : ${class.options}" th:id="'option-' + ${option.id}">
+                                    <tr v-for="option in classe.options" v-bind:id="'option-' + option.id">
                                         <td>
-                                            <button class="toggle-btn" th:id="'toggle-option-'+${option.id}"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></button> <strong>[[ ${option.name} ]]</strong>  
-                                            <div th:id="'content-toggle-option-'+${option.id}" class="toggle-content">
+                                            <button class="toggle-btn" v-on:click="toggleContent" v-bind:id="'toggle-option-' + option.id"><i class="fas fa-plus-square"></i><i class="fas fa-minus-square"></i></button> <strong>{{ option.name }}</strong>  
+                                            <div v-bind:id="'content-toggle-option-' + option.id" class="toggle-content">
                                                 <h3>Subjects</h3>
-                                                <button class="w-button myBtn" th:id="'1-'+ ${class.id} + '-' + ${option.id}"><i class="fas fa-plus"></i> Add new subject</button>
+                                                <button class="w-button myBtn" v-bind:id="'1-' + classe.id + '-' + option.id" v-on:click="handleModal"><i class="fas fa-plus"></i> Add new subject</button>
                                                 <table>
                                                     <tr>
                                                         <th> Subject name</th>
                                                         <th>edit</th>
                                                         <th>delete</th>
                                                     </tr>
-                                                    <tr th:each="subject : ${option.subjects}">
-                                                        <td th:id="'subject-' + ${subject.id}">[[ ${subject.name} ]]</td>
-                                                        <td><button th:id="'edit-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}" class="editBtn"><i class="fas fa-edit"></i> edit</button></td>
-                                                        <td><button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id} + '-' + ${subject.id}"><i class="fas fa-trash-alt"></i></button></td>
+                                                    <tr v-for="subject in option.subjects">
+                                                        <td v-bind:id="'subject-' + subject.id">{{ subject.name }}</td>
+                                                        <td><button v-bind:id="'edit-' + classe.id + '-' + option.id + '-' + subject.id" class="editBtn" v-on:click="handleModal"><i class="fas fa-edit"></i> edit</button></td>
+                                                        <td><button class="danger-bg delBtn" v-bind:id="'del-' + classe.id + '-' + option.id + '-' + subject.id" v-on:click="handleModal"><i class="fas fa-trash-alt"></i></button></td>
                                                     </tr>
                                                 </table>
                                             </div>
                                         </td>
                                         <td>
-                                            <button class="editBtn" th:id="'edit-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-edit"></i> edit</button>
+                                            <button class="editBtn" v-bind:id="'edit-' + classe.id + '-' + option.id" v-on:click="handleModal"><i class="fas fa-edit"></i> edit</button>
                                         </td>
                                         <td>
-                                            <button class="danger-bg delBtn" th:id="'del-' + ${class.id} + '-' + ${option.id}"><i class="fas fa-trash-alt"></i>  </button>
+                                            <button class="danger-bg delBtn" v-bind:id="'del-' + classe.id + '-' + option.id" v-on:click="handleModal"><i class="fas fa-trash-alt"></i>  </button>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                         </td>
                         <td>
-                            <button class="editBtn" th:id="'edit-' + ${class.id}"><i class="fas fa-edit"></i> edit</button>
+                            <button class="editBtn" v-bind:id="'edit-' + classe.id"  v-on:click="handleModal"><i class="fas fa-edit"></i> edit</button>
                         </td>
                         <td>
-                            <button class="danger-bg delBtn" th:id="'del-' + ${class.id}"><i class="fas fa-trash-alt"></i>  </button>
+                            <button class="danger-bg delBtn" v-bind:id="'del-' + classe.id" v-on:click="handleModal"><i class="fas fa-trash-alt"></i>  </button>
                         </td>
                     </tr>
 
@@ -257,10 +259,14 @@
 
         </div>
 
+        </main>
+
 
         <!-- INCLUDE SHARED SCRIPTS  -->
         <script th:replace="scripts-page :: script"></script>
+        
         <script src="js/toggle.js"></script>
+        <script src="js/admin.js"></script>
 
     </body>
 

@@ -9,8 +9,10 @@
 // get all button with class "toggle-btn" and add event listener to toggle 
 // all element with class "toggle-content"
 const toggleBtns = document.querySelectorAll(".toggle-btn");
+console.log(toggleBtns);
 toggleBtns.forEach((btn) => {
     btn.addEventListener("mousedown", function(e) {
+        console.log("click bouton toggle")
         const btnId = btn.id;
         // get the element to toggle identified by 'content-${btnId}'
         const eltToToggle = document.querySelector("#content-" + btnId);

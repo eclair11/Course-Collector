@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Student> opt = repo.findById(username);
-        if (opt.isEmpty()) {
+        if (opt == null) {
             throw new UsernameNotFoundException(username);
         }
         Student u = opt.get();

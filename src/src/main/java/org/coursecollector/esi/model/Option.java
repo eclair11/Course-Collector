@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Data;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class Option {
     List<Subject> subjects = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnore
     List<Class> classes = new ArrayList<>();
 
     /**
