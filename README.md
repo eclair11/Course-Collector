@@ -83,3 +83,8 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
 
 ## Images des cours
  - https://jedecouvrelavie.wordpress.com/cours-papier/
+ 
+## Version 1.4.1
+ - Migration page admin vers VueJS et ajout RestController
+ - Modifier mot de passe de l'utilisateur
+ - Correction des bugs sur la version 1.0.0
