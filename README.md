@@ -31,6 +31,10 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
 ## Organisation des fichiers 
  - _doc_ : diapos de présentation, diagrammes UML, vidéo de démonstration, ...
  - _src_ : code source du projet
+ - _src/main/java/org/coursecolletor/esi : contient les classes de Configuration et les classes Controlleur de l'application
+ - _src/main/java/org/coursecolletor/esi/api/ : contient les classes REST Api de l'application
+ - _src/main/java/org/coursecolletor/esi/service/ : contient les classes services de l'application
+ - _src/main/java/org/coursecolletor/esi/model/ : contient les classes Model et CrudRepository de l'application
 
 
 
