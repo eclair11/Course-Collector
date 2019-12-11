@@ -39,7 +39,7 @@
   - Gérer les conflits dans un projet Git.
   
  ## A faire différemment la prochaine fois
- - (IICIIIIIIIIIIIIIIIIIIIIIIIIII)
+ - Gérer bien le temps afin de pouvoir implémenter le maximum possible de fonctionnalités
  
  ## A garder à tout prix
  - Utiliser les technologies spring JPA Vue.js pour créer des applications web 
