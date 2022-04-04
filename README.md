@@ -1,5 +1,9 @@
-# PROJET COURSE COLLECTOR 2019
-_Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
+# Course Collector
+
+## Membres du groupe
+* Solofo
+* Ibrahima
+* Elias
 
 ## Sujet du projet
  - Notre idée de projet consiste à créer une application Web "Course Collector".
@@ -8,8 +12,6 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  Il aura également la possibilité de voter un cours pour faire en sorte que les cours soient triés selon la qualité.
  Nous utiliserons la technologie OCR (Optical Character Recognition) pour extraire le contenu des images de cours dans un document texte sous format PDF.
  Les documents extraits permettront par la suite aux étudiants de faire une recherche sur le contenu des cours.
-
-
 
 ## Instructions pour obtenir et lancer le projet
 
@@ -26,8 +28,6 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - Lancer l'application course-collector à travers le Spring-Boot Dashboard
  - Se connecter à l'adresse **[localhost](http://localhost:8080/)**
 
-
-
 ## Organisation des fichiers 
  - _doc_ : diapos de présentation, diagrammes UML, vidéo de démonstration, ...
  - _src_ : code source du projet
@@ -36,18 +36,15 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - _src/main/java/org/coursecolletor/esi/service/ : contient les classes services de l'application
  - _src/main/java/org/coursecolletor/esi/model/ : contient les classes Model et CrudRepository de l'application
 
-
-
 ## Description de l'architecture
 
  - Les fichiers html qui se trouvent dans le dossier templates constituent la vue de notre application, ils interagissent directement avec les contrôleurs qui se trouvent dans le dossier main/java/org/coursecollector/esi par l'intermédiaire de Thymeleaf.
  - Les fichiers java qui se trouvent dans le dossier model constituent les entités de notre application, ils intéragissent directement avec une base de données en mémoire H2.
  - Le dossier static regroupe toutes les ressources qui complètent les vues comme les feuilles de style, les scripts JS, les images...
  - Le dossier service contient les classes pour l'intégration de l'OCR et la sécurité
+
 ### Diagramme Entités-relations des modèles
  ![diagramme entités-relations des modèles](https://github.com/Enjana-mavitrika/ADV_WEB_2019/blob/dev/doc/diagramme_entit%C3%A9s_relations_des_mod%C3%A8les)
-
-
 
 ## Méthode de travail 
  - Code et commentaires en Anglais.
@@ -55,12 +52,8 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - Mettre à jour le diagramme de classe du Model en cas de modification dans le code.
  - Rajouter les liens, auteurs et licences des bibliothèques ou codes externes intégré à l'application.
 
-
-
 ## Liens utiles
  - Diagramme de classe du Model : https://www.draw.io/?state=%7B%22ids%22:%5B%221Bo0PLwGzm4GqWp639xA17IJqcUhRvAqL%22%5D,%22action%22:%22open%22,%22userId%22:%22{userId}%22%7D#G1Bo0PLwGzm4GqWp639xA17IJqcUhRvAqL
-
-
 
 ## Codes adaptés
  - https://github.com/necolas/normalize.css | MIT License
@@ -70,8 +63,6 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - https://www.roseindia.net/java/java-conversion/TextToPDF.shtml | Open Source
  - https://stackabuse.com/tesseract-simple-java-optical-character-recognition/
  
-
-
 ## Librairies
  - https://fontawesome.com/license/free
  - Modernizr 2.7.1 (Custom Build) | MIT & BSD
@@ -79,11 +70,9 @@ _Projet M1 Programmation Web avancée : Solofo Ibrahima Elias_
  - **[iText PDF](https://itextpdf.com/fr)** | Open Source AGPL
  - **[Tesseract OCR](https://github.com/tesseract-ocr)** | Apache License 2.0
 
-
-
 ## Images des cours
  - https://jedecouvrelavie.wordpress.com/cours-papier/
- 
+
 ## Version 1.4.1
  - Migration page admin vers VueJS et ajout RestAPI
  - Modifier mot de passe de l'utilisateur
